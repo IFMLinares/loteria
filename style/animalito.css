@@ -1,0 +1,87 @@
+.cuadroCentral{
+    margin: 8px 30px;
+}
+
+.cuadro-central{
+    width: 100%;
+    height: 100%; 
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+  
+.cuadro .cuadro1{
+    width: 100%;     
+    border-radius: 10px;
+    
+}
+/* cuadro numero 2 */
+.cuadro .cuadro1 .cuadroLadoaladoAnimalito {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 15px;
+    height: 70px;
+}
+.cuadro .cuadro1 .cuadroLadoaladoAnimalito .cuadroTexto{
+    font-size: 15px;
+}
+.cuadro .cuadro1 .cuadroLadoaladoAnimalito img{
+    width: 120px;
+    height: 75px;
+}
+.cuadro .cuadro2{
+    width: 100%;
+    height: 100%;    
+}
+.cuadro .cuadro3{
+    width: 100%;
+    margin-top: 10px;
+    text-align: center;
+}
+.cuadroLadoaladoAnimalito .cuadroHora{
+    display: flex;
+    justify-content: center; 
+}
+.cuadroLadoaladoAnimalito .cuadroHora h5{
+    font-size: 18px;
+}
+.cuadroresultadoAnimalito{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    width: 100%;
+}
+.cuadroResultadoAnimalito-uno{
+    display: block;
+    text-align: center; 
+    width: 100%;  
+    padding: 10px;
+    
+}
+.cuadroresultadoAnimalito .cuadroResultadoAnimalito-uno .opcion{
+    background-color: blue;
+    color:white;
+    text-align: center;
+    border-radius: 5px; 
+    width: 100%;
+    margin-bottom: 5px;
+    font-weight: bold;
+    line-height: 3;
+    font-size: 12px;
+}
+
+.cuadroresultadoAnimalito .cuadroResultadoAnimalito-uno .resultadoAnimalito{
+    margin-top: 6px;
+    background-color: #F4F4F4;
+    color:black;
+    text-align: center;
+    border-radius: 5px;  
+    font-weight: bold; 
+    line-height: 4;
+    font-size: 12px;
+}
+.cuadroresultadoAnimalito .cuadroResultadoAnimalito-uno .resultadoAnimalito img{
+    width: 40px;
+}
+ 

@@ -1,0 +1,113 @@
+ 
+.cuadroCentral{
+    margin: 8px 30px; 
+
+}
+
+.cuadro-central{
+    width: 100%;
+    height: 100%; 
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+.cuadro{
+    margin: 10px;
+    width: 100%;  
+    background-color: rgba(255, 255, 255, 0.123);
+    border: 5px solid rgb(211, 211, 211); 
+    border-radius: 10px;
+    box-shadow:
+    1.5px 1.8px 6.7px rgba(0, 0, 0, 0.078),
+    3.9px 4.5px 16.9px rgba(0, 0, 0, 0.082),
+    8px 9.2px 34.6px rgba(0, 0, 0, 0.082),
+    16.4px 19px 71.2px rgba(0, 0, 0, 0.081),
+    45px 52px 195px rgba(0, 0, 0, 0.08)
+  ;
+}
+ 
+.cuadro .cuadro1{
+    width: 100%;     
+    border-radius: 10px;
+    
+}
+.cuadro .cuadro1 .cuadroLadoalado {
+    display: flex;
+    justify-content: space-around;
+    align-items: center; 
+}
+.cuadro .cuadro1 .cuadroLadoalado .cuadroTexto{
+    font-size: 15px;
+}
+.cuadro .cuadro1 .cuadroLadoalado img{
+    width: 120px;
+    height: 75px;
+}
+.cuadro .cuadro2{
+    width: 100%;
+    height: 100%;    
+}
+.cuadro .cuadro3{
+    width: 100%;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* cuadro numero 2 */
+.cuadroLadoalado .cuadroHora{
+    display: flex;
+    justify-content: center; 
+}
+.cuadroLadoalado .cuadroHora h5{
+    font-size: 18px;
+}
+.cuadroresultado{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px 15px; 
+}
+.cuadroResultado-uno{
+    display: block;
+    text-align: center; 
+}
+.cuadroresultado .cuadroResultado-uno .opcion{
+    background-color: blue;
+    color:white;
+    text-align: center;
+    border-radius: 5px; 
+    width: 100%;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.cuadroresultado .cuadroResultado-uno .resultado{
+    background-color: #F4F4F4;
+    color:black;
+    text-align: center;
+    border-radius: 5px; 
+    width: 50px;
+    font-weight: bold;
+}
+
+/* Cuando la pantalla es menor a 900px  (tablets y teléfonos inteligentes)*/
+@media only screen and (max-width : 900px) {
+    .cuadroCentral{
+        margin: 30px;
+    }
+    .cuadro .cuadro1 .cuadroLadoalado {
+        margin: 0px;
+    }
+    .cuadro-central{
+        width: 100%;
+        height: 100%;
+        /* border: 4px solid black; */
+        display: block; 
+    }
+    .cuadro .cuadro1 .cuadroLadoalado img{
+        width: 75px;
+        height: 50px;
+    }
+}
