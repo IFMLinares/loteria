@@ -118,7 +118,7 @@ header .titulo-flex{
     }
     /* cuadro basado en el header que contiene: logo / titulo junto con hora / numero de telefono */
     header{
-        border: 1px solid black; 
+        /* border: 1px solid black;  */
         margin-bottom: 10px;
     
     }
