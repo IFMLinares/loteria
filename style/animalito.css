@@ -1,20 +1,4 @@
-.cuadroCentral{
-    margin: 8px 30px;
-}
-
-.cuadro-central{
-    width: 100%;
-    height: 100%; 
-    display: flex; 
-    justify-content: center;
-    align-items: center;
-}
-  
-.cuadro .cuadro1{
-    width: 100%;     
-    border-radius: 10px;
-    
-}
+ 
 /* cuadro numero 2 */
 .cuadro .cuadro1 .cuadroLadoaladoAnimalito {
     display: flex;
@@ -32,7 +16,9 @@
 }
 .cuadro .cuadro2{
     width: 100%;
-    height: 100%;    
+    height: 100%;   
+    display: grid;
+    grid-template-columns: repeat(auto-fill);
 }
 .cuadro .cuadro3{
     width: 100%;
