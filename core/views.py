@@ -8,22 +8,41 @@ from .models import *
 
 class LotteryView(View):
     def get(self, request):
-        # # Obtén la fecha actual
-        # today = timezone.now().date()
+        context = {}
+        models = [ 
+            ChanceAnimalitos,
+            GranjaPlus,
+            LaGranjita,
+            LaRicachona,
+            LottoActivo,
+            LottoRey,
+            SelvaPlus,
+            GuacharoActivo,
+            ]  # Agrega los otros modelos a esta lista
 
-        # # Realiza la consulta para obtener todos los resultados de hoy
-        # today_results = ChanceAnimalitos.objects.filter(date_sort=today)
+        for model in models:
+            model_name = model.__name__
+            today = timezone.now().date()
+            hours = [choice[0] for choice in model._meta.get_field('hour_sort').choices]
+            records = model.objects.filter(date_sort=today)
+            records_dict = {record.hour_sort: record for record in records}
 
-        # # Crea un diccionario con todos los horarios posibles
-        # results_dict = defaultdict(lambda: "-----")
-        # for hour, _ in HOUR_CHOICES:
-        #     results_dict[hour]
-
-        # # Llena el diccionario con los resultados de hoy
-        # for result in today_results:
-        #     results_dict[result.hour_sort] = result.get_animalito_display()
-
-        # # Pasa los resultados al contexto de la plantilla
-        # context = {'results': dict(results_dict)}
-
-        return render(request, 'lotoview/index.html')
+            context[model_name] = []
+            for hour in hours:
+                if hour in records_dict:
+                    record = records_dict[hour]
+                    context[model_name].append({
+                        'hour_sort': record.hour_sort,
+                        'animalito': record.animalito,
+                        'animalito_name': dict(model._meta.get_field('animalito').choices)[record.animalito],
+                        'image_path': record.get_image_path(),
+                    })
+                else:
+                    context[model_name].append({
+                        'hour_sort': hour,
+                        'animalito': '----------',
+                        'animalito_name': '----------',
+                        'image_path': '----------',
+                    })
+        print(context)
+        return render(request, 'lotoview/index.html', context)

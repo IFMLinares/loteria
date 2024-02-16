@@ -32,8 +32,12 @@ class LottoReyAdmin(admin.ModelAdmin):
 
 admin.site.register(LottoRey, LottoReyAdmin)
 
-# class SelvaPlusAdmin(admin.ModelAdmin):
-#     list_display = ('hour_sort', 'animalito', 'date_sort', 'get_image_path')
+class SelvaPlusAdmin(admin.ModelAdmin):
+    list_display = ('hour_sort', 'animalito', 'date_sort', 'get_image_path')
 
-# admin.site.register(SelvaPlus, SelvaPlusAdmin)
+admin.site.register(SelvaPlus, SelvaPlusAdmin)
 
+class GuacharoActivoAdmin(admin.ModelAdmin):
+    list_display = ('hour_sort', 'animalito', 'date_sort', 'get_image_path')
+
+admin.site.register(GuacharoActivo, GuacharoActivoAdmin)

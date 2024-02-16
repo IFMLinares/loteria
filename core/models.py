@@ -70,7 +70,7 @@ class LottoRey(models.Model):
 
     def get_image_path(self):
         return join(settings.STATIC_URL, f'img/lottorey/{self.animalito}.png')
-    
+
 class SelvaPlus(models.Model):
     hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES_SP, verbose_name="Hora del sorteo")
     animalito = models.CharField(max_length=2, choices=ANIMALITO_GRANJITA_LOTTO_ACTIVO_SELVA_PLUS_CHOICES, verbose_name="Animalito")
@@ -81,3 +81,14 @@ class SelvaPlus(models.Model):
 
     def get_image_path(self):
         return join(settings.STATIC_URL, f'img/selvaplus/{self.animalito}.png')
+
+class GuacharoActivo(models.Model):
+    hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES_GA, verbose_name="Hora del sorteo")
+    animalito = models.CharField(max_length=2, choices=ANIMALITO_GUACHARO_ACTIVO_CHOICES, verbose_name="Animalito")
+    date_sort = models.DateField(auto_now=True)
+
+    class Meta:
+        unique_together = ('hour_sort', 'date_sort',)
+
+    def get_image_path(self):
+        return join(settings.STATIC_URL, f'img/guacharoactivo/{self.animalito}.jpg')
