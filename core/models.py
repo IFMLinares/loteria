@@ -2,19 +2,7 @@ from django.db import models
 from datetime import datetime
 from django.conf import settings
 from os.path import join
-from .tuples import (
-    HOUR_CHOICES,
-    HOUR_CHOICES_SP,
-    HOUR_CHOICES_GP,
-    HOUR_CHOICES_LG,
-    HOUR_CHOICES_RC,
-    HOUR_CHOICES_GA,
-    ANIMALITO_CHOICES,
-    ANIMALITO_GRANA_PLUS_CHOICES,
-    ANIMALITO_GRANJITA_LOTTO_ACTIVO_SELVA_PLUS_CHOICES,
-    ANIMALITO_LA_RICACHONA_CHOICES,
-    ANIMALITO_GUACHARO_ACTIVO_CHOICES,
-)
+from .tuples import *
 
 # Create your models here.
 class ChanceAnimalitos(models.Model):
