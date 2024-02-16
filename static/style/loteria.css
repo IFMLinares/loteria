@@ -8,7 +8,7 @@
     height: 100%; 
     display: flex; 
     justify-content: center;
-    align-items: center; 
+    align-items: center;
     
 }
 /* cuadro basado en el header que contiene: logo / titulo junto con hora / numero de telefono */
@@ -95,6 +95,16 @@ header .titulo-flex{
     font-weight: bold;
     font-size: 14px;
 }
+
+.cuadroresultado .cuadroResultado-uno .resultado{
+    background-color: #F4F4F4;
+    color:black;
+    text-align: center;
+    border-radius: 25px; 
+    width: 80px;
+    font-weight: bold;
+}
+
 /* tabla */
  
 table{
@@ -124,18 +134,8 @@ tr td{
 }
 
 /* tabla */
-.cuadroresultado .cuadroResultado-uno .resultado{
-    background-color: #F4F4F4;
-    color:black;
-    text-align: center;
-    border-radius: 25px; 
-    width: 80px;
-    font-weight: bold;
-}
-
 /* Cuando la pantalla es menor a 900px  (tablets y teléfonos inteligentes)*/
 @media only screen and (max-width : 900px) {
-
     .cuadroCentral{
         margin: 0px 15px; 
     }
@@ -147,7 +147,7 @@ tr td{
     }
     /* cuadro basado en el header que contiene: logo / titulo junto con hora / numero de telefono */
     header{
-        /* border: 1px solid black;  */
+        border: 1px solid black; 
         margin-bottom: 10px;
     
     }
@@ -229,9 +229,6 @@ tr td{
 #Resolución = B/w 768px to 1024px */
 @media only screen and (min-device-width : 900px) and (max-device-width : 1366px) 
 and (orientation : landscape) {
-    body {
-        flex-direction: row;
-      }
     .cuadro-central{
         width: 100%;
         height: 100%;
@@ -270,6 +267,5 @@ header .text-titulo h1{
         8px 9.2px 34.6px rgba(0, 0, 0, 0.082),
         16.4px 19px 71.2px rgba(0, 0, 0, 0.081),
         45px 52px 195px rgba(0, 0, 0, 0.08);
-
     }
 }
