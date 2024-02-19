@@ -474,7 +474,7 @@ and (orientation : landscape) {
         margin: 0px 6px !important;
         width: 100%;    
         background-color: rgba(255, 255, 255, 0.123);
-        border: 5px solid rgb(211, 211, 211); 
+        border: 2px solid rgb(211, 211, 211); 
         border-radius: 10px;
         box-shadow:
         1.5px 1.8px 6.7px rgba(0, 0, 0, 0.078),
@@ -499,16 +499,16 @@ and (orientation : landscape) {
     display: flex;
     justify-content: space-between;
     align-items: center; 
-    height: 50px;  
-    margin: 0 !important;
+    height: 60px !important;  
+    margin: 0 !important; 
 
 }
 .cuadro .cuadro1 .cuadroLadoaladoAnimalito .cuadroTexto h5{
-    font-size: 14px;
+    font-size: 12px;
 }
 .cuadro .cuadro1 .cuadroLadoaladoAnimalito .cuadroImagen img{
-    width:80px;
-    height: 40px;
+    width:100px;
+    height: 50px;
 }
 /* cuadro numero 1 */
 /* cuadro numero 2 */
@@ -534,7 +534,7 @@ and (orientation : landscape) {
         text-align: center;
         border-radius: 10px;  
         padding: 5px !important;   
-        font-size: 8px;
+        font-size: 10px;
     
      } 
     
@@ -545,7 +545,7 @@ and (orientation : landscape) {
         text-align: center;
         border-radius: 10px;  
         font-weight: bold;  
-        font-size: 8px; 
+        font-size: 10px; 
     }
     tr td img{
         width: 40px;
@@ -581,10 +581,10 @@ and (orientation : landscape) {
 
 /* footer */
 footer{
-    margin-top: 15px;
+    margin-top: 10px;
 }
 footer h3{
-    font-size: 18px;
+    font-size: 15px;
 }    
 /* footer */
 
