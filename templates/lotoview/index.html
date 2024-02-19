@@ -83,32 +83,28 @@
   AOS.init();
 </script>
 <script type="text/javascript">
+
   function actualizarFechaHora() {
-    let ahora = new Date();
+      let ahora = new Date();
 
-    // Formatea la fecha como DD/MM/YY
-    let fecha = ahora.toLocaleDateString('es-VE', { day: '2-digit', month: '2-digit', year: 'numeric' });
+      // Formatea la fecha como DD/MM/YY
+      let fecha = ahora.toLocaleDateString('es-VE', { day: '2-digit', month: '2-digit', year: 'numeric' });
 
-    // Formatea la hora como HH:MM:SS
-    let hora = ahora.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      // Formatea la hora como HH:MM:SS
+      let hora = ahora.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 
-    // Actualiza los elementos HTML
-    document.getElementById('fecha').textContent = 'RESULTADO DE LOS ANIMALITOS ' + fecha;
-    document.getElementById('hora').textContent = hora;
-}
+      // Actualiza los elementos HTML
+      $('h1[fecha]').text('RESULTADO DE LOS ANIMALITOS ' + fecha);
+      $('h1[hora]').text(hora);
+  }
 
-// Actualiza la fecha y la hora cada segundo
-setInterval(actualizarFechaHora, 1000);
-
-setTimeout(function(){
-        location.reload();
-    }, 22000);
-
+  // Actualiza la fecha y la hora cada segundo
+  setInterval(actualizarFechaHora, 1000);
 
 </script>
 <script type="text/javascript">
 let webSocket;
-let url = `wss://${window.location.host}/ws/socket-server/`
+let url = `ws://${window.location.host}/ws/socket-server/`
 
 function connect() {
     webSocket = new WebSocket(url);

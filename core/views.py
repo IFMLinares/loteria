@@ -44,5 +44,4 @@ class LotteryView(View):
                         'animalito_name': '----------',
                         'image_path': '----------',
                     })
-        print(context)
         return render(request, 'lotoview/index.html', context)
