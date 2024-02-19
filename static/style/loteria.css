@@ -545,7 +545,7 @@ and (orientation : landscape) {
         text-align: center;
         border-radius: 10px;  
         font-weight: bold;  
-        font-size: 10px; 
+        font-size: 13px; 
     }
     tr td img{
         width: 40px;
