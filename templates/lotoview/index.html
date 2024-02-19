@@ -103,7 +103,7 @@ setInterval(actualizarFechaHora, 1000);
 </script>
 <script type="text/javascript">
 let webSocket;
-let url = `ws://${window.location.host}/ws/socket-server/`
+let url = `wss://${window.location.host}/ws/socket-server/`
 
 function connect() {
     webSocket = new WebSocket(url);
