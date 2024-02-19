@@ -458,7 +458,7 @@ and (orientation : landscape) {
  
     header .logo-general img{
         width: 160px;
-        height: 65px;
+        height: 60px;
     }
     header .text-titulo h1{
         text-align: center;
