@@ -423,6 +423,10 @@ footer h3{
 #Resolución = B/w 768px to 1024px */
 @media only screen and (min-device-width : 901px) and (max-device-width : 1199px) 
 and (orientation : landscape) {
+    *{
+        padding: 0px !important;
+        margin: 0px !important;
+    }
  
     .cuadroCentral{
         width: 100vw; 
@@ -434,14 +438,13 @@ and (orientation : landscape) {
         background-color: green;
         display: flex; 
         justify-content: center;
-        align-items: center;
+        align-items: center; 
         
     }
     /* cuadro basado en el header que contiene: logo / titulo junto con hora / numero de telefono */
      header{ 
-        width: 100vw;
-        margin-bottom: 0px;
-        background-color: blanchedalmond;
+        width: 100vw; 
+        background-color: blanchedalmond; 
      }
     header .titulo-flex{
         display: flex;
@@ -452,7 +455,7 @@ and (orientation : landscape) {
  
     header .logo-general img{
         width: 160px;
-        height: 50px;
+        height: 65px;
     }
     header .text-titulo h1{
         text-align: center;
@@ -465,7 +468,7 @@ and (orientation : landscape) {
     
      
     .cuadro{
-        margin: 10px;
+        margin: 0px 6px !important;
         width: 100%;   
         background-color: rgba(255, 1, 1, 0.123);
         /* background-color: rgba(255, 255, 255, 0.123); */
@@ -476,7 +479,7 @@ and (orientation : landscape) {
         3.9px 4.5px 16.9px rgba(0, 0, 0, 0.082),
         8px 9.2px 34.6px rgba(0, 0, 0, 0.082),
         16.4px 19px 71.2px rgba(0, 0, 0, 0.081),
-        45px 52px 195px rgba(0, 0, 0, 0.08);
+        45px 52px 195px rgba(0, 0, 0, 0.08); 
         
     }
      
@@ -487,6 +490,7 @@ and (orientation : landscape) {
     border-radius: 10px;
     margin: 0;
     padding: 0;
+    
 
 }
 .cuadro .cuadro1 .cuadroLadoaladoAnimalito {
@@ -499,11 +503,11 @@ and (orientation : landscape) {
 
 }
 .cuadro .cuadro1 .cuadroLadoaladoAnimalito .cuadroTexto h5{
-    font-size: 17px;
+    font-size: 14px;
 }
 .cuadro .cuadro1 .cuadroLadoaladoAnimalito .cuadroImagen img{
-    width:100px;
-    height: 50px;
+    width:80px;
+    height: 40px;
 }
 /* cuadro numero 1 */
 /* cuadro numero 2 */
@@ -519,16 +523,18 @@ and (orientation : landscape) {
         background-color: saddlebrown;
         width: 100%; 
         flex-direction: row; 
-        border-collapse: separate;
-        /* border-spacing: 4px 5px; */
+        border-collapse: separate; 
+        padding: 0px !important;
+        margin: 0px !important;
+        
     }
     thead tr th{
         background-color: blue;
         color:white;
         text-align: center;
         border-radius: 10px;  
-        padding: 10px;   
-        font-size: 10px;
+        padding: 7px !important;   
+        font-size: 8px;
     
      } 
     
@@ -539,7 +545,7 @@ and (orientation : landscape) {
         text-align: center;
         border-radius: 10px;  
         font-weight: bold;  
-        font-size: 10px;
+        font-size: 8px; 
     }
     tr td img{
         width: 40px;
@@ -547,23 +553,19 @@ and (orientation : landscape) {
     }
 /* cuadro numero 2 */
 
-.cuadro .cuadro3{
-    width: 100%;
-    margin-top: 10px;
-    text-align: center;
-}
+ 
 .cuadroLadoaladoAnimalito .cuadroHora{
     display: flex;
-    justify-content: center; 
+    justify-content: center;  
 }
 .cuadroLadoaladoAnimalito .cuadroHora h5{
-    font-size: 18px;
+    font-size: 18px; 
 }
 .cuadroresultadoAnimalito{
     display: flex;
     justify-content: center;
     align-items: center; 
-    width: 100%;
+    width: 100%; 
 }
 .cuadroResultadoAnimalito-uno{
     display: block;
@@ -572,28 +574,7 @@ and (orientation : landscape) {
     padding: 10px;
     
 }
-.cuadroresultadoAnimalito .cuadroResultadoAnimalito-uno .opcion{
-    background-color: blue;
-    color:white;
-    text-align: center;
-    border-radius: 5px; 
-    width: 100%;
-    margin-bottom: 5px;
-    font-weight: bold;
-    line-height: 3;
-    font-size: 12px;
-}
-
-.cuadroresultadoAnimalito .cuadroResultadoAnimalito-uno .resultadoAnimalito{
-    margin-top: 6px;
-    background-color: #F4F4F4;
-    color:black;
-    text-align: center;
-    border-radius: 5px;  
-    font-weight: bold; 
-    line-height: 4;
-    font-size: 12px;
-}
+ 
 .cuadroresultadoAnimalito .cuadroResultadoAnimalito-uno .resultadoAnimalito img{
     width: 40px;
 }
