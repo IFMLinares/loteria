@@ -78,8 +78,80 @@
 <script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
 <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
-
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
   AOS.init();
+</script>
+<script type="text/javascript">
+  function actualizarFechaHora() {
+    let ahora = new Date();
+
+    // Formatea la fecha como DD/MM/YY
+    let fecha = ahora.toLocaleDateString('es-VE', { day: '2-digit', month: '2-digit', year: 'numeric' });
+
+    // Formatea la hora como HH:MM:SS
+    let hora = ahora.toLocaleTimeString('es-VE', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+    // Actualiza los elementos HTML
+    document.getElementById('fecha').textContent = 'RESULTADO DE LOS ANIMALITOS ' + fecha;
+    document.getElementById('hora').textContent = hora;
+}
+
+// Actualiza la fecha y la hora cada segundo
+setInterval(actualizarFechaHora, 1000);
+
+</script>
+<script type="text/javascript">
+let webSocket;
+let url = `ws://${window.location.host}/ws/socket-server/`
+
+function connect() {
+    webSocket = new WebSocket(url);
+
+    webSocket.onopen = function(e) {
+        // console.log('Conexión WebSocket abierta');
+    };
+
+    webSocket.onclose = function(e) {
+        // console.log('Conexión WebSocket cerrada. Reconectando...');
+        setTimeout(connect, 1000);
+    };
+
+    webSocket.onerror = function(err) {
+        // console.error('WebSocket Error:', err);
+    };
+
+    webSocket.onmessage = function(e) {
+      let data = JSON.parse(e.data);
+      // console.log('Data:', data);
+
+      // Obtiene el ID de la tabla de los datos
+      let tablaId = data.modelo;
+
+      // Busca todas las filas de la tabla
+      let filas = document.querySelectorAll(`#${tablaId} tbody tr`);
+
+      // Itera sobre las filas para encontrar la que tiene la misma hora
+      for (let i = 0; i < filas.length; i++) {
+          let fila = filas[i];
+          let hora = fila.children[0].textContent;
+
+          // Si la hora de la fila coincide con la hora de los datos recibidos
+          if (hora === data.hour_sort) {
+              // Actualiza los datos de la fila
+              fila.children[1].textContent = data.animalito;
+              fila.children[2].textContent = data.animalito_name;
+              let imagen = fila.children[3].children[0];
+              imagen.src = data.image_path;
+              imagen.alt = data.animalito_name;
+
+              // Elimina el estilo de la imagen
+              imagen.style.opacity = '1';
+
+              break;
+          }
+      }
+    };
+}
+connect();
 </script>

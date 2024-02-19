@@ -31,6 +31,8 @@ ALLOWED_HOSTS = ['ifmlinars.pythonanywhere.com','localhost']
 # Application definition
 
 INSTALLED_APPS = [
+    "daphne",
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +43,14 @@ INSTALLED_APPS = [
     # Apps Propias
     'core'
 ]
+
+ASGI_APPLICATION = 'config.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
