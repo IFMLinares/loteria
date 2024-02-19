@@ -9,6 +9,7 @@
     display: flex; 
     justify-content: center;
     align-items: center;
+    
 
 }
 
@@ -53,6 +54,7 @@ header .titulo-flex{
     display: flex;
     justify-content: space-around;
     align-items: center; 
+    
 }
 .cuadro .cuadro1 .cuadroLadoalado .cuadroTexto{
     font-size: 15px;
@@ -69,6 +71,7 @@ header .titulo-flex{
     width: 100%;
     margin-top: 10px;
     text-align: center;
+    
 }
 
 /* cuadro numero 2 */
@@ -116,6 +119,7 @@ table{
     flex-direction: row; 
     border-collapse: separate;
     border-spacing: 10px 5px;
+    
 }
 thead tr th{
     background-color: blue;
@@ -124,6 +128,7 @@ thead tr th{
     border-radius: 10px;  
     padding: 10px;   
     font-size: 12px;
+    
 
  } 
 
@@ -423,10 +428,10 @@ footer h3{
 #Resolución = B/w 768px to 1024px */
 @media only screen and (min-device-width : 901px) and (max-device-width : 1199px) 
 and (orientation : landscape) {
-    *{
+    /* *{
         padding: 0px !important;
         margin: 0px !important;
-    }
+    } */
  
     .cuadroCentral{
         width: 100vw; 
@@ -434,8 +439,7 @@ and (orientation : landscape) {
     
     }
     .cuadro-central{ 
-        width: 100vw; 
-        background-color: green;
+        width: 100vw;  
         display: flex; 
         justify-content: center;
         align-items: center; 
@@ -443,8 +447,7 @@ and (orientation : landscape) {
     }
     /* cuadro basado en el header que contiene: logo / titulo junto con hora / numero de telefono */
      header{ 
-        width: 100vw; 
-        background-color: blanchedalmond; 
+        width: 100vw;  
      }
     header .titulo-flex{
         display: flex;
@@ -469,9 +472,8 @@ and (orientation : landscape) {
      
     .cuadro{
         margin: 0px 6px !important;
-        width: 100%;   
-        background-color: rgba(255, 1, 1, 0.123);
-        /* background-color: rgba(255, 255, 255, 0.123); */
+        width: 100%;    
+        background-color: rgba(255, 255, 255, 0.123);
         border: 5px solid rgb(211, 211, 211); 
         border-radius: 10px;
         box-shadow:
@@ -497,8 +499,7 @@ and (orientation : landscape) {
     display: flex;
     justify-content: space-between;
     align-items: center; 
-    height: 50px; 
-    background-color: aqua; 
+    height: 50px;  
     margin: 0 !important;
 
 }
@@ -519,13 +520,12 @@ and (orientation : landscape) {
 
     /* tabla */
      
-    table{
-        background-color: saddlebrown;
+    table{ 
         width: 100%; 
         flex-direction: row; 
         border-collapse: separate; 
-        padding: 0px !important;
-        margin: 0px !important;
+        border-spacing: 5px 2.5px;
+
         
     }
     thead tr th{
@@ -533,7 +533,7 @@ and (orientation : landscape) {
         color:white;
         text-align: center;
         border-radius: 10px;  
-        padding: 7px !important;   
+        padding: 5px !important;   
         font-size: 8px;
     
      } 
