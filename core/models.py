@@ -97,7 +97,7 @@ class LaRicachona(models.Model):
         enviar_mensaje(self)
 
 class LottoActivo(models.Model):
-    hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES, verbose_name="Hora del sorteo")
+    hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES_LA, verbose_name="Hora del sorteo")
     animalito = models.CharField(max_length=2, choices=ANIMALITO_GRANJITA_LOTTO_ACTIVO_SELVA_PLUS_CHOICES, verbose_name="Animalito")
     date_sort = models.DateField(auto_now=True)
 

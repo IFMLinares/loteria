@@ -3,20 +3,23 @@ from datetime import datetime, time
 # Tupla de 9:00AM - 7:00PM
 HOUR_CHOICES = [(time(hour=i, minute=0).strftime('%I:%M %p'), time(hour=i, minute=0).strftime('%I:%M %p')) for i in range(9, 20)]
 
+# Tupla de 9:00AM - 7:00PM
+HOUR_CHOICES_LA = [(time(hour=i, minute=0).strftime('%I:%M %p'), time(hour=i, minute=0).strftime('%I:%M %p')) for i in range(9, 20)]
+
 # Tupla de 8:00AM - 7:00PM
 HOUR_CHOICES_SP = [(time(hour=i, minute=0).strftime('%I:%M %p'), time(hour=i, minute=0).strftime('%I:%M %p')) for i in range(8, 20)]
 
 # Tupla de 8:30AM - 7:30PM
-HOUR_CHOICES_GP = [(time(hour=i, minute=j).strftime('%I:%M %p'), time(hour=i, minute=j).strftime('%I:%M %p')) for i in range(8, 21) for j in (30,) if not (i == 8 and j == 0)]
+HOUR_CHOICES_GP = [(time(hour=i, minute=j).strftime('%I:%M %p'), time(hour=i, minute=j).strftime('%I:%M %p')) for i in range(8, 20) for j in (30,) if not (i == 8 and j == 0)]
 
 # Tupla de 7:00AM - 6:00PM
 HOUR_CHOICES_LG = [(time(hour=i, minute=0).strftime('%I:%M %p'), time(hour=i, minute=0).strftime('%I:%M %p')) for i in range(8, 20)]
 
 # Tupla de 9:05AM - 7:05PM
-HOUR_CHOICES_RC = [(time(hour=i, minute=5).strftime('%I:%M %p'), time(hour=i, minute=5).strftime('%I:%M %p')) for i in range(9, 20)]
+HOUR_CHOICES_RC = [(time(hour=i, minute=10).strftime('%I:%M %p'), time(hour=i, minute=5).strftime('%I:%M %p')) for i in range(9, 21)]
 
 # Tupla de 8:00AM - 5:00PM
-HOUR_CHOICES_GA = [(time(hour=i, minute=0).strftime('%I:%M %p'), time(hour=i, minute=0).strftime('%I:%M %p')) for i in range(8, 17)]
+HOUR_CHOICES_GA = [(time(hour=i, minute=0).strftime('%I:%M %p'), time(hour=i, minute=0).strftime('%I:%M %p')) for i in range(8, 20)]
 
 # Lista de animales para ChanceAnimalitos
 ANIMALITO_CHOICES = [
