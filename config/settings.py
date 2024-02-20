@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-c$(y93a#-2u3zb@h4mb!ucpdj*hzj8o5m4^@52mb_zom=#4dp!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ifmlinars.pythonanywhere.com','localhost','srv480513.hstgr.cloud']
+ALLOWED_HOSTS = ['ifmlinars.pythonanywhere.com','localhost','srv480513.hstgr.cloud','89.116.186.173']
 
 
 # Application definition
