@@ -40,8 +40,8 @@ class LotteryView(View):
                 else:
                     context[model_name].append({
                         'hour_sort': hour,
-                        'animalito': '---',
-                        'animalito_name': '---',
-                        'image_path': '---',
+                        'animalito': '',
+                        'animalito_name': '',
+                        'image_path': '----------',
                     })
         return render(request, 'lotoview/index.html', context)
