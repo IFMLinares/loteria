@@ -115,7 +115,7 @@ header .titulo-flex{
 /* tabla */
  
 table{
-    width: 100%; 
+    width: 100%;
     flex-direction: row; 
     border-collapse: separate;
     border-spacing: 10px 5px;
