@@ -16,7 +16,7 @@ HOUR_CHOICES_GP = [(time(hour=i, minute=j).strftime('%I:%M %p'), time(hour=i, mi
 HOUR_CHOICES_LG = [(time(hour=i, minute=0).strftime('%I:%M %p'), time(hour=i, minute=0).strftime('%I:%M %p')) for i in range(8, 20)]
 
 # Tupla de 9:05AM - 7:05PM
-HOUR_CHOICES_RC = [(time(hour=i, minute=10).strftime('%I:%M %p'), time(hour=i, minute=5).strftime('%I:%M %p')) for i in range(9, 21)]
+HOUR_CHOICES_RC = [(time(hour=i, minute=10).strftime('%I:%M %p'), time(hour=i, minute=10).strftime('%I:%M %p')) for i in range(9, 21)]
 
 # Tupla de 8:00AM - 5:00PM
 HOUR_CHOICES_GA = [(time(hour=i, minute=0).strftime('%I:%M %p'), time(hour=i, minute=0).strftime('%I:%M %p')) for i in range(8, 20)]
