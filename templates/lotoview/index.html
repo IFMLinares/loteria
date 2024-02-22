@@ -140,9 +140,8 @@ function connect() {
           // Si la hora de la fila coincide con la hora de los datos recibidos
           if (hora === data.hour_sort) {
               // Actualiza los datos de la fila
-              fila.children[1].textContent = data.animalito;
-              fila.children[2].textContent = data.animalito_name;
-              let imagen = fila.children[3].children[0];
+              fila.children[1].textContent = data.animalito + '-' + data.animalito_name;
+              let imagen = fila.children[2].children[0];
               imagen.src = data.image_path;
               imagen.alt = data.animalito_name;
 
