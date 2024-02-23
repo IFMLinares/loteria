@@ -128,6 +128,7 @@ thead tr th{
     border-radius: 10px;  
     padding: 10px;   
     font-size: 12px;
+
  } 
 
 tr td{ 
@@ -135,8 +136,9 @@ tr td{
     color:black;
     text-align: center;
     border-radius: 10px;  
-    font-weight: bold;  
-    font-size: 12px;
+    font-weight: bold;     
+     font-size: 20px;
+
 } 
 tr td:nth-child(3){
     width: 100px;
@@ -351,7 +353,11 @@ and (orientation : landscape) {
         text-align: center;
         border-radius: 10px;  
         font-weight: bold;  
-        font-size: 10px;
+        font-size: 12px;
+
+    }
+    tr td:nth-child(2){
+        font-size: 20px;
     }
     tr td img{
         width: 40px;
@@ -542,6 +548,9 @@ and (orientation : landscape) {
         font-weight: bold;  
         font-size: 10px;
     }
+    tr td:nth-child(2){
+        font-size: 20px;
+    }
     tr td img{
         width: 40px;
         height: 35px;
@@ -730,7 +739,10 @@ and (orientation : landscape) {
         text-align: center;
         border-radius: 10px;  
         font-weight: bold;  
-        font-size: 14px;
+        font-size: 12px;
+    }
+    tr td:nth-child(2){
+        font-size: 13px;
     }
     tr td img{
         width: 40px;
@@ -844,6 +856,9 @@ and (orientation : landscape) {
     header .contacto-tlf h3{
         font-size: 25px;
     }
+    header .contacto-tlf h3 i{
+        color: rgb(121, 253, 121);
+    }
     /* cuadro basado en el header que contiene: logo / titulo junto con hora / numero de telefono */
     
      
@@ -930,7 +945,7 @@ and (orientation : landscape) {
         height: 40px;
     }
     tr td:nth-child(2){
-        font-size: 20px;
+        font-size: 18px;
     }
     tr td:nth-child(1){
         width: 65px;
