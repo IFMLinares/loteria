@@ -24,7 +24,7 @@ header .titulo-flex{
 }
 
 header .contacto-tlf h3 i{
-    color: green;
+    color: blue;
 }
 /* cuadro basado en el header que contiene: logo / titulo junto con hora / numero de telefono */
 
@@ -139,9 +139,12 @@ tr td{
     text-align: center;
     border-radius: 10px;  
     font-weight: bold;     
-     font-size: 20px;
+     font-size: 18px;
 
 } 
+tr td:nth-child(2){
+    font-size: 25px;
+}
 tr td:nth-child(3){
     width: 100px;
 }
