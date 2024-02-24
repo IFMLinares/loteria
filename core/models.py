@@ -183,14 +183,14 @@ class GuacharoActivo(models.Model):
 
 class GranjaMillonaria(models.Model):
     hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES, verbose_name="Hora del sorteo")
-    animalito = models.CharField(max_length=2, choices=ANIMALITO_CHOICES, verbose_name="Animalito")
+    animalito = models.CharField(max_length=2, choices=ANIMALITO_GRANJA_MILLONARIA_CHOICES, verbose_name="Animalito")
     date_sort = models.DateField(auto_now=True)
 
     class Meta:
         unique_together = ('hour_sort', 'date_sort',)
 
     def get_image_path(self):
-        return join(settings.STATIC_URL, f'img/lottoActivo/{self.animalito}.png')
+        return join(settings.STATIC_URL, f'img/gm/{self.animalito}.png')
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)  # Llama al método save original
@@ -200,14 +200,14 @@ class GranjaMillonaria(models.Model):
 
 class Granjazo(models.Model):
     hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES_GJ, verbose_name="Hora del sorteo")
-    animalito = models.CharField(max_length=2, choices=ANIMALITO_CHOICES, verbose_name="Animalito")
+    animalito = models.CharField(max_length=2, choices=ANIMALITO_GRANJAZO_CHOICES, verbose_name="Animalito")
     date_sort = models.DateField(auto_now=True)
 
     class Meta:
         unique_together = ('hour_sort', 'date_sort',)
 
     def get_image_path(self):
-        return join(settings.STATIC_URL, f'img/lottoActivo/{self.animalito}.png')
+        return join(settings.STATIC_URL, f'img/gm/{self.animalito}.png')
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)  # Llama al método save original
