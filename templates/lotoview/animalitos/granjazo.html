@@ -1,0 +1,52 @@
+{% load static %}
+<div class="cuadro">
+    <div class="cuadro1">
+      <div class="cuadroLadoaladoAnimalito">
+        <div class="cuadroTexto">
+            <h5>EL GRANJAZO</h5>
+        </div>
+        <div class="cuadroImagen">
+          <img
+            src="{% static 'img/granjazo/logogz.png' %}"
+            alt=""
+            id="foto1"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="cuadro2">
+        {% with records=Granjazo %}
+        <table id="Granjazo">
+            <thead>
+                <tr>
+                    <th>Hora</th> 
+                    <th>Nro - Nombre</th>
+                    <th>Animal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in records %}
+                    <tr>
+                        <td>{{ record.hour_sort }}</td>  
+                        <td>{{ record.animalito }} - {{ record.animalito_name }}</td>
+                        <!-- <td>29 - Elefante</td> -->
+                        <td>
+                            {% if record.image_path != '----------' %}
+                                <img src="{{ record.image_path }}" alt="{{ record.animalito_name }}" width="75px" height="50px">
+                            {% else %}
+                            <img src="{% static 'img/logo.png' %}" style="opacity: 0.5;" alt="" width="75px" height="50px">
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td>N/A</td>
+                    <td>N/A</td> 
+                    <td><img src="{% static 'img/logo.png' %}" style="opacity: 0.5;" alt="" width="75px" height="50px"></td>
+                </tr>
+            </tbody>
+        </table>
+    {% endwith %}
+    </div>
+    <div class="cuadro3"></div>
+  </div>

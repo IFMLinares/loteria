@@ -6,6 +6,9 @@ HOUR_CHOICES = [(time(hour=i, minute=0).strftime('%I:%M %p'), time(hour=i, minut
 # Tupla de 9:00AM - 7:00PM
 HOUR_CHOICES_LA = [(time(hour=i, minute=0).strftime('%I:%M %p'), time(hour=i, minute=0).strftime('%I:%M %p')) for i in range(9, 20)]
 
+# Tupla de 9:00AM - 7:00PM
+HOUR_CHOICES_GJ = [(time(hour=i, minute=30).strftime('%I:%M %p'), time(hour=i, minute=30).strftime('%I:%M %p')) for i in range(9, 20)]
+
 # Tupla de 8:00AM - 7:00PM
 HOUR_CHOICES_SP = [(time(hour=i, minute=0).strftime('%I:%M %p'), time(hour=i, minute=0).strftime('%I:%M %p')) for i in range(8, 20)]
 

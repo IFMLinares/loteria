@@ -18,6 +18,9 @@ class LotteryView(View):
             LottoRey,
             SelvaPlus,
             GuacharoActivo,
+            LottoActivoInterRD,
+            GranjaMillonaria,
+            Granjazo,
             ]  # Agrega los otros modelos a esta lista
 
         for model in models:

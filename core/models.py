@@ -113,6 +113,23 @@ class LottoActivo(models.Model):
         # Llama a la función para enviar el mensaje
         enviar_mensaje(self)
 
+class LottoActivoInterRD(models.Model):
+    hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES_GP, verbose_name="Hora del sorteo")
+    animalito = models.CharField(max_length=2, choices=ANIMALITO_GRANJITA_LOTTO_ACTIVO_SELVA_PLUS_CHOICES, verbose_name="Animalito")
+    date_sort = models.DateField(auto_now=True)
+
+    class Meta:
+        unique_together = ('hour_sort', 'date_sort',)
+
+    def get_image_path(self):
+        return join(settings.STATIC_URL, f'img/lottoActivo/{self.animalito}.png')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)  # Llama al método save original
+
+        # Llama a la función para enviar el mensaje
+        enviar_mensaje(self)
+
 class LottoRey(models.Model):
     hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES_GP, verbose_name="Hora del sorteo")
     animalito = models.CharField(max_length=2, choices=ANIMALITO_GRANJITA_LOTTO_ACTIVO_SELVA_PLUS_CHOICES, verbose_name="Animalito")
@@ -157,6 +174,40 @@ class GuacharoActivo(models.Model):
 
     def get_image_path(self):
         return join(settings.STATIC_URL, f'img/guacharoactivo/{self.animalito}.jpg')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)  # Llama al método save original
+
+        # Llama a la función para enviar el mensaje
+        enviar_mensaje(self)
+
+class GranjaMillonaria(models.Model):
+    hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES, verbose_name="Hora del sorteo")
+    animalito = models.CharField(max_length=2, choices=ANIMALITO_CHOICES, verbose_name="Animalito")
+    date_sort = models.DateField(auto_now=True)
+
+    class Meta:
+        unique_together = ('hour_sort', 'date_sort',)
+
+    def get_image_path(self):
+        return join(settings.STATIC_URL, f'img/lottoActivo/{self.animalito}.png')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)  # Llama al método save original
+
+        # Llama a la función para enviar el mensaje
+        enviar_mensaje(self)
+
+class Granjazo(models.Model):
+    hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES_GJ, verbose_name="Hora del sorteo")
+    animalito = models.CharField(max_length=2, choices=ANIMALITO_CHOICES, verbose_name="Animalito")
+    date_sort = models.DateField(auto_now=True)
+
+    class Meta:
+        unique_together = ('hour_sort', 'date_sort',)
+
+    def get_image_path(self):
+        return join(settings.STATIC_URL, f'img/lottoActivo/{self.animalito}.png')
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)  # Llama al método save original
