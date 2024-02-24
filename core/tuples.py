@@ -65,6 +65,8 @@ ANIMALITO_CHOICES = [
 
 # Lista Para la granja plus
 ANIMALITO_GRANA_PLUS_CHOICES = [
+    ("00", "Ballena"),
+    ("0", "Delfín"),
     ("1", "Carnero"),
     ("2", "Toro"),
     ("3", "Ciempies"),
@@ -148,6 +150,7 @@ ANIMALITO_GRANJITA_LOTTO_ACTIVO_SELVA_PLUS_CHOICES = [
 # lA RICACHONA
 ANIMALITO_LA_RICACHONA_CHOICES = [
     ("00", "Ballena"),
+    ("0", "Delfín"),
     ("1", "Carnero"),
     ("2", "Toro"),
     ("3", "Ciempies"),
