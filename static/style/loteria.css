@@ -985,9 +985,7 @@ footer h3{
 /* footer */
 }
 
- /* iPads (landscape) 
-#Dispositivo = Tablets, Ipads (horizontal) 
-#Resolución = B/w 768px to 1024px */
+ /* responsive TV */
 @media only screen and (min-device-width : 900px) and (max-device-width : 1020px) 
 and (orientation : landscape) {
     /* *{
@@ -1161,4 +1159,95 @@ footer h3{
 /* footer */
 
 }
+ /* responsive TV */
+
  
+ /* tabla */
+/* Cuando la pantalla es menor a 900px  (tablets y teléfonos inteligentes)*/
+@media only screen and (max-width : 900px) {
+    .cuadroCentral{
+        margin: 0px 15px; 
+    }
+    .cuadro-central{
+        width: 100%;
+        height: 100%; 
+        display: block; 
+        /* margin-bottom: 100px; */
+    }
+    /* cuadro basado en el header que contiene: logo / titulo junto con hora / numero de telefono */
+    header{
+        border: 1px solid black; 
+        margin-bottom: 10px;
+    
+    }
+    header .titulo-flex{
+        display: block; 
+        text-align: center;
+        width: 100%;
+    } 
+    
+    /* cuadro basado en el header que contiene: logo / titulo junto con hora / numero de telefono */
+    
+        .cuadro{ 
+            width: 100%;  
+            text-align: center; 
+        }
+            
+        /* cuadro numero 1 */
+    
+        .cuadro .cuadro1{
+            width: 100%;     
+            border-radius: 10px;
+            
+        }
+        .cuadro .cuadro1 .cuadroLadoalado {
+            display: block; 
+        }
+        .cuadro .cuadro1 .cuadroLadoalado .cuadroTexto{
+            font-size: 15px;
+        }
+        .cuadro .cuadro1 .cuadroLadoalado img{
+            width: 120px;
+            height: 75px;
+        }
+            /* cuadro numero 1 */
+    
+            /* cuadro numero 2 */
+        .cuadro .cuadro2{
+            width: 100%;
+            height: 100%;
+            text-align: center; 
+        }
+            .cuadroLadoalado .cuadroHora{
+                display: block;
+             }
+            .cuadroLadoalado .cuadroHora h5{
+                font-size: 18px;
+            }
+            .cuadroresultado{
+                display: block;
+            }
+            .cuadroResultado-uno{
+                display: block;
+                text-align: center; 
+            } 
+            .cuadroresultado .cuadroResultado-uno .opcion{
+               width: 100%;
+            }
+            
+            .cuadroresultado .cuadroResultado-uno .resultado{
+                background-color: #F4F4F4;
+                color:black;
+                text-align: center;
+                border-radius: 5px; 
+                width: 100%;
+                font-weight: bold;
+            }
+            /* cuadro numero 2 */
+        .cuadro .cuadro3{
+            width: 100%;
+            margin-top: 10px;
+            text-align: center;
+        }
+        
+    }
