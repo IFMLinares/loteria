@@ -24,7 +24,7 @@ header .titulo-flex{
 }
 
 header .contacto-tlf h3 i{
-    color: green;
+    color: red;
 }
 /* cuadro basado en el header que contiene: logo / titulo junto con hora / numero de telefono */
 
