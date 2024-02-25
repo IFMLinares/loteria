@@ -51,6 +51,6 @@ admin.site.register(LottoActivoInterRD, LottoActivoInterRDAdmin)
 admin.site.register(GranjaMillonaria, GranjaMillonariaAdmin)
 admin.site.register(Granjazo, GranjazoAdmin)
 
-admin.site.register(TripleCaliente, TripleCalienteAdmin)
+# admin.site.register(TripleCaliente, TripleCalienteAdmin)
 
 
