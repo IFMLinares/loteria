@@ -24,7 +24,7 @@ header .titulo-flex{
 }
 
 header .contacto-tlf h3 i{
-    color: yellow;
+    color: green;
 }
 /* cuadro basado en el header que contiene: logo / titulo junto con hora / numero de telefono */
 
@@ -578,7 +578,7 @@ and (orientation : landscape) {
         font-size: 18px;
     }
     header .contacto-tlf h3 i{
-        color: red;
+        color: green;
     }
     /* cuadro basado en el header que contiene: logo / titulo junto con hora / numero de telefono */
     
@@ -986,8 +986,7 @@ footer h3{
 }
 
  /* responsive TV */
-@media only screen and (min-device-width : 900px) and (max-device-width : 1020px) 
-and (orientation : landscape) {
+@media only screen and (min-device-width : 900px) and (max-device-width : 1020px)  {
     /* *{
         padding: 0px !important;
         margin: 0px !important;
@@ -1116,7 +1115,8 @@ and (orientation : landscape) {
         height: 40px;
     }
     tr td:nth-child(2){
-        font-size: 13px;
+        font-size: 20px !important;
+        width: 10px !important;
     }
     tr td:nth-child(1){
         width: 65px;
@@ -1175,8 +1175,7 @@ footer h3{
         /* margin-bottom: 100px; */
     }
     /* cuadro basado en el header que contiene: logo / titulo junto con hora / numero de telefono */
-    header{
-        border: 1px solid black; 
+    header{ 
         margin-bottom: 10px;
     
     }
