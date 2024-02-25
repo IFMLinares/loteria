@@ -1117,7 +1117,7 @@ footer h3{
     tr td:nth-child(2){
         font-size: 20px !important;
         width: 10px !important;
-        
+        background-color: aqua;
     }
     tr td:nth-child(1){
         width: 65px;
