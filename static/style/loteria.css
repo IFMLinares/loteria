@@ -773,7 +773,7 @@ and (orientation : landscape) {
         font-size: 25px;
     }
     header .contacto-tlf h3 i{
-        color: red;
+        color: green;
     }
     /* cuadro basado en el header que contiene: logo / titulo junto con hora / numero de telefono */
     
@@ -903,4 +903,84 @@ footer h3{
 }    
 /* footer */
 
+}
+
+@media only screen and (min-device-width : 1020px) and (max-device-width : 1151px) 
+and (orientation : landscape) {
+    /* cuadro basado en el header que contiene: logo / titulo junto con hora / numero de telefono */
+    header{ 
+        width: 100vw;
+        margin-bottom: 0px; 
+     }
+    header .titulo-flex{
+        display: flex;
+        justify-content: space-around;
+        align-items: center; 
+        width: 100%;
+    }
+ 
+    header .logo-general img{
+        width: 160px;
+        height: 50px;
+    }
+    header .text-titulo h1{
+        text-align: center;
+        font-size: 25px;
+    }
+    header .contacto-tlf h3{
+        font-size: 15px;
+    }
+    header .contacto-tlf h3 i{
+        color: red;
+    }
+    /* cuadro basado en el header que contiene: logo / titulo junto con hora / numero de telefono */
+
+    /* tabla */
+     
+    table{ 
+        width: 100%; 
+        flex-direction: row; 
+        border-collapse: separate; 
+        border-spacing: 2.5px 2.5px;
+
+        
+    }
+    thead tr th{
+        background-color: blue;
+        color:white;
+        text-align: center;
+        border-radius: 10px;  
+        padding: 5px !important;   
+        font-size: 13px;
+    
+     } 
+    
+    tr td{ 
+        background-color: #F4F4F4;
+        color:black;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        border-radius: 10px;  
+        font-weight: bold;  
+        font-size: 13px; 
+    }
+    tr td img{
+        width: 40px;
+        height: 40px;
+    }
+    tr td:nth-child(2){
+        font-size: 17px;
+    }
+    tr td:nth-child(1){
+        width: 65px;
+    }
+/* footer */
+footer{
+    margin-top: 10px;
+}
+footer h3{
+    font-size: 10px;
+}    
+/* footer */
 }
