@@ -24,6 +24,12 @@ HOUR_CHOICES_RC = [(time(hour=i, minute=10).strftime('%I:%M %p'), time(hour=i, m
 # Tupla de 8:00AM - 5:00PM
 HOUR_CHOICES_GA = [(time(hour=i, minute=0).strftime('%I:%M %p'), time(hour=i, minute=0).strftime('%I:%M %p')) for i in range(8, 20)]
 
+LOTERY_CHOICES_TC = [
+    ("1:00 PM","1:00 PM"),
+    ("4:30 PM","4:30 PM"),
+    ("7:10 PM","7:10 PM"),
+]
+
 # Lista de animales para ChanceAnimalitos
 ANIMALITO_CHOICES = [
     ("00", "Ballena"),

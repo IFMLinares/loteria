@@ -28,6 +28,9 @@ def enviar_mensaje(self):
     async_to_sync(channel_layer.group_send)('grupo_de_datos', message)
 
 # Create your models here.
+
+# modelos de los animalitos 
+
 class ChanceAnimalitos(models.Model):
     hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES, verbose_name="Hora del sorteo")
     animalito = models.CharField(max_length=2, choices=ANIMALITO_CHOICES, verbose_name="Animalito")
@@ -214,3 +217,62 @@ class Granjazo(models.Model):
 
         # Llama a la función para enviar el mensaje
         enviar_mensaje(self)
+
+
+# Modelo de las Loterias
+
+class TripleCaliente(models.Model):
+    hour_sort = models.CharField(max_length=9, choices=LOTERY_CHOICES_TC, verbose_name="Hora del sorteo")
+    date_sort = models.DateField(auto_now=True)
+    a = models.PositiveBigIntegerField()
+    b = models.PositiveBigIntegerField()
+    c = models.PositiveBigIntegerField()
+    zod = models.PositiveBigIntegerField()
+
+class TripleCaracas(models.Model):
+    hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES_GJ, verbose_name="Hora del sorteo")
+    date_sort = models.DateField(auto_now=True)
+    a = models.PositiveBigIntegerField()
+    b = models.PositiveBigIntegerField()
+    c = models.PositiveBigIntegerField()
+    zod = models.PositiveBigIntegerField()
+
+class TripleZamorano(models.Model):
+    hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES_GJ, verbose_name="Hora del sorteo")
+    date_sort = models.DateField(auto_now=True)
+    a = models.PositiveBigIntegerField()
+    b = models.PositiveBigIntegerField()
+    c = models.PositiveBigIntegerField()
+    zod = models.PositiveBigIntegerField()
+
+class TripleChance(models.Model):
+    hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES_GJ, verbose_name="Hora del sorteo")
+    date_sort = models.DateField(auto_now=True)
+    a = models.PositiveBigIntegerField()
+    b = models.PositiveBigIntegerField()
+    c = models.PositiveBigIntegerField()
+    zod = models.PositiveBigIntegerField()
+
+class TripleTachira(models.Model):
+    hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES_GJ, verbose_name="Hora del sorteo")
+    date_sort = models.DateField(auto_now=True)
+    a = models.PositiveBigIntegerField()
+    b = models.PositiveBigIntegerField()
+    c = models.PositiveBigIntegerField()
+    zod = models.PositiveBigIntegerField()
+
+class TrioActivo(models.Model):
+    hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES_GJ, verbose_name="Hora del sorteo")
+    date_sort = models.DateField(auto_now=True)
+    a = models.PositiveBigIntegerField()
+    b = models.PositiveBigIntegerField()
+    c = models.PositiveBigIntegerField()
+    zod = models.PositiveBigIntegerField()
+
+class Ricachona(models.Model):
+    hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES_GJ, verbose_name="Hora del sorteo")
+    date_sort = models.DateField(auto_now=True)
+    a = models.PositiveBigIntegerField()
+    b = models.PositiveBigIntegerField()
+    c = models.PositiveBigIntegerField()
+    zod = models.PositiveBigIntegerField()

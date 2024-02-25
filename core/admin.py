@@ -35,6 +35,9 @@ class GranjaMillonariaAdmin(admin.ModelAdmin):
 class GranjazoAdmin(admin.ModelAdmin):
     list_display = ('hour_sort', 'animalito', 'date_sort', 'get_image_path')
 
+class TripleCalienteAdmin(admin.ModelAdmin):
+    list_display = ('hour_sort', 'a', 'b', 'c', 'zod', 'date_sort')
+
 
 admin.site.register(ChanceAnimalitos, ChanceAnimalitosAdmin)
 admin.site.register(GranjaPlus, GranjaPlusAdmin)
@@ -47,4 +50,7 @@ admin.site.register(GuacharoActivo, GuacharoActivoAdmin)
 admin.site.register(LottoActivoInterRD, LottoActivoInterRDAdmin)
 admin.site.register(GranjaMillonaria, GranjaMillonariaAdmin)
 admin.site.register(Granjazo, GranjazoAdmin)
+
+admin.site.register(TripleCaliente, TripleCalienteAdmin)
+
 
