@@ -181,7 +181,7 @@ function connect() {
 
             if (hora === data.hour_sort) {
                 fila.children[1].textContent = data.animalito;
-                fila.children[1].textContent = data.animalito_name;
+                fila.children[2].textContent = data.animalito_name;
                 let imagen = fila.children[3].children[0];
                 imagen.src = data.image_path;
                 imagen.alt = data.animalito_name;
