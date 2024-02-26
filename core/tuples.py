@@ -15,6 +15,7 @@ HOUR_CHOICES_RC = [(time(hour=i, minute=10).strftime('%I:%M %p'), time(hour=i, m
 # Tupla de 8:00AM - 7:00PM
 HOUR_CHOICES_SP = [(time(hour=i, minute=0).strftime('%I:%M %p'), time(hour=i, minute=0).strftime('%I:%M %p')) for i in range(8, 20)]
 
+# Tupla de horario para Granja millonaria
 HOUR_CHOICES_GM = [
     ("9:00 AM", "9:00 AM"),
     ("10:00 AM", "10:00 AM"),
@@ -28,6 +29,7 @@ HOUR_CHOICES_GM = [
     ("8:00 PM", "8:00 PM"),
 ]
 
+# Tupla de horario para Granjazo
 HOUR_CHOICES_GJO = [
     ("9:30 AM", "9:30 AM"),
     ("10:30 AM", "10:30 AM"),
@@ -41,13 +43,42 @@ HOUR_CHOICES_GJO = [
     ("8:30 PM", "8:30 PM"),
 ]
 
-
+# Tupla de horario para triple caliente
 LOTERY_CHOICES_TC = [
     ("1:00 PM","1:00 PM"),
     ("4:30 PM","4:30 PM"),
     ("7:10 PM","7:10 PM"),
 ]
 
+# Tupla de horario para Triple caracas y triple chance
+LOTERY_CHOICES_TCCS_TCH = [
+    ("1:00 PM","1:00 PM"),
+    ("4:30 PM","4:30 PM"),
+    ("7:00 PM","7:00 PM"),
+]
+
+# Tupla de horario para Triple Zulia
+LOTERY_CHOICES_ZL = [
+    ("12:45 PM","12:45 PM"),
+    ("4:45 PM","4:45 PM"),
+    ("7:05 PM","7:05 PM"),
+]
+
+# Tupla de horario para Triple Zamorano
+LOTERY_CHOICES_ZA = [
+    ("12:00 PM","12:00 PM"),
+    ("4:00 PM","4:00 PM"),
+    ("7:00 PM","7:00 PM"),
+]
+
+# Tupla de horario para Triple Tachira
+LOTERY_CHOICES_TAC = [
+    ("1:15 PM","1:15 PM"),
+    ("4:45 PM","4:45 PM"),
+    ("7:20 PM","7:20 PM"),
+]
+
+# Tupla de horario para Ricachona loteria
 LOTERY_CHOICES_RC = [
     ("9:15 AM", "9:15 AM"),
     ("10:15 AM", "10:15 AM"),
@@ -63,6 +94,7 @@ LOTERY_CHOICES_RC = [
     ("8:15 PM", "8:15 PM"),
 ]
 
+# Tupla de horario para Trio activo
 LOTERY_CHOICES_TA = [
     ("9:00 AM", "9:00 AM"),
     ("10:00 AM", "10:00 AM"),
@@ -247,6 +279,7 @@ ANIMALITO_LA_RICACHONA_CHOICES = [
     ("36", "Culebra")
 ]
 
+# GUACHAROA ACTIVO
 ANIMALITO_GUACHARO_ACTIVO_CHOICES = [
     ("00", "Ballena"),
     ("0", "Delfín"),
@@ -327,6 +360,7 @@ ANIMALITO_GUACHARO_ACTIVO_CHOICES = [
     ("75", "Guácharo")
 ]
 
+# GRANJA MILLONARIA
 ANIMALITO_GRANJA_MILLONARIA_CHOICES = [
     ("00", "Ballena"),
     ("0", "Delfín"),
@@ -370,6 +404,7 @@ ANIMALITO_GRANJA_MILLONARIA_CHOICES = [
     ("38", "Conejo"),
 ]
 
+# GRANJAZO
 ANIMALITO_GRANJAZO_CHOICES = [
     ("00", "Ballena"),
     ("0", "Delfín"),

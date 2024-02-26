@@ -45,10 +45,10 @@ class TripleTachiraAdmin(admin.ModelAdmin):
     list_display = ('hour_sort', 'a', 'b', 'c', 'zod', 'date_sort')
 
 class TrioActivoAdmin(admin.ModelAdmin):
-    list_display = ('hour_sort', 'a', 'b', 'c', 'zod', 'date_sort')
+    list_display = ('hour_sort', 'a', 'date_sort')
 
 class RicachonaAdmin(admin.ModelAdmin):
-    list_display = ('hour_sort', 'a', 'b', 'c', 'zod', 'date_sort')
+    list_display = ('hour_sort', 'a', 'date_sort')
 
 class TripleZuliaAdmin(admin.ModelAdmin):
     list_display = ('hour_sort', 'a', 'b', 'c', 'zod', 'date_sort')
@@ -72,13 +72,13 @@ admin.site.register(LottoActivoInterRD, LottoActivoInterRDAdmin)
 admin.site.register(GranjaMillonaria, GranjaMillonariaAdmin)
 admin.site.register(Granjazo, GranjazoAdmin)
 
-# admin.site.register(TripleCaliente, TripleCalienteAdmin)
-# admin.site.register(TripleCaracas, TripleCaracasAdmin)
-# admin.site.register(TripleZulia, TripleZuliaAdmin)
-# admin.site.register(TripleZamorano, TripleZamoranoAdmin)
-# admin.site.register(TripleChance, TripleChanceAdmin)
-# admin.site.register(TripleTachira, TripleTachiraAdmin)
-# admin.site.register(TrioActivo, TrioActivoAdmin)
-# admin.site.register(Ricachona, RicachonaAdmin)
+admin.site.register(TripleCaliente, TripleCalienteAdmin)
+admin.site.register(TripleCaracas, TripleCaracasAdmin)
+admin.site.register(TripleZulia, TripleZuliaAdmin)
+admin.site.register(TripleZamorano, TripleZamoranoAdmin)
+admin.site.register(TripleChance, TripleChanceAdmin)
+admin.site.register(TripleTachira, TripleTachiraAdmin)
+admin.site.register(TrioActivo, TrioActivoAdmin)
+admin.site.register(Ricachona, RicachonaAdmin)
 
 
