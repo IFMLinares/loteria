@@ -19,18 +19,22 @@
                   {% with records=SelvaPlus %}
                     <table id="SelvaPlus">
                         <thead>
-                            <tr>
-                                <th>Hora</th>
-                                <th>Nro - Nombre</th>
-                                <th>Animal</th>
-                            </tr>
+                          <tr>
+                            <th>Hora</th> 
+                            <th>Nro</th>
+                            <th>Nombre</th>
+                            <th>Animal</th>
+                        </tr>
                         </thead>
                         <tbody>
                             {% for record in records %}
                                 <tr>
-                                    <td>{{ record.hour_sort }}</td>
-                                    <td>{{ record.animalito }} - {{ record.animalito_name }}</td>
-                                    <!-- <td>29 - Elefante</td> -->
+                                  <td>{{ record.hour_sort }}</td>  
+                                  <td>{{ record.animalito }}</td>  
+                                  <td>{{ record.animalito_name }}</td>
+                                  <!-- <td>09:00AM</td>
+                                  <td>99</td>  
+                                  <td>Elefante</td> -->
                                     <td>
                                         {% if record.image_path != '----------' %}
                                             <img src="{{ record.image_path }}" alt="{{ record.animalito_name }}" width="75px" height="50px">
