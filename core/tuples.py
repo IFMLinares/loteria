@@ -3,15 +3,6 @@ from datetime import datetime, time
 # Tupla de 9:00AM - 7:00PM
 HOUR_CHOICES = [(time(hour=i, minute=0).strftime('%I:%M %p'), time(hour=i, minute=0).strftime('%I:%M %p')) for i in range(9, 20)]
 
-# Tupla de 9:00AM - 7:00PM
-HOUR_CHOICES_LA = [(time(hour=i, minute=0).strftime('%I:%M %p'), time(hour=i, minute=0).strftime('%I:%M %p')) for i in range(9, 20)]
-
-# Tupla de 9:00AM - 7:00PM
-HOUR_CHOICES_GJ = [(time(hour=i, minute=30).strftime('%I:%M %p'), time(hour=i, minute=30).strftime('%I:%M %p')) for i in range(9, 20)]
-
-# Tupla de 8:00AM - 7:00PM
-HOUR_CHOICES_SP = [(time(hour=i, minute=0).strftime('%I:%M %p'), time(hour=i, minute=0).strftime('%I:%M %p')) for i in range(8, 20)]
-
 # Tupla de 8:30AM - 7:30PM
 HOUR_CHOICES_GP = [(time(hour=i, minute=j).strftime('%I:%M %p'), time(hour=i, minute=j).strftime('%I:%M %p')) for i in range(8, 20) for j in (30,) if not (i == 8 and j == 0)]
 
@@ -21,8 +12,34 @@ HOUR_CHOICES_LG = [(time(hour=i, minute=0).strftime('%I:%M %p'), time(hour=i, mi
 # Tupla de 9:05AM - 7:05PM
 HOUR_CHOICES_RC = [(time(hour=i, minute=10).strftime('%I:%M %p'), time(hour=i, minute=10).strftime('%I:%M %p')) for i in range(9, 21)]
 
-# Tupla de 8:00AM - 5:00PM
-HOUR_CHOICES_GA = [(time(hour=i, minute=0).strftime('%I:%M %p'), time(hour=i, minute=0).strftime('%I:%M %p')) for i in range(8, 20)]
+# Tupla de 8:00AM - 7:00PM
+HOUR_CHOICES_SP = [(time(hour=i, minute=0).strftime('%I:%M %p'), time(hour=i, minute=0).strftime('%I:%M %p')) for i in range(8, 20)]
+
+HOUR_CHOICES_GM = [
+    ("9:00 AM", "9:00 AM"),
+    ("10:00 AM", "10:00 AM"),
+    ("11:00 AM", "11:00 AM"),
+    ("12:00 PM", "12:00 PM"),
+    ("1:00 PM", "1:00 PM"),
+    ("4:00 PM", "4:00 PM"),
+    ("5:00 PM", "5:00 PM"),
+    ("6:00 PM", "6:00 PM"),
+    ("7:00 PM", "7:00 PM"),
+    ("8:00 PM", "8:00 PM"),
+]
+
+HOUR_CHOICES_GJO = [
+    ("9:30 AM", "9:30 AM"),
+    ("10:30 AM", "10:30 AM"),
+    ("11:30 AM", "11:30 AM"),
+    ("12:30 PM", "12:30 PM"),
+    ("1:30 PM", "1:30 PM"),
+    ("4:30 PM", "4:30 PM"),
+    ("5:30 PM", "5:30 PM"),
+    ("6:30 PM", "6:30 PM"),
+    ("7:30 PM", "7:30 PM"),
+    ("8:30 PM", "8:30 PM"),
+]
 
 LOTERY_CHOICES_TC = [
     ("1:00 PM","1:00 PM"),

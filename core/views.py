@@ -1,4 +1,4 @@
-from datetime import time
+from datetime import time, date
 from collections import defaultdict
 from django.shortcuts import render
 from django.views.generic import View
@@ -68,6 +68,7 @@ class LotteryView(View):
             TripleCaliente,
             TripleCaracas,
             TripleZamorano,
+            TripleZulia,
             TripleChance,
             TripleTachira,
             TrioActivo,
@@ -76,7 +77,7 @@ class LotteryView(View):
 
         for model in models:
             model_name = model.__name__
-            today = timezone.now().date()
+            today = date.today()
             hours = [choice[0] for choice in model._meta.get_field('hour_sort').choices]
             records = model.objects.filter(date_sort=today)
             records_dict = {record.hour_sort: record for record in records}
@@ -85,7 +86,7 @@ class LotteryView(View):
             for hour in hours:
                 if hour in records_dict:
                     record = records_dict[hour]
-                    if model_name in ['TripleCaliente', 'TripleCaracas', 'TripleZamorano', 'TripleChance', 'TripleTachira', 'TrioActivo', 'Ricachona']:
+                    if model_name in ['TripleCaliente', 'TripleCaracas', 'TripleZulia','TripleZamorano', 'TripleChance', 'TripleTachira', 'TrioActivo', 'Ricachona']:
                         # Maneja los nuevos modelos aquí
                         context[model_name].append({
                             'hour_sort': record.hour_sort,
@@ -102,7 +103,7 @@ class LotteryView(View):
                             'image_path': record.get_image_path(),
                         })
                 else:
-                    if model_name in ['TripleCaliente', 'TripleCaracas', 'TripleZamorano', 'TripleChance', 'TripleTachira', 'TrioActivo', 'Ricachona']:
+                    if model_name in ['TripleCaliente', 'TripleCaracas', 'TripleZulia', 'TripleZamorano', 'TripleChance', 'TripleTachira', 'TrioActivo', 'Ricachona']:
                         # Maneja los nuevos modelos aquí
                         context[model_name].append({
                             'hour_sort': hour,
@@ -118,4 +119,10 @@ class LotteryView(View):
                             'animalito_name': '---',
                             'image_path': '----------',
                         })
+        # Obtenemos la fecha de hoy
+        hoy = date.today()
+
+        # Imprimimos la fecha
+        print("La fecha de hoy es:", hoy)
+        print(context)
         return render(request, 'lotoview/index.html', context)

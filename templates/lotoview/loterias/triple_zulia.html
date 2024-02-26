@@ -3,11 +3,11 @@
     <div class="cuadro1">
       <div class="cuadroLadoalado">
         <div class="cuadroTexto">
-          <h5>Triple Caliente</h5>
+          <h5>Triple Zulia</h5>
         </div>
         <div class="cuadroImagen">
           <img
-            src="{% static 'img/loteria/triple-caliente-logo.png' %}"
+            src="{% static 'img/loteria/triple-zulia-logo.png' %}"
             alt=""
             id="foto1"
           />
@@ -16,13 +16,13 @@
     </div>
     <div class="cuadro2">
         
-    {% with records=TripleCaliente %}
+    {% with records=TripleZulia %}
     {% for record in records %}
       <div class="cuadroLadoalado">
         <div class="cuadroHora">
             <h5>{{ record.hour_sort }}</h5>
         </div>
-        <table class="TripleCaliente-{{ forloop.counter }}">
+        <table class="TripleZulia-{{ forloop.counter }}">
           <thead>
             <tr>
               <th>A</th>
