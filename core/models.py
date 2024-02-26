@@ -70,6 +70,8 @@ class ChanceAnimalitos(models.Model):
 
     class Meta:
         unique_together = ('hour_sort', 'date_sort',)
+        verbose_name = 'Chance Animalitos'
+        verbose_name_plural = 'Chance Animalitos'
 
     def get_image_path(self):
         return join(settings.STATIC_URL, f'img/chanceenlinea/{self.animalito}.png')
@@ -87,6 +89,8 @@ class GranjaPlus(models.Model):
 
     class Meta:
         unique_together = ('hour_sort', 'date_sort',)
+        verbose_name = 'Granja Plus'
+        verbose_name_plural = 'Granja Plus'
 
     def get_image_path(self):
         return join(settings.STATIC_URL, f'img/lagranjaplus/{self.animalito}.png')
@@ -104,6 +108,8 @@ class LaGranjita(models.Model):
 
     class Meta:
         unique_together = ('hour_sort', 'date_sort',)
+        verbose_name = 'La Granjita'
+        verbose_name_plural = 'La Granjita'
 
     def get_image_path(self):
         return join(settings.STATIC_URL, f'img/lagranjita/{self.animalito}.png')
@@ -121,6 +127,8 @@ class LaRicachona(models.Model):
 
     class Meta:
         unique_together = ('hour_sort', 'date_sort',)
+        verbose_name = 'La Ricachona Animalitos'
+        verbose_name_plural = 'La Ricachona Animalitos'
 
     def get_image_path(self):
         return join(settings.STATIC_URL, f'img/laricachona/{self.animalito}.png')
@@ -138,6 +146,8 @@ class LottoActivo(models.Model):
 
     class Meta:
         unique_together = ('hour_sort', 'date_sort',)
+        verbose_name = 'Lotto Activo'
+        verbose_name_plural = 'Lotto Activo'
 
     def get_image_path(self):
         return join(settings.STATIC_URL, f'img/lottoActivo/{self.animalito}.png')
@@ -155,6 +165,8 @@ class LottoActivoInterRD(models.Model):
 
     class Meta:
         unique_together = ('hour_sort', 'date_sort',)
+        verbose_name = 'lotto Activo Inter RD'
+        verbose_name_plural = 'Lotto Activo Inter RD'
 
     def get_image_path(self):
         return join(settings.STATIC_URL, f'img/lottoActivo/{self.animalito}.png')
@@ -172,6 +184,8 @@ class LottoRey(models.Model):
 
     class Meta:
         unique_together = ('hour_sort', 'date_sort',)
+        verbose_name = 'Lotto Rey'
+        verbose_name_plural = 'Lotto Rey'
 
     def get_image_path(self):
         return join(settings.STATIC_URL, f'img/lottorey/{self.animalito}.png')
@@ -189,6 +203,8 @@ class SelvaPlus(models.Model):
 
     class Meta:
         unique_together = ('hour_sort', 'date_sort',)
+        verbose_name = 'Selva Plus'
+        verbose_name_plural = 'Selva Plus'
 
     def get_image_path(self):
         return join(settings.STATIC_URL, f'img/selvaplus/{self.animalito}.png')
@@ -206,6 +222,8 @@ class GuacharoActivo(models.Model):
 
     class Meta:
         unique_together = ('hour_sort', 'date_sort',)
+        verbose_name = 'Guacharo Activo'
+        verbose_name_plural = 'Guacharo Activo'
 
     def get_image_path(self):
         return join(settings.STATIC_URL, f'img/guacharoactivo/{self.animalito}.jpg')
@@ -223,6 +241,8 @@ class GranjaMillonaria(models.Model):
 
     class Meta:
         unique_together = ('hour_sort', 'date_sort',)
+        verbose_name = 'Ganja Millonaria'
+        verbose_name_plural = 'Granja Millonaria'
 
     def get_image_path(self):
         return join(settings.STATIC_URL, f'img/gm/{self.animalito}.png')
@@ -240,6 +260,8 @@ class Granjazo(models.Model):
 
     class Meta:
         unique_together = ('hour_sort', 'date_sort',)
+        verbose_name = 'Granjazo'
+        verbose_name_plural = 'Granjazo'
 
     def get_image_path(self):
         return join(settings.STATIC_URL, f'img/gm/{self.animalito}.png')
@@ -263,6 +285,8 @@ class TripleCaliente(models.Model):
 
     class Meta:
         unique_together = ('hour_sort', 'date_sort',)
+        verbose_name = 'Loteria Triple Caliente'
+        verbose_name_plural = 'Loteria Triple Caliente'
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)  # Llama al método save original
@@ -280,6 +304,8 @@ class TripleCaracas(models.Model):
 
     class Meta:
         unique_together = ('hour_sort', 'date_sort',)
+        verbose_name = 'Loteria Triple Caracas'
+        verbose_name_plural = 'Loteria Triple Caracas'
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)  # Llama al método save original
@@ -297,6 +323,8 @@ class TripleZulia(models.Model):
 
     class Meta:
         unique_together = ('hour_sort', 'date_sort',)
+        verbose_name = 'Loteria Triple Zulia'
+        verbose_name_plural = 'Loteria Triple Zulia'
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)  # Llama al método save original
@@ -314,6 +342,8 @@ class TripleZamorano(models.Model):
 
     class Meta:
         unique_together = ('hour_sort', 'date_sort',)
+        verbose_name = 'Loteria Triple Zamorano'
+        verbose_name_plural = 'Loteria Triple Zamorano'
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)  # Llama al método save original
@@ -331,6 +361,8 @@ class TripleChance(models.Model):
 
     class Meta:
         unique_together = ('hour_sort', 'date_sort',)
+        verbose_name = 'Loteria Triple Chance'
+        verbose_name_plural = 'Loteria Triple Chance'
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)  # Llama al método save original
@@ -348,6 +380,8 @@ class TripleTachira(models.Model):
 
     class Meta:
         unique_together = ('hour_sort', 'date_sort',)
+        verbose_name = 'Loteria Triple Tachira'
+        verbose_name_plural = 'Loteria Triple Tachira'
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)  # Llama al método save original
@@ -361,6 +395,8 @@ class TrioActivo(models.Model):
     a = models.PositiveBigIntegerField()
     class Meta:
         unique_together = ('hour_sort', 'date_sort',)
+        verbose_name = 'Loteria Trio Activo'
+        verbose_name_plural = 'Loteria Trio Activo'
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)  # Llama al método save original
@@ -375,6 +411,8 @@ class Ricachona(models.Model):
 
     class Meta:
         unique_together = ('hour_sort', 'date_sort',)
+        verbose_name = 'Loteria Ricachona'
+        verbose_name_plural = 'Loteria Ricachona'
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)  # Llama al método save original
