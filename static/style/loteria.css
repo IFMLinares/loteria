@@ -1111,14 +1111,17 @@ footer h3{
         font-size: 13px; 
     }
     tr td img{
-        width: 40px;
-        height: 40px;
+        width: 50px;
+        height: 41px;
     }
     tr td:nth-child(2){
         font-size: 20px !important;
         width: 10px !important; 
     }
     tr td:nth-child(1){
+        width: 65px;
+    }
+    tr td:nth-child(3){
         width: 65px;
     }
 /* cuadro numero 2 */
