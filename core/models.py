@@ -343,7 +343,7 @@ class TripleTachira(models.Model):
         enviar_mensaje_loterias(self)
 
 class TrioActivo(models.Model):
-    hour_sort = models.CharField(max_length=9, choices=LOTERY_CHOICES_TC, verbose_name="Hora del sorteo")
+    hour_sort = models.CharField(max_length=9, choices=LOTERY_CHOICES_TA, verbose_name="Hora del sorteo")
     date_sort = models.DateField(auto_now=True)
     a = models.PositiveBigIntegerField()
     b = models.PositiveBigIntegerField()
@@ -360,7 +360,7 @@ class TrioActivo(models.Model):
         enviar_mensaje_loterias(self)
 
 class Ricachona(models.Model):
-    hour_sort = models.CharField(max_length=9, choices=LOTERY_CHOICES_TC, verbose_name="Hora del sorteo")
+    hour_sort = models.CharField(max_length=9, choices=LOTERY_CHOICES_RC, verbose_name="Hora del sorteo")
     date_sort = models.DateField(auto_now=True)
     a = models.PositiveBigIntegerField()
     b = models.PositiveBigIntegerField()

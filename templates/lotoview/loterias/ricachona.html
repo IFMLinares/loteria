@@ -1,47 +1,80 @@
 {% load static %}
 <div class="cuadro">
     <div class="cuadro1">
-      <div class="cuadroLadoalado">
-        <div class="cuadroTexto">
-          <h5>RICACHONA</h5>
+        <div class="cuadroLadoalado">
+            <div class="cuadroTexto">
+                <h5>RICACHONA</h5>
+            </div>
+            <div class="cuadroImagen">
+                <img src="{% static 'img/loteria/triple-ricachona-logo.png' %}" alt="" id="foto1" />
+            </div>
         </div>
-        <div class="cuadroImagen">
-          <img
-            src="{% static 'img/loteria/triple-ricachona-logo.png' %}"
-            alt=""
-            id="foto1"
-          />
-        </div>
-      </div>
     </div>
     <div class="cuadro2">
-        
-    {% with records=Ricachona %}
-    {% for record in records %}
-      <div class="cuadroLadoalado">
         <div class="cuadroHora">
-            <h5>{{ record.hour_sort }}</h5>
+            <h5 style="visibility: hidden;">01:00 PM</h5>
         </div>
-        <table class="Ricachona {{ record.hour_sort }}">
-          <thead>
-            <tr>
-              <th>A</th>
-              <th>B</th>
-              <th>C</th>
-              <th>ZOD</th>
-            </tr>
-          </thead>
-          <tr>
-            <td>{{ record.a }}</td>
-            <td>{{ record.b }}</td>
-            <td>{{ record.c }}</td>
-            <td style="color: red">{{ record.zod }}</td>
-          </tr>
-        </table>
+        {% with records=Ricachona %}
+            <div class="cuadroTabla" style="display: flex; justify-content: center;">
+                {% for record in records %}
+                    {% if forloop.counter <= 4 %}
+                        <table class="Ricachona">
+                            <thead>
+                                <tr> 
+                                    <th>{{ record.hour_sort }}</th>
+                                </tr> 
+                            </thead> 
+                            <tr>
+                                <td>--</td>
+                            </tr> 
+                        </table>   
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endwith %}
+        
+        <div class="cuadroHora">
+          <h5 style="visibility: hidden;">01:00 PM</h5>
       </div>
-      {% endfor %}
-      {% endwith %}
-
+        {% with records=Ricachona %}
+            <div class="cuadroTabla" style="display: flex; justify-content: center;">
+                {% for record in records %}
+                    {% if forloop.counter > 4 and forloop.counter <= 8 %}
+                    <table class="Ricachona">
+                            <thead>
+                                <tr> 
+                                    <th>{{ record.hour_sort }}</th>
+                                </tr> 
+                            </thead> 
+                            <tr>
+                                <td>--</td>
+                            </tr> 
+                        </table>   
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endwith %}
+        
+        <div class="cuadroHora">
+          <h5 style="visibility: hidden;">01:00 PM</h5>
+      </div>
+        {% with records=Ricachona %}
+            <div class="cuadroTabla" style="display: flex; justify-content: center;">
+                {% for record in records %}
+                    {% if forloop.counter > 8 and forloop.counter <= 12 %}
+                    <table class="Ricachona">
+                            <thead>
+                                <tr> 
+                                    <th>{{ record.hour_sort }}</th>
+                                </tr> 
+                            </thead> 
+                            <tr>
+                                <td>--</td>
+                            </tr> 
+                        </table>   
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endwith %}
     </div>
-    <div class="cuadro3"></div>
-  </div>
+</div>

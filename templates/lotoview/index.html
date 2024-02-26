@@ -31,39 +31,9 @@
     >
       <div class="carousel-inner">
         
-      <div class="carousel-item active">
-        <div class="cuadroCentral">
-          <!-- /* cuadro basado en el header que contiene: logo / titulo junto con hora / numero de telefono */ -->
-          {% include "lotoview/header.html" %}
-          <!-- /* cuadro basado en el header que contiene: logo / titulo junto con hora / numero de telefono */ -->
-          <div
-            class="cuadro-central"
-            data-aos="zoom-in-down"
-            data-aos-easing="linear"
-            data-aos-duration="1500"
-          >
-          {% include "lotoview/loterias/triple_caliente.html" %}
-          {% include "lotoview/loterias/triple_caracas.html" %}
-          {% include "lotoview/loterias/triple_zulia.html" %}
-          {% include "lotoview/loterias/triple_zamorano.html" %}
-          </div>
-        </div>
-        
-        <div class="cuadroCentral"><div
-            class="cuadro-central"
-            data-aos="zoom-in-down"
-            data-aos-easing="linear"
-            data-aos-duration="1500"
-          >
-          {% include "lotoview/loterias/triple_chance.html" %}
-          {% include "lotoview/loterias/triple_tachira.html" %}
-          {% include "lotoview/loterias/trio_activo.html" %}
-          {% include "lotoview/loterias/ricachona.html" %}
-          </div>
-        </div>
-      </div>
+        <!-- { % include "lotoview/include_loterias.html" % } -->
 
-        <div class="carousel-item">
+        <div class="carousel-item active">
           <div class="cuadroCentral">
             <!-- /* cuadro basado en el header que contiene: logo / titulo junto con hora / numero de telefono */ -->
             {% include "lotoview/header.html" %}
@@ -161,8 +131,8 @@
     'TripleZamorano': ['1:00 PM', '4:30 PM', '7:10 PM'],
     'TripleChance': ['1:00 PM', '4:30 PM', '7:10 PM'],
     'TripleTachira': ['1:00 PM', '4:30 PM', '7:10 PM'],
-    'TrioActivo': ['1:00 PM', '4:30 PM', '7:10 PM'],
-    'Ricachona': ['1:00 PM', '4:30 PM', '7:10 PM'],
+    // 'TrioActivo': ['1:00 PM', '4:30 PM', '7:10 PM'],
+    // 'Ricachona': ['1:00 PM', '4:30 PM', '7:10 PM'],
     // Añade aquí los horarios para los otros modelos
 };
 // Función para conectar al WebSocket
@@ -188,7 +158,7 @@ function connect() {
     webSocket.onmessage = function(e) {
     let data = JSON.parse(e.data);
     let tablaId = data.modelo;
-    let modelos = ['TripleCaliente', 'TripleCaracas', 'TripleZulia', 'TripleZamorano', 'TripleChance', 'TripleTachira', 'TrioActivo', 'Ricachona'];
+    let modelos = ['TripleCaliente', 'TripleCaracas', 'TripleZulia', 'TripleZamorano', 'TripleChance', 'TripleTachira'];
 
     if (modelos.includes(tablaId)) {
       let indice = horarios[tablaId].indexOf(data.hour_sort) + 1;

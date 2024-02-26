@@ -41,11 +41,43 @@ HOUR_CHOICES_GJO = [
     ("8:30 PM", "8:30 PM"),
 ]
 
+
 LOTERY_CHOICES_TC = [
     ("1:00 PM","1:00 PM"),
     ("4:30 PM","4:30 PM"),
     ("7:10 PM","7:10 PM"),
 ]
+
+LOTERY_CHOICES_RC = [
+    ("9:15 AM", "9:15 AM"),
+    ("10:15 AM", "10:15 AM"),
+    ("11:15 AM", "11:15 AM"),
+    ("12:15 PM", "12:15 PM"),
+    ("1:15 PM", "1:15 PM"),
+    ("2:15 PM", "2:15 PM"),
+    ("3:15 PM", "3:15 PM"),
+    ("4:15 PM", "4:15 PM"),
+    ("5:15 PM", "5:15 PM"),
+    ("6:15 PM", "6:15 PM"),
+    ("7:15 PM", "7:15 PM"),
+    ("8:15 PM", "8:15 PM"),
+]
+
+LOTERY_CHOICES_TA = [
+    ("9:00 AM", "9:00 AM"),
+    ("10:00 AM", "10:00 AM"),
+    ("11:00 AM", "11:00 AM"),
+    ("12:00 PM", "12:00 PM"),
+    ("1:00 PM", "1:00 PM"),
+    ("2:00 PM", "2:00 PM"),
+    ("3:00 PM", "3:00 PM"),
+    ("4:00 PM", "4:00 PM"),
+    ("5:00 PM", "5:00 PM"),
+    ("6:00 PM", "6:00 PM"),
+    ("7:00 PM", "7:00 PM"),
+]
+
+
 
 # Lista de animales para ChanceAnimalitos
 ANIMALITO_CHOICES = [
@@ -296,8 +328,8 @@ ANIMALITO_GUACHARO_ACTIVO_CHOICES = [
 ]
 
 ANIMALITO_GRANJA_MILLONARIA_CHOICES = [
-    # ("00", "Ballena"),
-    # ("0", "Delfín"),
+    ("00", "Ballena"),
+    ("0", "Delfín"),
     ("1", "Carnero"),
     ("2", "Toro"),
     ("3", "Ciempies"),
@@ -339,8 +371,8 @@ ANIMALITO_GRANJA_MILLONARIA_CHOICES = [
 ]
 
 ANIMALITO_GRANJAZO_CHOICES = [
-    # ("00", "Ballena"),
-    # ("0", "Delfín"),
+    ("00", "Ballena"),
+    ("0", "Delfín"),
     ("1", "Carnero"),
     ("2", "Toro"),
     ("3", "Ciempies"),
