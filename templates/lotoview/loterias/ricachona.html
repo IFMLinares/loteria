@@ -18,7 +18,7 @@
             <div class="cuadroTabla" style="display: flex; justify-content: center;">
                 {% for record in records %}
                     {% if forloop.counter <= 4 %}
-                        <table class="Ricachona">
+                        <table class="Ricachona tabla_loteria">
                             <thead>
                                 <tr> 
                                     <th>{{ record.hour_sort }}</th>
@@ -40,7 +40,7 @@
             <div class="cuadroTabla" style="display: flex; justify-content: center;">
                 {% for record in records %}
                     {% if forloop.counter > 4 and forloop.counter <= 8 %}
-                    <table class="Ricachona">
+                    <table class="Ricachona tabla_loteria">
                             <thead>
                                 <tr> 
                                     <th>{{ record.hour_sort }}</th>
@@ -62,7 +62,7 @@
             <div class="cuadroTabla" style="display: flex; justify-content: center;">
                 {% for record in records %}
                     {% if forloop.counter > 8 and forloop.counter <= 12 %}
-                    <table class="Ricachona">
+                    <table class="Ricachona tabla_loteria">
                             <thead>
                                 <tr> 
                                     <th>{{ record.hour_sort }}</th>

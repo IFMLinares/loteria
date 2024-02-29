@@ -278,6 +278,31 @@ and (orientation : landscape) {
         width: 40px;
         height: 35px;
     }
+            /*tabla_loteria  */
+            .tabla_loteria{
+                width: 100%;
+                height:100px;  
+            }
+            .tabla_loteria tr td{
+                font-size: 25px !important;
+            }
+            .tabla_loteria tr td:nth-child(2){ 
+                width: 25% !important;
+                 
+            }
+            .tabla_loteria tr td:nth-child(1){
+                width: 25% !important;
+                 
+            }
+            .tabla_loteria tr td:nth-child(3){
+                width: 25% !important;
+                 
+            }
+            .tabla_loteria tr td:nth-child(4){
+                width: 25% !important;
+                 
+            }  
+            /*tabla_loteria  */
 /* cuadro numero 2 */
 
 .cuadro .cuadro3{
@@ -471,6 +496,31 @@ and (orientation : landscape) {
         width: 40px;
         height: 35px;
     }
+            /*tabla_loteria  */
+            .tabla_loteria{
+                width: 100%;
+                height:100px;  
+            }
+            .tabla_loteria tr td{
+                font-size: 25px !important;
+            }
+            .tabla_loteria tr td:nth-child(2){ 
+                width: 25% !important;
+                 
+            }
+            .tabla_loteria tr td:nth-child(1){
+                width: 25% !important;
+                 
+            }
+            .tabla_loteria tr td:nth-child(3){
+                width: 25% !important;
+                 
+            }
+            .tabla_loteria tr td:nth-child(4){
+                width: 25% !important;
+                 
+            }  
+            /*tabla_loteria  */
 /* cuadro numero 2 */
 
 .cuadro .cuadro3{
@@ -664,6 +714,31 @@ and (orientation : landscape) {
         width: 40px;
         height: 35px;
     }
+        /*tabla_loteria  */
+        .tabla_loteria{
+            width: 100%;
+            height:100px;  
+        }
+        .tabla_loteria tr td{
+            font-size: 25px !important;
+        }
+        .tabla_loteria tr td:nth-child(2){ 
+            width: 25% !important;
+             
+        }
+        .tabla_loteria tr td:nth-child(1){
+            width: 25% !important;
+             
+        }
+        .tabla_loteria tr td:nth-child(3){
+            width: 25% !important;
+             
+        }
+        .tabla_loteria tr td:nth-child(4){
+            width: 25% !important;
+             
+        }  
+        /*tabla_loteria  */
 /* cuadro numero 2 */
 
 .cuadro .cuadro3{
@@ -866,6 +941,32 @@ and (orientation : landscape) {
     tr td:nth-child(1){
         width: 65px;
     }
+        /*tabla_loteria  */
+        .tabla_loteria{
+            width: 100%;
+            height:100px;  
+        }
+        .tabla_loteria tr td{
+            font-size: 25px !important;
+
+        }
+        .tabla_loteria tr td:nth-child(2){ 
+            width: 25% !important;
+             
+        }
+        .tabla_loteria tr td:nth-child(1){
+            width: 25% !important;
+             
+        }
+        .tabla_loteria tr td:nth-child(3){
+            width: 25% !important;
+             
+        }
+        .tabla_loteria tr td:nth-child(4){
+            width: 25% !important;
+             
+        }  
+        /*tabla_loteria  */
 /* cuadro numero 2 */
 
  
@@ -975,6 +1076,31 @@ and (orientation : landscape) {
     tr td:nth-child(1){
         width: 65px;
     }
+        /*tabla_loteria  */
+        .tabla_loteria{
+            width: 100%;
+            height:100px;  
+        }
+        .tabla_loteria tr td{
+            font-size: 25px !important;
+        }
+        .tabla_loteria tr td:nth-child(2){ 
+            width: 25% !important;
+             
+        }
+        .tabla_loteria tr td:nth-child(1){
+            width: 25% !important;
+             
+        }
+        .tabla_loteria tr td:nth-child(3){
+            width: 25% !important;
+             
+        }
+        .tabla_loteria tr td:nth-child(4){
+            width: 25% !important;
+             
+        }  
+        /*tabla_loteria  */
 /* footer */
 footer{
     margin-top: 10px;
@@ -1127,6 +1253,33 @@ footer h3{
     tr td:nth-child(4){
         width: 65px;
     }
+    /*tabla_loteria  */
+    .tabla_loteria{
+        width: 100%;
+        height:100px;  
+    }
+    .tabla_loteria tr td{
+        font-size: 25px !important;
+
+    }
+    .tabla_loteria tr td:nth-child(2){ 
+        width: 25% !important;
+         
+    }
+    .tabla_loteria tr td:nth-child(1){
+        width: 25% !important;
+         
+    }
+    .tabla_loteria tr td:nth-child(3){
+        width: 25% !important;
+         
+    }
+    .tabla_loteria tr td:nth-child(4){
+        width: 25% !important;
+         
+    }  
+    /*tabla_loteria  */
+
 /* cuadro numero 2 */
 
  
@@ -1172,7 +1325,7 @@ footer h3{
 /* Cuando la pantalla es menor a 900px  (tablets y teléfonos inteligentes)*/
 @media only screen and (max-width : 900px) {
     .cuadroCentral{
-        margin: 0px 15px; 
+        margin: 0px 0px; 
     }
     .cuadro-central{
         width: 100%;
