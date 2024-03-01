@@ -281,7 +281,7 @@ class TripleCaliente(models.Model):
     a = models.PositiveBigIntegerField()
     b = models.PositiveBigIntegerField()
     c = models.PositiveBigIntegerField()
-    zod = models.PositiveBigIntegerField()
+    zod = models.CharField(max_length=9, choices=ZOD_CHOICES)
 
     class Meta:
         unique_together = ('hour_sort', 'date_sort',)
@@ -300,7 +300,7 @@ class TripleCaracas(models.Model):
     a = models.PositiveBigIntegerField()
     b = models.PositiveBigIntegerField()
     c = models.PositiveBigIntegerField()
-    zod = models.PositiveBigIntegerField()
+    zod = models.CharField(max_length=9, choices=ZOD_CHOICES)
 
     class Meta:
         unique_together = ('hour_sort', 'date_sort',)
@@ -319,7 +319,7 @@ class TripleZulia(models.Model):
     a = models.PositiveBigIntegerField()
     b = models.PositiveBigIntegerField()
     c = models.PositiveBigIntegerField()
-    zod = models.PositiveBigIntegerField()
+    zod = models.CharField(max_length=9, choices=ZOD_CHOICES)
 
     class Meta:
         unique_together = ('hour_sort', 'date_sort',)
@@ -338,7 +338,7 @@ class TripleZamorano(models.Model):
     a = models.PositiveBigIntegerField()
     b = models.PositiveBigIntegerField()
     c = models.PositiveBigIntegerField()
-    zod = models.PositiveBigIntegerField()
+    zod = models.CharField(max_length=9, choices=ZOD_CHOICES)
 
     class Meta:
         unique_together = ('hour_sort', 'date_sort',)
@@ -357,7 +357,7 @@ class TripleChance(models.Model):
     a = models.PositiveBigIntegerField()
     b = models.PositiveBigIntegerField()
     c = models.PositiveBigIntegerField()
-    zod = models.PositiveBigIntegerField()
+    zod = models.CharField(max_length=9, choices=ZOD_CHOICES)
 
     class Meta:
         unique_together = ('hour_sort', 'date_sort',)
@@ -376,7 +376,7 @@ class TripleTachira(models.Model):
     a = models.PositiveBigIntegerField()
     b = models.PositiveBigIntegerField()
     c = models.PositiveBigIntegerField()
-    zod = models.PositiveBigIntegerField()
+    zod = models.CharField(max_length=9, choices=ZOD_CHOICES)
 
     class Meta:
         unique_together = ('hour_sort', 'date_sort',)

@@ -109,7 +109,21 @@ LOTERY_CHOICES_TA = [
     ("7:00 PM", "7:00 PM"),
 ]
 
-
+# ZODIACO
+ZOD_CHOICES = [
+    ("ARI","ARIES"),
+    ("TAU","TAURO"),
+    ("GEM","GÉMINIS"),
+    ("CAN","CANCER"),
+    ("LEO","LEO"),
+    ("VIR","VIRGO"),
+    ("LIB","LIBRA"),
+    ("ESC","EESCORPIO"),
+    ("SAG","SAGITARIO"),
+    ("CAP","CAPRICORNIO"),
+    ("ACU","ACUARIO"),
+    ("PIS","PISCIS"),
+]
 
 # Lista de animales para ChanceAnimalitos
 ANIMALITO_CHOICES = [

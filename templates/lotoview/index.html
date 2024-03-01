@@ -54,18 +54,18 @@
   AOS.init();
 </script>
 <script type="text/javascript">
-  var date = new Date();
-  date.setDate(date.getDate() - 1);
-  var day = date.getDate();
-  var month = date.getMonth() + 1;
-  var year = date.getFullYear();
+  // var date = new Date();
+  // date.setDate(date.getDate() - 1);
+  // var day = date.getDate();
+  // var month = date.getMonth() + 1;
+  // var year = date.getFullYear();
 
-  day = (day < 10) ? '0' + day : day;
-  month = (month < 10) ? '0' + month : month;
+  // day = (day < 10) ? '0' + day : day;
+  // month = (month < 10) ? '0' + month : month;
 
-  var yesterday = day + '/' + month + '/' + year;
-  console.log(yesterday)
-  $('#yesterday').text('RESULTADO DE LOS ANIMALITOS ' + yesterday);
+  // var yesterday = day + '/' + month + '/' + year;
+  // console.log(yesterday)
+  // $('#yesterday').text('RESULTADO DE LOS ANIMALITOS ' + yesterday);
 
   function actualizarFechaHora() {
       let ahora = new Date();
@@ -87,11 +87,11 @@
 <script type="text/javascript">
   let horarios = {
     'TripleCaliente': ['1:00 PM', '4:30 PM', '7:10 PM'],
-    'TripleCaracas': ['1:00 PM', '4:30 PM', '7:10 PM'],
-    'TripleZulia': ['1:00 PM', '4:30 PM', '7:10 PM'],
-    'TripleZamorano': ['1:00 PM', '4:30 PM', '7:10 PM'],
-    'TripleChance': ['1:00 PM', '4:30 PM', '7:10 PM'],
-    'TripleTachira': ['1:00 PM', '4:30 PM', '7:10 PM'],
+    'TripleCaracas': ['1:00 PM', '4:30 PM', '7:00 PM'],
+    'TripleZulia': ['12:45 PM', '4:45 PM', '7:05 PM'],
+    'TripleZamorano': ['12:00 PM', '4:00 PM', '7:00 PM'],
+    'TripleChance': ['1:00 PM', '4:30 PM', '7:00 PM'],
+    'TripleTachira': ['1:15 PM', '4:45 PM', '7:20 PM'],
     // 'TrioActivo': ['1:00 PM', '4:30 PM', '7:10 PM'],
     // 'Ricachona': ['1:00 PM', '4:30 PM', '7:10 PM'],
     // Añade aquí los horarios para los otros modelos
