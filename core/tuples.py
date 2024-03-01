@@ -118,7 +118,7 @@ ZOD_CHOICES = [
     ("LEO","LEO"),
     ("VIR","VIRGO"),
     ("LIB","LIBRA"),
-    ("ESC","EESCORPIO"),
+    ("ESC","ESCORPIO"),
     ("SAG","SAGITARIO"),
     ("CAP","CAPRICORNIO"),
     ("ACU","ACUARIO"),
