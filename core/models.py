@@ -41,6 +41,8 @@ def enviar_mensaje_loterias(self):
         'type': 'nuevos_datos',
         'data': datos,
     }
+    channel_layer = get_channel_layer()
+    async_to_sync(channel_layer.group_send)('grupo_de_datos', message)
 
 def enviar_mensaje_loterias_tz(self):
     datos = {
