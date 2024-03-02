@@ -42,6 +42,20 @@ def enviar_mensaje_loterias(self):
         'data': datos,
     }
 
+def enviar_mensaje_loterias_tz(self):
+    datos = {
+            'hour_sort': self.hour_sort,
+            'date_sort': self.date_sort.isoformat(),  # Convertimos el objeto date a una cadena de texto
+            'a': self.a,
+            'c': self.c,
+            'zod': self.zod,
+            'modelo': self.__class__.__name__,
+        }
+    message = {
+        'type': 'nuevos_datos',
+        'data': datos,
+    }
+
     channel_layer = get_channel_layer()
     async_to_sync(channel_layer.group_send)('grupo_de_datos', message)
 
@@ -336,7 +350,7 @@ class TripleZamorano(models.Model):
     hour_sort = models.CharField(max_length=9, choices=LOTERY_CHOICES_ZA, verbose_name="Hora del sorteo")
     date_sort = models.DateField(auto_now=True)
     a = models.PositiveBigIntegerField()
-    b = models.PositiveBigIntegerField()
+    # b = models.PositiveBigIntegerField()
     c = models.PositiveBigIntegerField()
     zod = models.CharField(max_length=9, choices=ZOD_CHOICES)
 
@@ -349,7 +363,7 @@ class TripleZamorano(models.Model):
         super().save(*args, **kwargs)  # Llama al método save original
 
         # Llama a la función para enviar el mensaje
-        enviar_mensaje_loterias(self)
+        enviar_mensaje_loterias_tz(self)
 
 class TripleChance(models.Model):
     hour_sort = models.CharField(max_length=9, choices=LOTERY_CHOICES_TCCS_TCH, verbose_name="Hora del sorteo")

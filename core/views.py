@@ -53,7 +53,7 @@ def ContextData(day):
                         'hour_sort': record.hour_sort,
                         'a': record.a,
                     })
-                elif model_name in ['TripleCaliente', 'TripleCaracas', 'TripleZulia', 'TripleZamorano', 'TripleChance', 'TripleTachira']:
+                elif model_name in ['TripleCaliente', 'TripleCaracas', 'TripleZulia', 'TripleChance', 'TripleTachira']:
                     context[model_name].append({
                         'hour_sort': record.hour_sort,
                         'a': record.a,
@@ -61,6 +61,13 @@ def ContextData(day):
                         'c': record.c,
                         'zod': record.zod,
                     })
+                elif model_name in ['TripleZamorano']:
+                        context[model_name].append({
+                            'hour_sort': record.hour_sort,
+                            'a': record.a,
+                            'c': record.c,
+                            'zod': record.zod,
+                        })
                 else:
                     context[model_name].append({
                         'hour_sort': record.hour_sort,
@@ -74,7 +81,14 @@ def ContextData(day):
                         'hour_sort': hour,
                         'a': '---',
                     })
-                elif model_name in ['TripleCaliente', 'TripleCaracas', 'TripleZulia', 'TripleZamorano', 'TripleChance', 'TripleTachira']:
+                elif model_name in ['TripleZamorano']:
+                        context[model_name].append({
+                            'hour_sort': hour,
+                            'a': '---',
+                            'c': '---',
+                            'zod': '---',
+                        })
+                elif model_name in ['TripleCaliente', 'TripleCaracas', 'TripleZulia', 'TripleChance', 'TripleTachira']:
                     context[model_name].append({
                         'hour_sort': hour,
                         'a': '---',

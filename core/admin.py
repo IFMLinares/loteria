@@ -54,7 +54,7 @@ class TripleZuliaAdmin(admin.ModelAdmin):
     list_display = ('hour_sort', 'a', 'b', 'c', 'zod', 'date_sort')
 
 class TripleZamoranoAdmin(admin.ModelAdmin):
-    list_display = ('hour_sort', 'a', 'b', 'c', 'zod', 'date_sort')
+    list_display = ('hour_sort', 'a', 'c', 'zod', 'date_sort')
 
 class TripleChanceAdmin(admin.ModelAdmin):
     list_display = ('hour_sort', 'a', 'b', 'c', 'zod', 'date_sort')

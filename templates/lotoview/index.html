@@ -133,21 +133,30 @@ function connect() {
                     break;
                 }
             }
-        } else {
+        }else {
             let indice = horarios[tablaId].indexOf(data.hour_sort) + 1;
             let tabla = document.querySelector(`.${tablaId}-${indice}`);
             let filaVieja = tabla.querySelector('tbody tr');
             filaVieja.remove();
-
             let nuevaFila = tabla.querySelector('tbody').insertRow(-1);
-            nuevaFila.insertCell(0).textContent = data.a;
-            nuevaFila.insertCell(1).textContent = data.b;
-            nuevaFila.insertCell(2).textContent = data.c;
-            let celdaZod = nuevaFila.insertCell(3);
-            celdaZod.textContent = data.zod;
-            celdaZod.style.color = 'red';
+
+            if(tablaId === 'TripleZamorano'){
+              nuevaFila.insertCell(0).textContent = data.a;
+              nuevaFila.insertCell(1).textContent = data.c;
+              let celdaZod = nuevaFila.insertCell(2);
+              celdaZod.textContent = data.zod;
+              celdaZod.style.color = 'red';
+            }else{
+              nuevaFila.insertCell(0).textContent = data.a;
+              nuevaFila.insertCell(1).textContent = data.b;
+              nuevaFila.insertCell(2).textContent = data.c;
+              let celdaZod = nuevaFila.insertCell(3);
+              celdaZod.textContent = data.zod;
+              celdaZod.style.color = 'red';
+            }
         }
     } else {
+    console.log(data)
         let filas = document.querySelectorAll(`#${tablaId} tbody tr`);
         for (let i = 0; i < filas.length; i++) {
             let fila = filas[i];
