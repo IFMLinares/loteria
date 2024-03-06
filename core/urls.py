@@ -44,6 +44,31 @@ from core.views import (
     AddLoteryGroupResultE,
     AddLoteryGroupResultF,
     AddLoteryGroupResultG,
+
+    ChanceAnimalitosView,
+    GranjaPlusView,
+    LaGranjitaView,
+    LaRicachonaView,
+    LottoActivoView,
+    LottoActivoInterRDView,
+    LottoReyView,
+    SelvaPlusView,
+    GuacharoActivoView,
+    GranjaMillonariaView,
+    GranjazoView,
+
+    TripleCalienteView,
+    TripleCaracasView,
+    TripleZuliaView,
+    TripleZamoranoView,
+    TripleChanceView,
+    TripleTachiraView,
+    TrioActivoView,
+    RicachonaView,
+
+    # AJAX VIEW
+    # DeleteObjectView,
+    ajax_delete_view
 )
 
 app_name = "core"
@@ -65,7 +90,7 @@ urlpatterns = [
     path("administrador/guacharoActivo", view=AdminGuacharoActivo.as_view(), name="guacharoActivo"),
     path("administrador/granjaMillonaria", view=AdminGranjaMillonaria.as_view(), name="granjaMillonaria"),
     path("administrador/granjazo", view=AdminGranjazo.as_view(), name="granjazo"),
-    path("administrador/granjazo", view=AdminGranjazo.as_view(), name="granjazo"),
+    # path("administrador/granjazo", view=AdminGranjazo.as_view(), name="granjazo"),
 
     # URLS LISTADOS DE LOTERIAS
     path("administrador/triple_caliente", view=AdminTripleCaliente.as_view(), name="triple_caliente"),
@@ -93,4 +118,31 @@ urlpatterns = [
     path("administrador/add_lotery_group_e", view=AddLoteryGroupResultE.as_view(), name="lotery_group_e"),
     path("administrador/add_lotery_group_f", view=AddLoteryGroupResultF.as_view(), name="lotery_group_f"),
     path("administrador/add_lotery_group_g", view=AddLoteryGroupResultG.as_view(), name="lotery_group_g"),
+    
+    path("administrador/chance_animalitos_add", view=ChanceAnimalitosView.as_view(), name="chance_animalitos_add"),
+    path("administrador/granja_plus_add", view=GranjaPlusView.as_view(), name="granja_plus_add"),
+    path("administrador/la_granjita_add", view=LaGranjitaView.as_view(), name="la_granjita_add"),
+    path("administrador/ricachona_add", view=LaRicachonaView.as_view(), name="ricachona_add"),
+    path("administrador/lotto_activo_add", view=LottoActivoView.as_view(), name="lotto_activo_add"),
+    path("administrador/lotto_Activo_inter_rd_add", view=LottoActivoInterRDView.as_view(), name="lotto_Activo_inter_rd_add"),
+    path("administrador/lotto_rey_add", view=LottoReyView.as_view(), name="lotto_rey_add"),
+    path("administrador/selva_plus_add", view=SelvaPlusView.as_view(), name="selva_plus_add"),
+    path("administrador/guacharo_activo_add", view=GuacharoActivoView.as_view(), name="guacharo_activo_add"),
+    path("administrador/granja_millonaria_add", view=GranjaMillonariaView.as_view(), name="granja_millonaria_add"),
+    path("administrador/granjazo_add", view=GranjazoView.as_view(), name="granjazo_add"),
+
+
+    path("administrador/triple_caliente_add", view=TripleCalienteView.as_view(), name="triple_caliente_add"),
+    path("administrador/triple_caracas_add", view=TripleCaracasView.as_view(), name="triple_caracas_add"),
+    path("administrador/triple_zulia_add", view=TripleZuliaView.as_view(), name="triple_zulia_add"),
+    path("administrador/triple_zamorano_add", view=TripleZamoranoView.as_view(), name="triple_zamorano_add"),
+    path("administrador/triple_chance_add", view=TripleChanceView.as_view(), name="triple_chance_add"),
+    path("administrador/triple_tachira_add", view=TripleTachiraView.as_view(), name="triple_tachira_add"),
+    path("administrador/trio_activo_add", view=TrioActivoView.as_view(), name="trio_activo_add"),
+    path("administrador/la_ricachona_add", view=RicachonaView.as_view(), name="la_ricachona_add"),
+
+    # AJAX VIEW
+    
+    # path("administrador/ajax/delete_view", view=DeleteObjectView.as_view(), name="ajax_delete_view"),
+    path('administrador/ajax/delete_view/', ajax_delete_view, name='ajax_delete_view'),
 ]

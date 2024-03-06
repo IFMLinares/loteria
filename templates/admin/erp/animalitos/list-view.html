@@ -53,18 +53,9 @@
                                                     <img src="{{ c.get_image_path }}" alt="{{ c.animalito_name }}" width="75px" height="50px" /></td>
                                                 <td>
                                                     <div class="dropdown d-inline-block">
-                                                        <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                            <i class="ri-more-fill align-middle"></i>
+                                                        <button class="dropdown-item remove-item-btn" data-id="{{c.id}}" data-model="{{model_name}}" onclick="deleteItem(this)">
+                                                            <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete
                                                         </button>
-                                                        <ul class="dropdown-menu dropdown-menu-end">
-                                                            <li><a class="dropdown-item"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>
-                                                            <li><a  href="" class="dropdown-item edit-item-btn"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a></li>
-                                                            <li>
-                                                                <a href="" class="dropdown-item remove-item-btn">
-                                                                    <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete
-                                                                </a>
-                                                            </li>
-                                                        </ul>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -104,9 +95,47 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="{% static 'administrador/js/sweetalert2/sweet-alert-2-11.js'%}"></script>
+    <script src="{% static 'administrador/js/functions.js'%}"></script>
+    <script src="{% static 'administrador/js/pages/select2.init.js' %}"></script>
     <script type="text/javascript">
         var spanishData = "{% static 'js/erp/datatables/spanish.txt' %}";
     </script>
+    <script src="{% static '/js/erp/datatables/datatable-list.js' %}"></script>
     <script src="{% static 'administrador/js/erp/datatables/datatable-list.js' %}"></script>
+    <script>
+        function deleteItem(button) {
+            var id = button.getAttribute('data-id');
+            var model_name = button.getAttribute('data-model');
+
+            $.ajax({
+                url: "{% url 'core:ajax_delete_view' %}",
+                type: 'POST',
+                data: {
+                    'id': id,
+                    'model_name': model_name,
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.success) {
+                        Swal.fire({
+                            title: '¡Éxito!',
+                            text: 'El elemento se eliminó correctamente.',
+                            icon: 'success'
+                        }).then(function() {
+                            // Redireccionar a una URL después de hacer clic en el botón "OK"
+                            window.location.href = '{{ url }}';
+                        });
+                    } else {
+                        Swal.fire({
+                            title: '¡Error!',
+                            text: data.error,
+                            icon: 'error'
+                        });
+                    }
+                }
+            });
+        }
+    </script>
 
 {% endblock extra_js %}
