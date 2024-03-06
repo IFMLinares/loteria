@@ -1,0 +1,58 @@
+{% extends "account/base/base.html" %}
+{% load static %}
+
+{% block title %} Cerrar Sesión {% endblock %}
+{% block content %}
+<div class="auth-page-content">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-12">
+              <div class="text-center mt-sm-5 mb-4 text-white-50">
+                  <div>
+                      <a href="" class="d-inline-block auth-logo">
+                          <img src="{% static 'administrador/images/logo-light.png'%}" alt="" height="60">
+                      </a>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- end row -->
+
+      <div class="row justify-content-center">
+          <div class="col-md-8 col-lg-6 col-xl-5">
+              <div class="card mt-4">
+                  <div class="card-body p-4 text-center"> 
+                      <lord-icon
+                          src="https://cdn.lordicon.com/hzomhqxz.json"
+                          trigger="loop"
+                          colors="primary:#405189,secondary:#08a88a"
+                          style="width:180px;height:180px">
+                      </lord-icon>
+
+                      <div class="mt-4 pt-2">
+                          <h5>¿Estas seguro de cerrar sesión?</h5>
+                          <form method="post" action="{% url 'account_logout' %}">
+                            {% csrf_token %}
+                            {% if redirect_field_value %}
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                            {% endif %}
+                            <div class="text-center">
+                              <a href="{% url 'core:index' %}" class="btn btn-info">Regresar</a>
+                              <button type="submit" class="btn btn-danger btn-md">Cerrar Sesión</button>
+                            </div>
+                          </form>
+                      </div>
+                  </div>
+                  <!-- end card body -->
+              </div>
+              <!-- end card -->
+
+          </div>
+          <!-- end col -->
+      </div>
+      <!-- end row -->
+  </div>
+  <!-- end container -->
+</div>
+
+{% endblock %}

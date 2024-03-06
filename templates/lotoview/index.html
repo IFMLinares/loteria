@@ -99,7 +99,7 @@
 };
 // Función para conectar al WebSocket
 let webSocket;
-let url = `ws://${window.location.host}/ws/socket-server/`
+let url = `ws://${window.location.host}/ws/socket-server/`;
 
 function connect() {
     webSocket = new WebSocket(url);
@@ -118,67 +118,68 @@ function connect() {
     };
 
     webSocket.onmessage = function(e) {
-    let data = JSON.parse(e.data);
-    let tablaId = data.modelo;
-    let modelos = ['TripleCaliente', 'TripleCaracas', 'TripleZulia', 'TripleZamorano', 'TripleChance', 'TripleTachira', 'TrioActivo', 'Ricachona'];
+      let data = JSON.parse(e.data);
+      if (data === 'reload') {
+          location.reload();
+      }else{
+        let tablaId = data.modelo;
+        let modelos = ['TripleCaliente', 'TripleCaracas', 'TripleZulia', 'TripleZamorano', 'TripleChance', 'TripleTachira', 'TrioActivo', 'Ricachona'];
+        if (modelos.includes(tablaId)) {
+            if (tablaId === 'TrioActivo' || tablaId === 'Ricachona') {
+                let tablas = document.querySelectorAll(`.${tablaId}`);
+                for (let tabla of tablas) {
+                    let hora = tabla.querySelector('thead tr th').textContent;
+                    if (hora === data.hour_sort) {
+                        let fila = tabla.querySelector('tbody tr');
+                        fila.children[0].textContent = data.a;
+                        break;
+                    }
+                }
+            }else {
+                let indice = horarios[tablaId].indexOf(data.hour_sort) + 1;
+                let tabla = document.querySelector(`.${tablaId}-${indice}`);
+                let filaVieja = tabla.querySelector('tbody tr');
+                filaVieja.remove();
+                let nuevaFila = tabla.querySelector('tbody').insertRow(-1);
 
-    if (modelos.includes(tablaId)) {
-        if (tablaId === 'TrioActivo' || tablaId === 'Ricachona') {
-            let tablas = document.querySelectorAll(`.${tablaId}`);
-            for (let tabla of tablas) {
-                let hora = tabla.querySelector('thead tr th').textContent;
+                if(tablaId === 'TripleZamorano'){
+                  nuevaFila.insertCell(0).textContent = data.a;
+                  nuevaFila.insertCell(1).textContent = data.c;
+                  let celdaZod = nuevaFila.insertCell(2);
+                  celdaZod.textContent = data.zod;
+                  celdaZod.style.color = 'red';
+                }else{
+                  nuevaFila.insertCell(0).textContent = data.a;
+                  nuevaFila.insertCell(1).textContent = data.b;
+                  nuevaFila.insertCell(2).textContent = data.c;
+                  let celdaZod = nuevaFila.insertCell(3);
+                  celdaZod.textContent = data.zod;
+                  celdaZod.style.color = 'red';
+                }
+            }
+        } else {
+            let filas = document.querySelectorAll(`#${tablaId} tbody tr`);
+            for (let i = 0; i < filas.length; i++) {
+                let fila = filas[i];
+                let hora = fila.children[0].textContent;
+
                 if (hora === data.hour_sort) {
-                    let fila = tabla.querySelector('tbody tr');
-                    fila.children[0].textContent = data.a;
+                    fila.children[1].textContent = data.animalito;
+                    fila.children[2].textContent = data.animalito_name;
+                    let imagen = fila.children[3].children[0];
+                    imagen.src = data.image_path;
+                    imagen.alt = data.animalito_name;
+                    imagen.style.opacity = '1';
                     break;
                 }
             }
-        }else {
-            let indice = horarios[tablaId].indexOf(data.hour_sort) + 1;
-            let tabla = document.querySelector(`.${tablaId}-${indice}`);
-            let filaVieja = tabla.querySelector('tbody tr');
-            filaVieja.remove();
-            let nuevaFila = tabla.querySelector('tbody').insertRow(-1);
-
-            if(tablaId === 'TripleZamorano'){
-              nuevaFila.insertCell(0).textContent = data.a;
-              nuevaFila.insertCell(1).textContent = data.c;
-              let celdaZod = nuevaFila.insertCell(2);
-              celdaZod.textContent = data.zod;
-              celdaZod.style.color = 'red';
-            }else{
-              nuevaFila.insertCell(0).textContent = data.a;
-              nuevaFila.insertCell(1).textContent = data.b;
-              nuevaFila.insertCell(2).textContent = data.c;
-              let celdaZod = nuevaFila.insertCell(3);
-              celdaZod.textContent = data.zod;
-              celdaZod.style.color = 'red';
-            }
         }
-    } else {
-    console.log(data)
-        let filas = document.querySelectorAll(`#${tablaId} tbody tr`);
-        for (let i = 0; i < filas.length; i++) {
-            let fila = filas[i];
-            let hora = fila.children[0].textContent;
-
-            if (hora === data.hour_sort) {
-                fila.children[1].textContent = data.animalito;
-                fila.children[2].textContent = data.animalito_name;
-                let imagen = fila.children[3].children[0];
-                imagen.src = data.image_path;
-                imagen.alt = data.animalito_name;
-                imagen.style.opacity = '1';
-                break;
-            }
-        }
-    }
+      }
 };
-
 
 }
 
 // Conectamos al WebSocket
-connect();
+connect()
 
 </script>

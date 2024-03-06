@@ -5,7 +5,7 @@
             <!-- LOGO -->
             <div class="navbar-brand-box">
                 <!-- Dark Logo-->
-                <a href="" class="logo logo-dark">
+                <a href="{% url 'core:index' %}" class="logo logo-dark">
                     <span class="logo-sm">
                         <img src="{% static 'administrador/images/logo-dark.png'%}" alt="" height="20">
                     </span>
@@ -14,7 +14,7 @@
                     </span>
                 </a>
                 <!-- Light Logo-->
-                <a href="" class="logo logo-light">
+                <a href="{% url 'core:index' %}" class="logo logo-light">
                     <span class="logo-sm">
                         <img src="{% static 'administrador/images/logo-light.png'%}" alt="" height="20">
                     </span>
@@ -35,244 +35,501 @@
                     <ul class="navbar-nav" id="navbar-nav">
                         <li class="menu-title"><span data-key="t-menu">Ingresar Resultados Agrupados Por horario</span></li>
                         
+                        <li class="menu-title"><span data-key="t-menu">Animalitos:</span></li>
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="{% url 'core:group_a' %}">
-                                <i class="las la-flask"></i> <span data-key="t-widgets">
-                                    8:00AM - 7:00PM <br> 
-                                    Guacharo Activo <br> 
-                                    La Granjita <br> 
-                                    SelvaPlus
-                                </span>
+                            <a class="nav-link menu-link" href="#Animalitos" data-bs-toggle="collapse" role="button"
+                                aria-expanded="false" aria-controls="Animalitos">
+                                <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Ingresar Animalitos</span>
                             </a>
-                        </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="{% url 'core:group_b' %}">
-                                <i class="las la-flask"></i> <span data-key="t-widgets">
-                                    8:30AM - 7:30PM <br> 
-                                    Lotto Rey <br> 
-                                    La Granja Plus <br> 
-                                    Lotto Activo RD Inter
-                                </span>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="{% url 'core:group_c' %}">
-                                <i class="las la-flask"></i> <span data-key="t-widgets">
-                                    9:00AM - 8:00PM <br> 
-                                    Granja Millonaria <br> 
-                                    Lotto Activo <br> 
-                                    Chance Animalitos
-                                </span>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="{% url 'core:group_d' %}">
-                                <i class="las la-flask"></i> <span data-key="t-widgets">
-                                    9:10AM - 8:10PM <br> 
-                                    La Ricachona <br> 
-                                </span>
-                            </a>
-                        </li>
+                            <div class="collapse menu-dropdown" id="Animalitos">
+                                <ul class="nav nav-sm flex-column">
                         
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="{% url 'core:group_e' %}">
-                                <i class="las la-flask"></i> <span data-key="t-widgets">
-                                    9:30AM - 8:30PM <br> 
-                                    El Granjazo <br> 
-                                </span>
-                            </a>
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="{% url 'core:group_a' %}">
+                                            <i class="las la-flask"></i> <span data-key="t-widgets">
+                                                8:00AM - 7:00PM <br> 
+                                                Guacharo Activo <br> 
+                                                La Granjita <br> 
+                                                SelvaPlus
+                                            </span>
+                                        </a>
+                                    </li>
+            
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="{% url 'core:group_b' %}">
+                                            <i class="las la-flask"></i> <span data-key="t-widgets">
+                                                8:30AM - 7:30PM <br> 
+                                                Lotto Rey <br> 
+                                                La Granja Plus <br> 
+                                                Lotto Activo RD Inter
+                                            </span>
+                                        </a>
+                                    </li>
+            
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="{% url 'core:group_c' %}">
+                                            <i class="las la-flask"></i> <span data-key="t-widgets">
+                                                9:00AM - 8:00PM <br> 
+                                                Granja Millonaria <br> 
+                                                Lotto Activo <br> 
+                                                Chance Animalitos
+                                            </span>
+                                        </a>
+                                    </li>
+            
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="{% url 'core:group_d' %}">
+                                            <i class="las la-flask"></i> <span data-key="t-widgets">
+                                                9:10AM - 8:10PM <br> 
+                                                La Ricachona <br> 
+                                            </span>
+                                        </a>
+                                    </li>
+                                    
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="{% url 'core:group_e' %}">
+                                            <i class="las la-flask"></i> <span data-key="t-widgets">
+                                                9:30AM - 8:30PM <br> 
+                                                El Granjazo <br> 
+                                            </span>
+                                        </a>
+                                    </li>
+                                    
+
+                                </ul>
+                            </div>
+
                         </li>
 
-                        <li class="menu-title"><span data-key="t-menu">Animalitos</span></li>
+                        <li class="menu-title"><span data-key="t-menu">Loterias</span></li>
+
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="#ChanceAnimalitos" data-bs-toggle="collapse" role="button"
-                                aria-expanded="false" aria-controls="ChanceAnimalitos">
-                                <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Chance Animalitos</span>
+                            <a class="nav-link menu-link" href="#Loterias" data-bs-toggle="collapse" role="button"
+                                aria-expanded="false" aria-controls="Loterias">
+                                <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Ingresar Loterias</span>
                             </a>
-                            <div class="collapse menu-dropdown" id="ChanceAnimalitos">
+
+                            <div class="collapse menu-dropdown" id="Loterias">
+                                <ul class="nav nav-sm flex-column">
+
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="{% url 'core:lotery_group_a' %}">
+                                            <i class="las la-flask"></i> <span data-key="t-widgets">
+                                                <!-- 1:00PM - 4:30PM - 7:10PM <br>  -->
+                                                Triple caliente
+                                            </span>
+                                        </a>
+                                    </li>
+            
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="{% url 'core:lotery_group_b' %}">
+                                            <i class="las la-flask"></i> <span data-key="t-widgets">
+                                                <!-- 1:00PM - 4:30PM - 7:00PM <br>  -->
+                                                Triple caracas <br>
+                                                Triple chance
+                                            </span>
+                                        </a>
+                                    </li>
+            
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="{% url 'core:lotery_group_c' %}">
+                                            <i class="las la-flask"></i> <span data-key="t-widgets">
+                                                <!-- 12:45PM - 4:45PM - 7:05PM <br>  -->
+                                                Triple Zulia
+                                            </span>
+                                        </a>
+                                    </li>
+            
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="{% url 'core:lotery_group_d' %}">
+                                            <i class="las la-flask"></i> <span data-key="t-widgets">
+                                                <!-- 12:00PM - 4:00PM - 7:00PM <br>  -->
+                                                Triple Zamorano
+                                            </span>
+                                        </a>
+                                    </li>
+            
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="{% url 'core:lotery_group_e' %}">
+                                            <i class="las la-flask"></i> <span data-key="t-widgets">
+                                                <!-- 1:15PM - 4:45PM - 7:20PM <br>  -->
+                                                Triple Tachira
+                                            </span>
+                                        </a>
+                                    </li>
+            
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="{% url 'core:lotery_group_g' %}">
+                                            <i class="las la-flask"></i> <span data-key="t-widgets">
+                                                <!-- 9:15 AM - 8:15PM <br>  -->
+                                                Ricachona
+                                            </span>
+                                        </a>
+                                    </li>
+            
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="{% url 'core:lotery_group_f' %}">
+                                            <i class="las la-flask"></i> <span data-key="t-widgets">
+                                                <!-- 9:00 AM - 7:00PM <br>  -->
+                                                Trio Activo
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </li>
+
+                        <hr>
+
+                        <li class="menu-title"><span data-key="t-menu">Listados</span></li>
+                        <li class="nav-item">
+                            <a class="nav-link menu-link" href="#listado_animalitos" data-bs-toggle="collapse" role="button"
+                                aria-expanded="false" aria-controls="listado_animalitos">
+                                <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Listado de Animalitos</span>
+                            </a>
+                            <div class="collapse menu-dropdown" id="listado_animalitos">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                        <a class="nav-link menu-link" href="#ChanceAnimalitos" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="ChanceAnimalitos">
+                                            <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Chance Animalitos</span>
+                                        </a>
+                                        <div class="collapse menu-dropdown" id="ChanceAnimalitos">
+                                            <ul class="nav nav-sm flex-column">
+                                                <li class="nav-item">
+                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{% url 'core:chanceAnimalitos' %}" class="nav-link" data-key="t-crm"> Listado </a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </li>
+                                    
                                     <li class="nav-item">
-                                        <a href="{% url 'core:chanceAnimalitos' %}" class="nav-link" data-key="t-crm"> Listado </a>
+                                        <a class="nav-link menu-link" href="#GranjaPlus" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="GranjaPlus">
+                                            <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Granja Plus</span>
+                                        </a>
+                                        <div class="collapse menu-dropdown" id="GranjaPlus">
+                                            <ul class="nav nav-sm flex-column">
+                                                <li class="nav-item">
+                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{% url 'core:granjaPlus' %}" class="nav-link" data-key="t-crm"> Listado </a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="#LaGranjita" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="LaGranjita">
+                                            <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">La granjita</span>
+                                        </a>
+                                        <div class="collapse menu-dropdown" id="LaGranjita">
+                                            <ul class="nav nav-sm flex-column">
+                                                <li class="nav-item">
+                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{% url 'core:laGranjita' %}" class="nav-link" data-key="t-crm"> Listado </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="#LaRicachona" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="LaRicachona">
+                                            <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">La Ricachona</span>
+                                        </a>
+                                        <div class="collapse menu-dropdown" id="LaRicachona">
+                                            <ul class="nav nav-sm flex-column">
+                                                <li class="nav-item">
+                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{% url 'core:laRicachona' %}" class="nav-link" data-key="t-crm"> Listado </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="#LottoActivo" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="LottoActivo">
+                                            <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">LottoActivo</span>
+                                        </a>
+                                        <div class="collapse menu-dropdown" id="LottoActivo">
+                                            <ul class="nav nav-sm flex-column">
+                                                <li class="nav-item">
+                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{% url 'core:lottoActivo' %}" class="nav-link" data-key="t-crm"> Listado </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="#LottoActivoInterRD" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="LottoActivoInterRD">
+                                            <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">LottoActivo Inter RD</span>
+                                        </a>
+                                        <div class="collapse menu-dropdown" id="LottoActivoInterRD">
+                                            <ul class="nav nav-sm flex-column">
+                                                <li class="nav-item">
+                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{% url 'core:lottoActivoInterRD' %}" class="nav-link" data-key="t-crm"> Listado </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="#LottoRey" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="LottoRey">
+                                            <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">LottoRey</span>
+                                        </a>
+                                        <div class="collapse menu-dropdown" id="LottoRey">
+                                            <ul class="nav nav-sm flex-column">
+                                                <li class="nav-item">
+                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{% url 'core:lottoRey' %}" class="nav-link" data-key="t-crm"> Listado </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="#SelvaPlus" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="SelvaPlus">
+                                            <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">SelvaPlus</span>
+                                        </a>
+                                        <div class="collapse menu-dropdown" id="SelvaPlus">
+                                            <ul class="nav nav-sm flex-column">
+                                                <li class="nav-item">
+                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{% url 'core:selvaPlus' %}" class="nav-link" data-key="t-crm"> Listado </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="#GuacharoActivo" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="GuacharoActivo">
+                                            <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Guacharo Activo</span>
+                                        </a>
+                                        <div class="collapse menu-dropdown" id="GuacharoActivo">
+                                            <ul class="nav nav-sm flex-column">
+                                                <li class="nav-item">
+                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{% url 'core:guacharoActivo' %}" class="nav-link" data-key="t-crm"> Listado </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="#GranjaMillonaria" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="GranjaMillonaria">
+                                            <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Granja Millonaria</span>
+                                        </a>
+                                        <div class="collapse menu-dropdown" id="GranjaMillonaria">
+                                            <ul class="nav nav-sm flex-column">
+                                                <li class="nav-item">
+                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{% url 'core:granjaMillonaria' %}" class="nav-link" data-key="t-crm"> Listado </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="#Granjazo" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="Granjazo">
+                                            <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Granjazo</span>
+                                        </a>
+                                        <div class="collapse menu-dropdown" id="Granjazo">
+                                            <ul class="nav nav-sm flex-column">
+                                                <li class="nav-item">
+                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{% url 'core:granjazo' %}" class="nav-link" data-key="t-crm"> Listado </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+
                                 </ul>
                             </div>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link menu-link" href="#GranjaPlus" data-bs-toggle="collapse" role="button"
-                                aria-expanded="false" aria-controls="GranjaPlus">
-                                <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Granja Plus</span>
+                            <a class="nav-link menu-link" href="#listado_loterias" data-bs-toggle="collapse" role="button"
+                                aria-expanded="false" aria-controls="listado_loterias">
+                                <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Listado de Loterias</span>
                             </a>
-                            <div class="collapse menu-dropdown" id="GranjaPlus">
+
+                            <div class="collapse menu-dropdown" id="listado_loterias">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                        <a class="nav-link menu-link" href="#triple_caliente" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="triple_caliente">
+                                            <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Triple Caliente</span>
+                                        </a>
+                                        <div class="collapse menu-dropdown" id="triple_caliente">
+                                            <ul class="nav nav-sm flex-column">
+                                                <li class="nav-item">
+                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{% url 'core:triple_caliente' %}" class="nav-link" data-key="t-crm"> Listado </a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </li>
+
                                     <li class="nav-item">
-                                        <a href="{% url 'core:granjaPlus' %}" class="nav-link" data-key="t-crm"> Listado </a>
+                                        <a class="nav-link menu-link" href="#triple_caracas" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="triple_caracas">
+                                            <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Triple Caracas</span>
+                                        </a>
+                                        <div class="collapse menu-dropdown" id="triple_caracas">
+                                            <ul class="nav nav-sm flex-column">
+                                                <li class="nav-item">
+                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{% url 'core:triple_caracas' %}" class="nav-link" data-key="t-crm"> Listado </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="#triple_zulia" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="triple_zulia">
+                                            <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Triple Zulia</span>
+                                        </a>
+                                        <div class="collapse menu-dropdown" id="triple_zulia">
+                                            <ul class="nav nav-sm flex-column">
+                                                <li class="nav-item">
+                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{% url 'core:triple_zulia' %}" class="nav-link" data-key="t-crm"> Listado </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="#triple_zamorano" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="triple_zamorano">
+                                            <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Triple Zamorano</span>
+                                        </a>
+                                        <div class="collapse menu-dropdown" id="triple_zamorano">
+                                            <ul class="nav nav-sm flex-column">
+                                                <li class="nav-item">
+                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{% url 'core:triple_zamorano' %}" class="nav-link" data-key="t-crm"> Listado </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="#triple_chance" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="triple_chance">
+                                            <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Triple Chance</span>
+                                        </a>
+                                        <div class="collapse menu-dropdown" id="triple_chance">
+                                            <ul class="nav nav-sm flex-column">
+                                                <li class="nav-item">
+                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{% url 'core:triple_chance' %}" class="nav-link" data-key="t-crm"> Listado </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="#triple_tachira" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="triple_tachira">
+                                            <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Triple Tachira</span>
+                                        </a>
+                                        <div class="collapse menu-dropdown" id="triple_tachira">
+                                            <ul class="nav nav-sm flex-column">
+                                                <li class="nav-item">
+                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{% url 'core:triple_tachira' %}" class="nav-link" data-key="t-crm"> Listado </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="#trio_activo" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="trio_activo">
+                                            <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Trio Activo</span>
+                                        </a>
+                                        <div class="collapse menu-dropdown" id="trio_activo">
+                                            <ul class="nav nav-sm flex-column">
+                                                <li class="nav-item">
+                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{% url 'core:trio_activo' %}" class="nav-link" data-key="t-crm"> Listado </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="#ricachona" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="ricachona">
+                                            <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Ricachona</span>
+                                        </a>
+                                        <div class="collapse menu-dropdown" id="ricachona">
+                                            <ul class="nav nav-sm flex-column">
+                                                <li class="nav-item">
+                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{% url 'core:ricachona' %}" class="nav-link" data-key="t-crm"> Listado </a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </li>
                                 </ul>
                             </div>
+
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="#LaGranjita" data-bs-toggle="collapse" role="button"
-                                aria-expanded="false" aria-controls="LaGranjita">
-                                <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">La granjita</span>
-                            </a>
-                            <div class="collapse menu-dropdown" id="LaGranjita">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{% url 'core:laGranjita' %}" class="nav-link" data-key="t-crm"> Listado </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="#LaRicachona" data-bs-toggle="collapse" role="button"
-                                aria-expanded="false" aria-controls="LaRicachona">
-                                <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">La Ricachona</span>
-                            </a>
-                            <div class="collapse menu-dropdown" id="LaRicachona">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{% url 'core:laRicachona' %}" class="nav-link" data-key="t-crm"> Listado </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="#LottoActivo" data-bs-toggle="collapse" role="button"
-                                aria-expanded="false" aria-controls="LottoActivo">
-                                <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">LottoActivo</span>
-                            </a>
-                            <div class="collapse menu-dropdown" id="LottoActivo">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{% url 'core:lottoActivo' %}" class="nav-link" data-key="t-crm"> Listado </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="#LottoActivoInterRD" data-bs-toggle="collapse" role="button"
-                                aria-expanded="false" aria-controls="LottoActivoInterRD">
-                                <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">LottoActivo Inter RD</span>
-                            </a>
-                            <div class="collapse menu-dropdown" id="LottoActivoInterRD">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{% url 'core:lottoActivoInterRD' %}" class="nav-link" data-key="t-crm"> Listado </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="#LottoRey" data-bs-toggle="collapse" role="button"
-                                aria-expanded="false" aria-controls="LottoRey">
-                                <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">LottoRey</span>
-                            </a>
-                            <div class="collapse menu-dropdown" id="LottoRey">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{% url 'core:lottoRey' %}" class="nav-link" data-key="t-crm"> Listado </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="#SelvaPlus" data-bs-toggle="collapse" role="button"
-                                aria-expanded="false" aria-controls="SelvaPlus">
-                                <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">SelvaPlus</span>
-                            </a>
-                            <div class="collapse menu-dropdown" id="SelvaPlus">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{% url 'core:selvaPlus' %}" class="nav-link" data-key="t-crm"> Listado </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="#GuacharoActivo" data-bs-toggle="collapse" role="button"
-                                aria-expanded="false" aria-controls="GuacharoActivo">
-                                <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Guacharo Activo</span>
-                            </a>
-                            <div class="collapse menu-dropdown" id="GuacharoActivo">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{% url 'core:guacharoActivo' %}" class="nav-link" data-key="t-crm"> Listado </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="#GranjaMillonaria" data-bs-toggle="collapse" role="button"
-                                aria-expanded="false" aria-controls="GranjaMillonaria">
-                                <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Granja Millonaria</span>
-                            </a>
-                            <div class="collapse menu-dropdown" id="GranjaMillonaria">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{% url 'core:granjaMillonaria' %}" class="nav-link" data-key="t-crm"> Listado </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="#Granjazo" data-bs-toggle="collapse" role="button"
-                                aria-expanded="false" aria-controls="Granjazo">
-                                <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Granjazo</span>
-                            </a>
-                            <div class="collapse menu-dropdown" id="Granjazo">
-                                <ul class="nav nav-sm flex-column">
-                                    <li class="nav-item">
-                                        <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{% url 'core:granjazo' %}" class="nav-link" data-key="t-crm"> Listado </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
 
                         <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Pages</span></li>
 
@@ -496,7 +753,8 @@
                                     </li>
                                 </ul>
                             </div>
-                        </li>                       
+                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="#sidebarLanding" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="sidebarLanding">
                                 <i class="ri-rocket-line"></i> <span data-key="t-landing">Landing</span>

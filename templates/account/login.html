@@ -1,0 +1,95 @@
+{% extends "account/base/base.html" %}
+
+{% load static %}
+{% block title %} Iniciar Sesión {% endblock %}
+{% block content %}
+        <!-- auth page content -->
+        <div class="auth-page-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-center mt-sm-5 mb-4 text-white">
+                            <div>
+                                <a href="" class="d-inline-block auth-logo">
+                                    <img src="{% static 'administrador/images/logo-light.png'%}" alt="" height="60">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6 col-xl-5">
+                        <div class="card mt-4">
+                        
+                            <div class="card-body p-4"> 
+                                <div class="text-center mt-2">
+                                    <h5 class="text-primary">Bienvenido, Inicia Sesión!</h5>
+                                    <p class="text-muted">Ingresa al administrador de La Revista Digital.</p>
+                                </div>
+                                <div class="p-2 mt-4">
+                                    <form method="POST" action="{% url 'account_login' %}">
+                                        {% csrf_token %}
+                                        {% if form.errors %}
+                                          {% for field in form %}
+                                            {% for error in field.errors %}
+                                            <div class="alert alert-error">
+                                              <strong>{{ error|escape }}</strong>
+                                            </div>
+                                            {% endfor %}
+                                          {% endfor %}
+                                          {% for error in form.non_field_errors %}
+                                            <div class="alert alert-error">
+                                              <strong>{{ error|escape }}</strong>
+                                            </div>
+                                          {% endfor %}
+                                        {% endif %}
+                                        <div class="mb-3">
+                                            <label for="username" class="form-label">Nombre de usuario</label>
+                                            <input type="text" class="form-control" id="id_login" name="login" placeholder="Enter username">
+                                        </div>
+                
+                                        <div class="mb-3">
+                                            <div class="float-end">
+                                                <a href="" class="text-muted">Olvidaste tu contraseña?</a>
+                                            </div>
+                                            <label class="form-label" for="password-input">Contraseña</label>
+                                            <div class="position-relative auth-pass-inputgroup mb-3">
+                                                <input type="password" class="form-control pe-5 password-input" placeholder="Enter password" id="id_password" name="password">
+                                                <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mb-2">
+                                          {% if redirect_field_value %}
+                                          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                                          {% endif %}
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="auth-remember-check">
+                                            <label class="form-check-label" for="auth-remember-check">Recuerdame</label>
+                                        </div>
+                                        
+                                        <div class="mt-4">
+                                            <button class="btn btn-success w-100" type="submit">Inicia Sesión</button>
+                                        </div>
+
+                                        <div class="mt-4 text-center">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- end card body -->
+                        </div>
+                        <!-- end card -->
+
+                    </div>
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end container -->
+        </div>
+        <!-- end auth page content -->
+{% endblock %}

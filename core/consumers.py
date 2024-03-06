@@ -28,3 +28,7 @@ class CoreConsumer(WebsocketConsumer):
     def nuevos_datos(self, event):
         # Enviar el mensaje al cliente
         self.send(text_data=json.dumps(event['data']))
+
+    # def reload(self, event):
+    #     # Enviar el mensaje al cliente
+    #     self.send(text_data=json.dumps(event['data']))
