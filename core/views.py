@@ -114,6 +114,7 @@ class LotteryView(View):
         return render(request, 'lotoview/index.html', context)
 
 # L I S T A D O S   D E   A N I M A L I T O S
+@method_decorator(csrf_exempt, name='dispatch')
 @method_decorator(staff_member_required, name='dispatch')
 class IndexView(View):
     def get(self, request):
