@@ -65,7 +65,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
+    'config.middleware.AdminLoginRedirectMiddleware',
     "allauth.account.middleware.AccountMiddleware",
 ]
 
@@ -146,4 +146,5 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = '/administrador'
+LOGIN_REDIRECT_URL = 'core:index'
+LOGIN_URL = 'account_login'
