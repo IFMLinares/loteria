@@ -36,6 +36,7 @@ def ContextData(day):
         TripleTachira,
         TrioActivo,
         Ricachona,
+        Terminalito
     ]
 
     for model in models:
@@ -113,9 +114,8 @@ class LotteryView(View):
         print(context)
         return render(request, 'lotoview/index.html', context)
 
-
-
 # L I S T A D O S   D E   A N I M A L I T O S
+
 @method_decorator(csrf_exempt, name='dispatch')
 @method_decorator(staff_member_required, name='dispatch')
 class IndexView(View):
@@ -299,6 +299,20 @@ class AdminGranjazo(ListView):
         context['create_url'] = reverse_lazy('core:granjazo_add')
         return context
 
+@method_decorator(staff_member_required, name='dispatch')
+class AdminTerminalito(ListView):
+    model = Terminalito
+    template_name = "admin/erp/animalitos/list-view.html"
+    context_object_name = "context"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "Listado de Animalitos"
+        context['entity'] = 'Terminalito'
+        context['model_name'] = self.model.__name__
+        context['url'] = reverse_lazy('core:terminalito')
+        context['create_url'] = reverse_lazy('core:terminalito_add')
+        return context
 
 # L I S T A D O S   D E   L O T E R I A S
 @method_decorator(staff_member_required, name='dispatch')
@@ -734,6 +748,66 @@ class AddGroupResultE(View):
         for model_name in model_names:
             if model_name == 'Granjazo':
                 model = Granjazo
+
+            # Filtrar los registros de hoy
+            today = date.today()
+            today_records = model.objects.filter(date_sort=today)
+
+            # Obtener los horarios que ya se han registrado hoy
+            today_hours = [record.hour_sort for record in today_records]
+
+            # Excluir estos horarios al crear tus choices
+            hour_sort_choices = [choice for choice in model._meta.get_field('hour_sort').choices if choice[0] not in today_hours]
+
+            models.append({
+                'name': model_name,
+                'animalito_choices': model._meta.get_field('animalito').choices,
+                'hour_sort_choices': hour_sort_choices,
+            })
+
+        context['models'] = models
+
+        return render(request, 'admin/erp/animalitos/group_result_add.html', context)
+
+@method_decorator(staff_member_required, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
+class AddGroupResultF(View):
+    def post(self, request):
+        # Recibir los datos de los formularios
+        data = json.loads(request.body)
+
+        try:
+            # Validar los datos y guardarlos en el modelo correspondiente
+            for model_name, form_data in data.items():
+                if model_name == 'Terminalito':
+                    model = Terminalito
+
+                # Crear una nueva instancia del modelo y guardarla
+                instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
+                instance.full_clean()  # Validar la instancia
+                instance.save()
+
+            # Devolver una respuesta de éxito al cliente
+            return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
+
+        except ValidationError as e:
+            # Devolver una respuesta de error al cliente
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    def get(self, request):
+        context = {}
+        context['entity'] = "Registro de Animalitos"
+        context['title'] = 'Terminalito'
+        # Crear una lista con el nombre del modelo
+        model_names = ['Terminalito']
+        # Asignar la lista al contexto con el nombre 'model'
+        context['model'] = model_names
+
+        # Crear una lista de diccionarios con los choices del modelo
+        models = []
+        for model_name in model_names:
+            if model_name == 'Terminalito':
+                model = Terminalito
 
             # Filtrar los registros de hoy
             today = date.today()
@@ -1210,6 +1284,7 @@ class ChanceAnimalitosView(View):
         context = {}
         context['entity'] = "Registro de Animalitos"
         context['title'] = 'ChanceAnimalitos'
+        context['url'] = reverse_lazy('core:chanceAnimalitos')
         # Crear una lista con el nombre del modelo
         model_names = ['ChanceAnimalitos']
         # Asignar la lista al contexto con el nombre 'model'
@@ -1239,7 +1314,7 @@ class ChanceAnimalitosView(View):
 
         context['models'] = models
 
-        return render(request, 'admin/erp/animalitos/group_result_add.html', context)
+        return render(request, 'admin/erp/animalitos/add_individual.html', context)
 
 @method_decorator(staff_member_required, name='dispatch')
 @method_decorator(csrf_exempt, name='dispatch')
@@ -1272,6 +1347,7 @@ class GranjaPlusView(View):
         context['title'] = 'GranjaPlus'
         # Crear una lista con el nombre del modelo
         model_names = ['GranjaPlus']
+        context['url'] = reverse_lazy('core:granjaPlus')
         # Asignar la lista al contexto con el nombre 'model'
         context['model'] = model_names
 
@@ -1299,7 +1375,7 @@ class GranjaPlusView(View):
 
         context['models'] = models
 
-        return render(request, 'admin/erp/animalitos/group_result_add.html', context)
+        return render(request, 'admin/erp/animalitos/add_individual.html', context)
 
 @method_decorator(staff_member_required, name='dispatch')
 @method_decorator(csrf_exempt, name='dispatch')
@@ -1330,6 +1406,7 @@ class LaGranjitaView(View):
         context = {}
         context['entity'] = "Registro de Animalitos"
         context['title'] = 'LaGranjita'
+        context['url'] = reverse_lazy('core:laGranjita')
         # Crear una lista con el nombre del modelo
         model_names = ['LaGranjita']
         # Asignar la lista al contexto con el nombre 'model'
@@ -1359,7 +1436,7 @@ class LaGranjitaView(View):
 
         context['models'] = models
 
-        return render(request, 'admin/erp/animalitos/group_result_add.html', context)
+        return render(request, 'admin/erp/animalitos/add_individual.html', context)
 
 
 @method_decorator(staff_member_required, name='dispatch')
@@ -1391,6 +1468,7 @@ class LaRicachonaView(View):
         context = {}
         context['entity'] = "Registro de Animalitos"
         context['title'] = 'LaRicachona'
+        context['url'] = reverse_lazy('core:laRicachona')
         # Crear una lista con el nombre del modelo
         model_names = ['LaRicachona']
         # Asignar la lista al contexto con el nombre 'model'
@@ -1420,7 +1498,7 @@ class LaRicachonaView(View):
 
         context['models'] = models
 
-        return render(request, 'admin/erp/animalitos/group_result_add.html', context)
+        return render(request, 'admin/erp/animalitos/add_individual.html', context)
 
 @method_decorator(staff_member_required, name='dispatch')
 @method_decorator(csrf_exempt, name='dispatch')
@@ -1451,6 +1529,7 @@ class LottoActivoView(View):
         context = {}
         context['entity'] = "Registro de Animalitos"
         context['title'] = 'LottoActivo'
+        context['url'] = reverse_lazy('core:lottoActivo')
         # Crear una lista con el nombre del modelo
         model_names = ['LottoActivo']
         # Asignar la lista al contexto con el nombre 'model'
@@ -1512,6 +1591,7 @@ class LottoActivoInterRDView(View):
         context = {}
         context['entity'] = "Registro de Animalitos"
         context['title'] = 'LottoActivoInterRD'
+        context['url'] = reverse_lazy('core:lottoActivoInterRD')
         # Crear una lista con el nombre del modelo
         model_names = ['LottoActivoInterRD']
         # Asignar la lista al contexto con el nombre 'model'
@@ -1541,7 +1621,7 @@ class LottoActivoInterRDView(View):
 
         context['models'] = models
 
-        return render(request, 'admin/erp/animalitos/group_result_add.html', context)
+        return render(request, 'admin/erp/animalitos/add_individual.html', context)
 
 @method_decorator(staff_member_required, name='dispatch')
 @method_decorator(csrf_exempt, name='dispatch')
@@ -1572,6 +1652,7 @@ class LottoReyView(View):
         context = {}
         context['entity'] = "Registro de Animalitos"
         context['title'] = 'LottoRey'
+        context['url'] = reverse_lazy('core:lottoRey')
         # Crear una lista con el nombre del modelo
         model_names = ['LottoRey']
         # Asignar la lista al contexto con el nombre 'model'
@@ -1601,7 +1682,7 @@ class LottoReyView(View):
 
         context['models'] = models
 
-        return render(request, 'admin/erp/animalitos/group_result_add.html', context)
+        return render(request, 'admin/erp/animalitos/add_individual.html', context)
 
 @method_decorator(staff_member_required, name='dispatch')
 @method_decorator(csrf_exempt, name='dispatch')
@@ -1632,6 +1713,7 @@ class SelvaPlusView(View):
         context = {}
         context['entity'] = "Registro de Animalitos"
         context['title'] = 'SelvaPlus'
+        context['url'] = reverse_lazy('core:selvaPlus')
         # Crear una lista con el nombre del modelo
         model_names = ['SelvaPlus']
         # Asignar la lista al contexto con el nombre 'model'
@@ -1661,7 +1743,7 @@ class SelvaPlusView(View):
 
         context['models'] = models
 
-        return render(request, 'admin/erp/animalitos/group_result_add.html', context)
+        return render(request, 'admin/erp/animalitos/add_individual.html', context)
 
 
 @method_decorator(staff_member_required, name='dispatch')
@@ -1693,6 +1775,7 @@ class GuacharoActivoView(View):
         context = {}
         context['entity'] = "Registro de Animalitos"
         context['title'] = 'GuacharoActivo'
+        context['url'] = reverse_lazy('core:guacharoActivo')
         # Crear una lista con el nombre del modelo
         model_names = ['GuacharoActivo']
         # Asignar la lista al contexto con el nombre 'model'
@@ -1722,7 +1805,7 @@ class GuacharoActivoView(View):
 
         context['models'] = models
 
-        return render(request, 'admin/erp/animalitos/group_result_add.html', context)
+        return render(request, 'admin/erp/animalitos/add_individual.html', context)
 
 @method_decorator(staff_member_required, name='dispatch')
 @method_decorator(csrf_exempt, name='dispatch')
@@ -1753,6 +1836,7 @@ class GranjaMillonariaView(View):
         context = {}
         context['entity'] = "Registro de Animalitos"
         context['title'] = 'GranjaMillonaria'
+        context['url'] = reverse_lazy('core:granjaMillonaria')
         # Crear una lista con el nombre del modelo
         model_names = ['GranjaMillonaria']
         # Asignar la lista al contexto con el nombre 'model'
@@ -1782,7 +1866,7 @@ class GranjaMillonariaView(View):
 
         context['models'] = models
 
-        return render(request, 'admin/erp/animalitos/group_result_add.html', context)
+        return render(request, 'admin/erp/animalitos/add_individual.html', context)
 
 @method_decorator(staff_member_required, name='dispatch')
 @method_decorator(csrf_exempt, name='dispatch')
@@ -1813,6 +1897,7 @@ class GranjazoView(View):
         context = {}
         context['entity'] = "Registro de Animalitos"
         context['title'] = 'Granjazo'
+        context['url'] = reverse_lazy('core:granjazo')
         # Crear una lista con el nombre del modelo
         model_names = 'Granjazo'
         # Asignar la lista al contexto con el nombre 'model'
@@ -1839,8 +1924,66 @@ class GranjazoView(View):
 
         context['models'] = models
 
-        return render(request, 'admin/erp/animalitos/group_result_add.html', context)
+        return render(request, 'admin/erp/animalitos/add_individual.html', context)
 
+
+@method_decorator(staff_member_required, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
+class TerminalitoView(View):
+    def post(self, request):
+        # Recibir los datos de los formularios
+        data = json.loads(request.body)
+
+        try:
+            # Validar los datos y guardarlos en el modelo correspondiente
+            for model_name, form_data in data.items():
+                if model_name == 'Terminalito':
+                    model = Terminalito
+
+                # Crear una nueva instancia del modelo y guardarla
+                instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
+                instance.full_clean()  # Validar la instancia
+                instance.save()
+
+            # Devolver una respuesta de éxito al cliente
+            return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
+
+        except ValidationError as e:
+            # Devolver una respuesta de error al cliente
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    def get(self, request):
+        context = {}
+        context['entity'] = "Registro de Animalitos"
+        context['title'] = 'Terminalito'
+        context['url'] = reverse_lazy('core:terminalito')
+        # Crear una lista con el nombre del modelo
+        model_names = 'Terminalito'
+        # Asignar la lista al contexto con el nombre 'model'
+        context['model'] = model_names
+
+        # Crear una lista de diccionarios con los choices del modelo
+        model = Terminalito
+        models = []
+        # Filtrar los registros de hoy
+        today = date.today()
+        today_records = model.objects.filter(date_sort=today)
+
+        # Obtener los horarios que ya se han registrado hoy
+        today_hours = [record.hour_sort for record in today_records]
+
+        # Excluir estos horarios al crear tus choices
+        hour_sort_choices = [choice for choice in model._meta.get_field('hour_sort').choices if choice[0] not in today_hours]
+
+        models.append({
+                'name': model_names,
+                'animalito_choices': model._meta.get_field('animalito').choices,
+                'hour_sort_choices': hour_sort_choices,
+            })
+
+        context['models'] = models
+
+        return render(request, 'admin/erp/animalitos/add_individual.html', context)
 
 # I N G R E S O   D E  L O T E R I A S  I N D I V I D U A L
 @method_decorator(staff_member_required, name='dispatch')
@@ -1872,6 +2015,7 @@ class TripleCalienteView(View):
         context = {}
         context['entity'] = "Registro de Loterias"
         context['title'] = 'TripleCaliente'
+        context['url'] = reverse_lazy('core:triple_caliente')
         # Crear una lista con el nombre del modelo
         model_name = 'TripleCaliente'
         # Asignar la lista al contexto con el nombre 'model'
@@ -1899,7 +2043,7 @@ class TripleCalienteView(View):
 
         context['models'] = models
 
-        return render(request, 'admin/erp/loterias/group_result_add.html', context)
+        return render(request, 'admin/erp/loterias/individual_add.html', context)
 
 @method_decorator(staff_member_required, name='dispatch')
 @method_decorator(csrf_exempt, name='dispatch')
@@ -1930,6 +2074,7 @@ class TripleCaracasView(View):
         context = {}
         context['entity'] = "Registro de Loterias"
         context['title'] = 'TripleCaracas'
+        context['url'] = reverse_lazy('core:triple_caracas')
         # Crear una lista con el nombre del modelo
         model_name = 'TripleCaracas'
         # Asignar la lista al contexto con el nombre 'model'
@@ -1957,7 +2102,7 @@ class TripleCaracasView(View):
 
         context['models'] = models
 
-        return render(request, 'admin/erp/loterias/group_result_add.html', context)
+        return render(request, 'admin/erp/loterias/individual_add.html', context)
 
 @method_decorator(staff_member_required, name='dispatch')
 @method_decorator(csrf_exempt, name='dispatch')
@@ -1988,6 +2133,7 @@ class TripleZuliaView(View):
         context = {}
         context['entity'] = "Registro de Loterias"
         context['title'] = 'TripleZulia'
+        context['url'] = reverse_lazy('core:triple_zulia')
         # Crear una lista con el nombre del modelo
         model_name = 'TripleZulia'
         # Asignar la lista al contexto con el nombre 'model'
@@ -2015,7 +2161,7 @@ class TripleZuliaView(View):
 
         context['models'] = models
 
-        return render(request, 'admin/erp/loterias/group_result_add.html', context)
+        return render(request, 'admin/erp/loterias/individual_add.html', context)
 
 @method_decorator(staff_member_required, name='dispatch')
 @method_decorator(csrf_exempt, name='dispatch')
@@ -2048,6 +2194,7 @@ class TripleZamoranoView(View):
         context['title'] = 'TripleZamorano'
         # Crear una lista con el nombre del modelo
         model_name = 'TripleZamorano'
+        context['url'] = reverse_lazy('core:triple_zamorano')
         # Asignar la lista al contexto con el nombre 'model'
         context['model'] = model_name
 
@@ -2073,7 +2220,7 @@ class TripleZamoranoView(View):
 
         context['models'] = models
 
-        return render(request, 'admin/erp/loterias/group_result_add.html', context)
+        return render(request, 'admin/erp/loterias/individual_add.html', context)
 
 @method_decorator(staff_member_required, name='dispatch')
 @method_decorator(csrf_exempt, name='dispatch')
@@ -2104,6 +2251,7 @@ class TripleChanceView(View):
         context = {}
         context['entity'] = "Registro de Loterias"
         context['title'] = 'TripleChance'
+        context['url'] = reverse_lazy('core:triple_chance')
         # Crear una lista con el nombre del modelo
         model_name = 'TripleChance'
         # Asignar la lista al contexto con el nombre 'model'
@@ -2131,7 +2279,7 @@ class TripleChanceView(View):
 
         context['models'] = models
 
-        return render(request, 'admin/erp/loterias/group_result_add.html', context)
+        return render(request, 'admin/erp/loterias/individual_add.html', context)
 
 @method_decorator(staff_member_required, name='dispatch')
 @method_decorator(csrf_exempt, name='dispatch')
@@ -2162,6 +2310,7 @@ class TripleTachiraView(View):
         context = {}
         context['entity'] = "Registro de Loterias"
         context['title'] = 'TripleTachira'
+        context['url'] = reverse_lazy('core:triple_tachira')
         # Crear una lista con el nombre del modelo
         model_name = 'TripleTachira'
         # Asignar la lista al contexto con el nombre 'model'
@@ -2189,7 +2338,7 @@ class TripleTachiraView(View):
 
         context['models'] = models
 
-        return render(request, 'admin/erp/loterias/group_result_add.html', context)
+        return render(request, 'admin/erp/loterias/individual_add.html', context)
 
 @method_decorator(staff_member_required, name='dispatch')
 @method_decorator(csrf_exempt, name='dispatch')
@@ -2220,6 +2369,7 @@ class TrioActivoView(View):
         context = {}
         context['entity'] = "Registro de Loterias"
         context['title'] = 'TrioActivo'
+        context['url'] = reverse_lazy('core:trio_activo')
         # Crear una lista con el nombre del modelo
         model_name = 'TrioActivo'
         # Asignar la lista al contexto con el nombre 'model'
@@ -2246,7 +2396,7 @@ class TrioActivoView(View):
 
         context['models'] = models
 
-        return render(request, 'admin/erp/loterias/group_result_add.html', context)
+        return render(request, 'admin/erp/loterias/individual_add.html', context)
 
 @method_decorator(staff_member_required, name='dispatch')
 @method_decorator(csrf_exempt, name='dispatch')
@@ -2277,6 +2427,7 @@ class RicachonaView(View):
         context = {}
         context['entity'] = "Registro de Loterias"
         context['title'] = 'Ricachona'
+        context['url'] = reverse_lazy('core:ricachona')
         # Crear una lista con el nombre del modelo
         model_name = 'Ricachona'
         # Asignar la lista al contexto con el nombre 'model'
@@ -2303,7 +2454,7 @@ class RicachonaView(View):
 
         context['models'] = models
 
-        return render(request, 'admin/erp/loterias/group_result_add.html', context)
+        return render(request, 'admin/erp/loterias/individual_add.html', context)
 
 # VISTAS AJAX
 @csrf_exempt

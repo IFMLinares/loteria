@@ -96,6 +96,15 @@
                                         </a>
                                     </li>
                                     
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="{% url 'core:group_f' %}">
+                                            <i class="las la-flask"></i> <span data-key="t-widgets">
+                                                9:15AM - 7:15PM <br> 
+                                                Terminalito <br> 
+                                            </span>
+                                        </a>
+                                    </li>
+                                    
 
                                 </ul>
                             </div>
@@ -373,6 +382,24 @@
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="{% url 'core:granjazo' %}" class="nav-link" data-key="t-crm"> Listado </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    
+
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="#Terminalito" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="Terminalito">
+                                            <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Terminalito</span>
+                                        </a>
+                                        <div class="collapse menu-dropdown" id="Terminalito">
+                                            <ul class="nav nav-sm flex-column">
+                                                <li class="nav-item">
+                                                    <a href="{% url 'core:terminalito_add' %}" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{% url 'core:terminalito' %}" class="nav-link" data-key="t-crm"> Listado </a>
                                                 </li>
                                             </ul>
                                         </div>

@@ -29,6 +29,7 @@ from core.views import (
     AdminTripleChance,
     AdminTrioActivo,
     AdminRicachona,
+    AdminTerminalito,
 
     # Vistas de Resultados por grupo:
     AddGroupResultA,
@@ -36,6 +37,7 @@ from core.views import (
     AddGroupResultC,
     AddGroupResultD,
     AddGroupResultE,
+    AddGroupResultF,
 
     AddLoteryGroupResultA,
     AddLoteryGroupResultB,
@@ -56,6 +58,7 @@ from core.views import (
     GuacharoActivoView,
     GranjaMillonariaView,
     GranjazoView,
+    TerminalitoView,
 
     TripleCalienteView,
     TripleCaracasView,
@@ -90,6 +93,7 @@ urlpatterns = [
     path("administrador/guacharoActivo", view=AdminGuacharoActivo.as_view(), name="guacharoActivo"),
     path("administrador/granjaMillonaria", view=AdminGranjaMillonaria.as_view(), name="granjaMillonaria"),
     path("administrador/granjazo", view=AdminGranjazo.as_view(), name="granjazo"),
+    path("administrador/terminalito", view=AdminTerminalito.as_view(), name="terminalito"),
     # path("administrador/granjazo", view=AdminGranjazo.as_view(), name="granjazo"),
 
     # URLS LISTADOS DE LOTERIAS
@@ -109,6 +113,7 @@ urlpatterns = [
     path("administrador/add_group_c", view=AddGroupResultC.as_view(), name="group_c"),
     path("administrador/add_group_d", view=AddGroupResultD.as_view(), name="group_d"),
     path("administrador/add_group_e", view=AddGroupResultE.as_view(), name="group_e"),
+    path("administrador/add_group_f", view=AddGroupResultF.as_view(), name="group_f"),
 
 
     path("administrador/add_lotery_group_a", view=AddLoteryGroupResultA.as_view(), name="lotery_group_a"),
@@ -130,6 +135,7 @@ urlpatterns = [
     path("administrador/guacharo_activo_add", view=GuacharoActivoView.as_view(), name="guacharo_activo_add"),
     path("administrador/granja_millonaria_add", view=GranjaMillonariaView.as_view(), name="granja_millonaria_add"),
     path("administrador/granjazo_add", view=GranjazoView.as_view(), name="granjazo_add"),
+    path("administrador/terminalito_add", view=TerminalitoView.as_view(), name="terminalito_add"),
 
 
     path("administrador/triple_caliente_add", view=TripleCalienteView.as_view(), name="triple_caliente_add"),
@@ -140,6 +146,7 @@ urlpatterns = [
     path("administrador/triple_tachira_add", view=TripleTachiraView.as_view(), name="triple_tachira_add"),
     path("administrador/trio_activo_add", view=TrioActivoView.as_view(), name="trio_activo_add"),
     path("administrador/la_ricachona_add", view=RicachonaView.as_view(), name="la_ricachona_add"),
+
 
     # AJAX VIEW
     

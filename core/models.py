@@ -294,6 +294,24 @@ class Granjazo(models.Model):
         # Llama a la función para enviar el mensaje
         enviar_mensaje(self)
 
+class Terminalito(models.Model):
+    hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES_TO, verbose_name="Hora del sorteo")
+    animalito = models.CharField(max_length=3, choices=NUMERO_CHOICES, verbose_name="Nro ")
+    date_sort = models.DateField(auto_now=True)
+
+    class Meta:
+        unique_together = ('hour_sort', 'date_sort',)
+        verbose_name = 'Terminalito'
+        verbose_name_plural = 'Terminalito'
+
+    def get_image_path(self):
+        return join(settings.STATIC_URL, f'img/terminalito/r{self.animalito}.jpg')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)  # Llama al método save original
+
+        # Llama a la función para enviar el mensaje
+        enviar_mensaje(self)
 
 # Modelo de las Loterias
 
