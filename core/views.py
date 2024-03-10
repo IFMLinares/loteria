@@ -461,11 +461,11 @@ class AddGroupResultA(View):
                     model = GuacharoActivo
                 elif model_name == 'SelvaPlus':
                     model = SelvaPlus
-
-                # Crear una nueva instancia del modelo y guardarla
-                instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
-                instance.full_clean()  # Validar la instancia
-                instance.save()
+                if(form_data['save']):
+                    # Crear una nueva instancia del modelo y guardarla
+                    instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
+                    instance.full_clean()  # Validar la instancia
+                    instance.save()
 
             # Devolver una respuesta de éxito al cliente
             return JsonResponse({'status': 'success', 'message': 'Los modelos se han guardado correctamente.'})
@@ -530,10 +530,11 @@ class AddGroupResultB(View):
                 elif model_name == 'LottoRey':
                     model = LottoRey
 
-                # Crear una nueva instancia del modelo y guardarla
-                instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
-                instance.full_clean()  # Validar la instancia
-                instance.save()
+                if(form_data['save']):
+                    # Crear una nueva instancia del modelo y guardarla
+                    instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
+                    instance.full_clean()  # Validar la instancia
+                    instance.save()
 
             # Devolver una respuesta de éxito al cliente
             return JsonResponse({'status': 'success', 'message': 'Los modelos se han guardado correctamente.'})
@@ -598,10 +599,11 @@ class AddGroupResultC(View):
                 elif model_name == 'GranjaMillonaria':
                     model = GranjaMillonaria
 
-                # Crear una nueva instancia del modelo y guardarla
-                instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
-                instance.full_clean()  # Validar la instancia
-                instance.save()
+                if(form_data['save']):
+                    # Crear una nueva instancia del modelo y guardarla
+                    instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
+                    instance.full_clean()  # Validar la instancia
+                    instance.save()
 
             # Devolver una respuesta de éxito al cliente
             return JsonResponse({'status': 'success', 'message': 'Los modelos se han guardado correctamente.'})
@@ -662,10 +664,11 @@ class AddGroupResultD(View):
                 if model_name == 'LaRicachona':
                     model = LaRicachona
 
-                # Crear una nueva instancia del modelo y guardarla
-                instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
-                instance.full_clean()  # Validar la instancia
-                instance.save()
+                if(form_data['save']):
+                    # Crear una nueva instancia del modelo y guardarla
+                    instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
+                    instance.full_clean()  # Validar la instancia
+                    instance.save()
 
             # Devolver una respuesta de éxito al cliente
             return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
@@ -722,10 +725,11 @@ class AddGroupResultE(View):
                 if model_name == 'Granjazo':
                     model = Granjazo
 
-                # Crear una nueva instancia del modelo y guardarla
-                instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
-                instance.full_clean()  # Validar la instancia
-                instance.save()
+                if(form_data['save']):
+                    # Crear una nueva instancia del modelo y guardarla
+                    instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
+                    instance.full_clean()  # Validar la instancia
+                    instance.save()
 
             # Devolver una respuesta de éxito al cliente
             return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
@@ -782,10 +786,11 @@ class AddGroupResultF(View):
                 if model_name == 'Terminalito':
                     model = Terminalito
 
-                # Crear una nueva instancia del modelo y guardarla
-                instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
-                instance.full_clean()  # Validar la instancia
-                instance.save()
+                if(form_data['save']):
+                    # Crear una nueva instancia del modelo y guardarla
+                    instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
+                    instance.full_clean()  # Validar la instancia
+                    instance.save()
 
             # Devolver una respuesta de éxito al cliente
             return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
@@ -845,10 +850,11 @@ class AddLoteryGroupResultA(View):
                 if model_name == 'TripleCaliente':
                     model = TripleCaliente
 
-                # Crear una nueva instancia del modelo y guardarla
-                instance = model(hour_sort=form_data['hour'], a=form_data['a'], b=form_data['b'], c=form_data['c'], zod=form_data['zod'])
-                instance.full_clean()  # Validar la instancia
-                instance.save()
+                if(form_data['save']):
+                    # Crear una nueva instancia del modelo y guardarla
+                    instance = model(hour_sort=form_data['hour'], a=form_data['a'], b=form_data['b'], c=form_data['c'], zod=form_data['zod'])
+                    instance.full_clean()  # Validar la instancia
+                    instance.save()
             # Devolver una respuesta de éxito al cliente
             return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
 
@@ -905,11 +911,12 @@ class AddLoteryGroupResultB(View):
                     model = TripleCaracas
                 elif model_name == 'TripleChance':
                     model = TripleChance
-
-                # Crear una nueva instancia del modelo y guardarla
-                instance = model(hour_sort=form_data['hour'], a=form_data['a'], b=form_data['b'], c=form_data['c'], zod=form_data['zod'])
-                instance.full_clean()  # Validar la instancia
-                instance.save()
+                
+                if(form_data['save']):
+                    # Crear una nueva instancia del modelo y guardarla
+                    instance = model(hour_sort=form_data['hour'], a=form_data['a'], b=form_data['b'], c=form_data['c'], zod=form_data['zod'])
+                    instance.full_clean()  # Validar la instancia
+                    instance.save()
 
             # Devolver una respuesta de éxito al cliente
             return JsonResponse({'status': 'success', 'message': 'Los modelos se han guardado correctamente.'})
@@ -968,10 +975,12 @@ class AddLoteryGroupResultC(View):
                 if model_name == 'TripleZulia':
                     model = TripleZulia
 
-                # Crear una nueva instancia del modelo y guardarla
-                instance = model(hour_sort=form_data['hour'], a=form_data['a'], b=form_data['b'], c=form_data['c'], zod=form_data['zod'])
-                instance.full_clean()  # Validar la instancia
-                instance.save()
+                
+                if(form_data['save']):
+                    # Crear una nueva instancia del modelo y guardarla
+                    instance = model(hour_sort=form_data['hour'], a=form_data['a'], b=form_data['b'], c=form_data['c'], zod=form_data['zod'])
+                    instance.full_clean()  # Validar la instancia
+                    instance.save()
 
             # Devolver una respuesta de éxito al cliente
             return JsonResponse({'status': 'success', 'message': 'Los modelos se han guardado correctamente.'})
@@ -1028,10 +1037,11 @@ class AddLoteryGroupResultD(View):
                 if model_name == 'TripleZamorano':
                     model = TripleZamorano
 
-                # Crear una nueva instancia del modelo y guardarla
-                instance = model(hour_sort=form_data['hour'], a=form_data['a'], c=form_data['c'], zod=form_data['zod'])
-                instance.full_clean()  # Validar la instancia
-                instance.save()
+                if(form_data['save']):
+                    # Crear una nueva instancia del modelo y guardarla
+                    instance = model(hour_sort=form_data['hour'], a=form_data['a'], c=form_data['c'], zod=form_data['zod'])
+                    instance.full_clean()  # Validar la instancia
+                    instance.save()
 
             # Devolver una respuesta de éxito al cliente
             return JsonResponse({'status': 'success', 'message': 'Los modelos se han guardado correctamente.'})
@@ -1088,10 +1098,12 @@ class AddLoteryGroupResultE(View):
                 if model_name == 'TripleTachira':
                     model = TripleTachira
 
-                # Crear una nueva instancia del modelo y guardarla
-                instance = model(hour_sort=form_data['hour'], a=form_data['a'], b=form_data['b'], c=form_data['c'], zod=form_data['zod'])
-                instance.full_clean()  # Validar la instancia
-                instance.save()
+
+                if(form_data['save']):
+                    # Crear una nueva instancia del modelo y guardarla
+                    instance = model(hour_sort=form_data['hour'], a=form_data['a'], b=form_data['b'], c=form_data['c'], zod=form_data['zod'])
+                    instance.full_clean()  # Validar la instancia
+                    instance.save()
 
             # Devolver una respuesta de éxito al cliente
             return JsonResponse({'status': 'success', 'message': 'Los modelos se han guardado correctamente.'})
@@ -1148,10 +1160,11 @@ class AddLoteryGroupResultF(View):
                 if model_name == 'TrioActivo':
                     model = TrioActivo
 
-                # Crear una nueva instancia del modelo y guardarla
-                instance = model(hour_sort=form_data['hour'], a=form_data['a'])
-                instance.full_clean()  # Validar la instancia
-                instance.save()
+                if(form_data['save']):
+                    # Crear una nueva instancia del modelo y guardarla
+                    instance = model(hour_sort=form_data['hour'], a=form_data['a'])
+                    instance.full_clean()  # Validar la instancia
+                    instance.save()
 
             # Devolver una respuesta de éxito al cliente
             return JsonResponse({'status': 'success', 'message': 'Los modelos se han guardado correctamente.'})
@@ -1207,10 +1220,11 @@ class AddLoteryGroupResultG(View):
                 if model_name == 'Ricachona':
                     model = Ricachona
 
-                # Crear una nueva instancia del modelo y guardarla
-                instance = model(hour_sort=form_data['hour'], a=form_data['a'])
-                instance.full_clean()  # Validar la instancia
-                instance.save()
+                if(form_data['save']):
+                    # Crear una nueva instancia del modelo y guardarla
+                    instance = model(hour_sort=form_data['hour'], a=form_data['a'])
+                    instance.full_clean()  # Validar la instancia
+                    instance.save()
 
             # Devolver una respuesta de éxito al cliente
             return JsonResponse({'status': 'success', 'message': 'Los modelos se han guardado correctamente.'})

@@ -61,6 +61,13 @@ Listado de Loterias
                                     {% endfor %}
                                 </select>
                                 {% endif %}
+                                
+                                <div class="form-check form-check-danger mb-3 mt-3">
+                                    <input class="form-check-input" type="checkbox" id="{{ model.name }}-checkbox" onclick="disabledEnabledForm(this.id)" model-name="{{ model.name }}">
+                                    <label class="form-check-label" for="{{ model.name }}-checkbox">
+                                        No enviar este formulario
+                                    </label>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -121,18 +128,26 @@ $(document).ready(function() {
 
         // Recoger los datos de cada formulario
         {% for model in models %}
+
+        if(($('#{{model.name}}-checkbox').is(':checked'))){
         formData['{{ model.name }}'] = {
-            'hour': $('#hour-{{ model.name }}').val(),
-            {% if model.name == 'TrioActivo' %}
-                'a': $('#a-{{ model.name }}').val(),
-            {% else %}
-                'a': $('#a-{{ model.name }}').val(),
-                {% if model.name != 'TripleZamorano' %}
-                    'b': $('#b-{{ model.name }}').val(),
+            'save': 0,
+        };
+        }else{
+            formData['{{ model.name }}'] = {
+                'save': 1,
+                'hour': $('#hour-{{ model.name }}').val(),
+                {% if model.name == 'TrioActivo' %}
+                    'a': $('#a-{{ model.name }}').val(),
+                {% else %}
+                    'a': $('#a-{{ model.name }}').val(),
+                    {% if model.name != 'TripleZamorano' %}
+                        'b': $('#b-{{ model.name }}').val(),
+                    {% endif %}
+                    'c': $('#c-{{ model.name }}').val(),
+                    'zod': $('#zod-{{ model.name }}').val(),
                 {% endif %}
-                'c': $('#c-{{ model.name }}').val(),
-                'zod': $('#zod-{{ model.name }}').val(),
-            {% endif %}
+            };
         };
         {% endfor %}
 
@@ -165,6 +180,29 @@ $(document).ready(function() {
         });
     });
 });
+
+function disabledEnabledForm(id) {
+    var checkbox = document.getElementById(id);
+    var modelName = checkbox.getAttribute('model-name');
+    var hour = $(`#hour-${modelName}`);
+    var a = $(`#a-${modelName}`);
+    var b = $(`#b-${modelName}`);
+    var c = $(`#c-${modelName}`);
+    var zod = $(`#zod-${modelName}`);
+    
+    if (checkbox.checked) {
+        hour.prop('disabled', true);
+        a.prop('disabled', true);
+        b.prop('disabled', true);
+        c.prop('disabled', true);
+        zod.prop('disabled', true);
+    } else {
+        hour.prop('disabled', false);
+        a.prop('disabled', false);
+        b.prop('disabled', false);
+        zod.prop('disabled', false);
+    }
+}
 
 </script>
 {% endblock extra_js %}
