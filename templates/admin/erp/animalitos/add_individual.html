@@ -37,12 +37,6 @@ Listado de Categorias
                                     <option value="{{ value }}">{{ value }}-{{ display }}</option>
                                     {% endfor %}
                                 </select>
-                                <div class="form-check form-check-danger mb-3 mt-3">
-                                    <input class="form-check-input" type="checkbox" id="{{ model.name }}-checkbox" onclick="disabledEnabledForm(this.id)" model-name="{{ model.name }}">
-                                    <label class="form-check-label" for="{{ model.name }}-checkbox">
-                                        No enviar este formulario
-                                    </label>
-                                </div>
                             </form>
                         </div>
                     </div>
@@ -94,7 +88,6 @@ Listado de Categorias
             // footer: '<a href="#">Why do I have this issue?</a>'
         });
     {% endif %}
-
 $(document).ready(function() {
     $('#btnTest').click(function(e) {
         e.preventDefault();
@@ -104,21 +97,11 @@ $(document).ready(function() {
 
         // Recoger los datos de cada formulario
         {% for model in models %}
-        if(($('#{{model.name}}-checkbox').is(':checked'))){
-            formData['{{ model.name }}'] = {
-            'hour': '',
-            'animal': '',
-            'save': 0
-            };
-        }else{
-            formData['{{ model.name }}'] = {
+        formData['{{ model.name }}'] = {
             'hour': $('#hour-{{ model.name }}').val(),
-            'animal': $('#animal-{{ model.name }}').val(),
-            'save': 1
-            };
+            'animal': $('#animal-{{ model.name }}').val()
         };
         {% endfor %}
-        console.log(formData)
 
         // Enviar los datos a la vista mediante una solicitud POST
         $.ajax({
@@ -136,7 +119,7 @@ $(document).ready(function() {
                         icon: 'success'
                     }).then(function() {
                         // Redireccionar a una URL después de hacer clic en el botón "OK"
-                        window.location.href = '{% url 'core:index' %}';
+                        window.location.href = '{{url}}';
                     });
                 } else if (response.status == 'error') {
                     Swal.fire({
@@ -149,22 +132,6 @@ $(document).ready(function() {
         });
     });
 });
-
-function disabledEnabledForm(id) {
-    var checkbox = document.getElementById(id);
-    var modelName = checkbox.getAttribute('model-name');
-    var hour = $(`#hour-${modelName}`);
-    var animal = $(`#animal-${modelName}`);
-    
-    if (checkbox.checked) {
-        hour.prop('disabled', true);
-        animal.prop('disabled', true);
-    } else {
-        hour.prop('disabled', false);
-        animal.prop('disabled', false);
-    }
-}
-
 
 </script>
 {% endblock extra_js %}

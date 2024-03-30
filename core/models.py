@@ -1,6 +1,8 @@
 from django.db import models
 from datetime import datetime
 from django.conf import settings
+from django.core.exceptions import ValidationError
+import re
 
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
@@ -75,6 +77,10 @@ def enviar_mensaje_loterias_esp(self):
 
     channel_layer = get_channel_layer()
     async_to_sync(channel_layer.group_send)('grupo_de_datos', message)
+
+def validate_numeric(value):
+    if not re.match('^[0-9]*$', value):
+        raise ValidationError('El valor debe ser numérico')
 # Create your models here.
 
 # modelos de los animalitos 
@@ -288,15 +294,33 @@ class Granjazo(models.Model):
         # Llama a la función para enviar el mensaje
         enviar_mensaje(self)
 
+class Terminalito(models.Model):
+    hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES_TO, verbose_name="Hora del sorteo")
+    animalito = models.CharField(max_length=3, choices=NUMERO_CHOICES, verbose_name="Nro ")
+    date_sort = models.DateField(auto_now=True)
+
+    class Meta:
+        unique_together = ('hour_sort', 'date_sort',)
+        verbose_name = 'Terminalito'
+        verbose_name_plural = 'Terminalito'
+
+    def get_image_path(self):
+        return join(settings.STATIC_URL, f'img/terminalito/r{self.animalito}.jpg')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)  # Llama al método save original
+
+        # Llama a la función para enviar el mensaje
+        enviar_mensaje(self)
 
 # Modelo de las Loterias
 
 class TripleCaliente(models.Model):
     hour_sort = models.CharField(max_length=9, choices=LOTERY_CHOICES_TC, verbose_name="Hora del sorteo")
     date_sort = models.DateField(auto_now=True)
-    a = models.PositiveBigIntegerField()
-    b = models.PositiveBigIntegerField()
-    c = models.PositiveBigIntegerField()
+    a = models.CharField(max_length=20, validators=[validate_numeric])
+    b = models.CharField(max_length=20, validators=[validate_numeric])
+    c = models.CharField(max_length=20, validators=[validate_numeric])
     zod = models.CharField(max_length=9, choices=ZOD_CHOICES)
 
     class Meta:
@@ -313,9 +337,9 @@ class TripleCaliente(models.Model):
 class TripleCaracas(models.Model):
     hour_sort = models.CharField(max_length=9, choices=LOTERY_CHOICES_TCCS_TCH, verbose_name="Hora del sorteo")
     date_sort = models.DateField(auto_now=True)
-    a = models.PositiveBigIntegerField()
-    b = models.PositiveBigIntegerField()
-    c = models.PositiveBigIntegerField()
+    a = models.CharField(max_length=20, validators=[validate_numeric])
+    b = models.CharField(max_length=20, validators=[validate_numeric])
+    c = models.CharField(max_length=20, validators=[validate_numeric])
     zod = models.CharField(max_length=9, choices=ZOD_CHOICES)
 
     class Meta:
@@ -332,9 +356,9 @@ class TripleCaracas(models.Model):
 class TripleZulia(models.Model):
     hour_sort = models.CharField(max_length=9, choices=LOTERY_CHOICES_ZL, verbose_name="Hora del sorteo")
     date_sort = models.DateField(auto_now=True)
-    a = models.PositiveBigIntegerField()
-    b = models.PositiveBigIntegerField()
-    c = models.PositiveBigIntegerField()
+    a = models.CharField(max_length=20, validators=[validate_numeric])
+    b = models.CharField(max_length=20, validators=[validate_numeric])
+    c = models.CharField(max_length=20, validators=[validate_numeric])
     zod = models.CharField(max_length=9, choices=ZOD_CHOICES)
 
     class Meta:
@@ -351,9 +375,9 @@ class TripleZulia(models.Model):
 class TripleZamorano(models.Model):
     hour_sort = models.CharField(max_length=9, choices=LOTERY_CHOICES_ZA, verbose_name="Hora del sorteo")
     date_sort = models.DateField(auto_now=True)
-    a = models.PositiveBigIntegerField()
-    # b = models.PositiveBigIntegerField()
-    c = models.PositiveBigIntegerField()
+    a = models.CharField(max_length=20, validators=[validate_numeric])
+    # b = models.CharField(max_length=20, validators=[validate_numeric])
+    c = models.CharField(max_length=20, validators=[validate_numeric])
     zod = models.CharField(max_length=9, choices=ZOD_CHOICES)
 
     class Meta:
@@ -370,9 +394,9 @@ class TripleZamorano(models.Model):
 class TripleChance(models.Model):
     hour_sort = models.CharField(max_length=9, choices=LOTERY_CHOICES_TCCS_TCH, verbose_name="Hora del sorteo")
     date_sort = models.DateField(auto_now=True)
-    a = models.PositiveBigIntegerField()
-    b = models.PositiveBigIntegerField()
-    c = models.PositiveBigIntegerField()
+    a = models.CharField(max_length=20, validators=[validate_numeric])
+    b = models.CharField(max_length=20, validators=[validate_numeric])
+    c = models.CharField(max_length=20, validators=[validate_numeric])
     zod = models.CharField(max_length=9, choices=ZOD_CHOICES)
 
     class Meta:
@@ -389,9 +413,9 @@ class TripleChance(models.Model):
 class TripleTachira(models.Model):
     hour_sort = models.CharField(max_length=9, choices=LOTERY_CHOICES_TAC, verbose_name="Hora del sorteo")
     date_sort = models.DateField(auto_now=True)
-    a = models.PositiveBigIntegerField()
-    b = models.PositiveBigIntegerField()
-    c = models.PositiveBigIntegerField()
+    a = models.CharField(max_length=20, validators=[validate_numeric])
+    b = models.CharField(max_length=20, validators=[validate_numeric])
+    c = models.CharField(max_length=20, validators=[validate_numeric])
     zod = models.CharField(max_length=9, choices=ZOD_CHOICES)
 
     class Meta:
@@ -408,7 +432,7 @@ class TripleTachira(models.Model):
 class TrioActivo(models.Model):
     hour_sort = models.CharField(max_length=9, choices=LOTERY_CHOICES_TA, verbose_name="Hora del sorteo")
     date_sort = models.DateField(auto_now=True)
-    a = models.PositiveBigIntegerField()
+    a = models.CharField(max_length=20, validators=[validate_numeric])
     class Meta:
         unique_together = ('hour_sort', 'date_sort',)
         verbose_name = 'Loteria Trio Activo'
@@ -423,7 +447,7 @@ class TrioActivo(models.Model):
 class Ricachona(models.Model):
     hour_sort = models.CharField(max_length=9, choices=LOTERY_CHOICES_RC, verbose_name="Hora del sorteo")
     date_sort = models.DateField(auto_now=True)
-    a = models.PositiveBigIntegerField()
+    a = models.CharField(max_length=20, validators=[validate_numeric])
 
     class Meta:
         unique_together = ('hour_sort', 'date_sort',)

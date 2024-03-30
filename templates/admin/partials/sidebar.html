@@ -96,6 +96,15 @@
                                         </a>
                                     </li>
                                     
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="{% url 'core:group_f' %}">
+                                            <i class="las la-flask"></i> <span data-key="t-widgets">
+                                                9:15AM - 7:15PM <br> 
+                                                Terminalito <br> 
+                                            </span>
+                                        </a>
+                                    </li>
+                                    
 
                                 </ul>
                             </div>
@@ -199,7 +208,7 @@
                                         <div class="collapse menu-dropdown" id="ChanceAnimalitos">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                    <a href="{% url 'core:chance_animalitos_add' %}" class="nav-link" data-key="t-analytics"> Registrar </a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="{% url 'core:chanceAnimalitos' %}" class="nav-link" data-key="t-crm"> Listado </a>
@@ -216,7 +225,7 @@
                                         <div class="collapse menu-dropdown" id="GranjaPlus">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                    <a href="{% url 'core:granja_plus_add' %}" class="nav-link" data-key="t-analytics"> Registrar </a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="{% url 'core:granjaPlus' %}" class="nav-link" data-key="t-crm"> Listado </a>
@@ -233,7 +242,7 @@
                                         <div class="collapse menu-dropdown" id="LaGranjita">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                    <a href="{% url 'core:la_granjita_add' %}" class="nav-link" data-key="t-analytics"> Registrar </a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="{% url 'core:laGranjita' %}" class="nav-link" data-key="t-crm"> Listado </a>
@@ -250,7 +259,7 @@
                                         <div class="collapse menu-dropdown" id="LaRicachona">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                    <a href="{% url 'core:ricachona_add' %}" class="nav-link" data-key="t-analytics"> Registrar </a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="{% url 'core:laRicachona' %}" class="nav-link" data-key="t-crm"> Listado </a>
@@ -267,7 +276,7 @@
                                         <div class="collapse menu-dropdown" id="LottoActivo">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                    <a href="{% url 'core:lotto_activo_add' %}" class="nav-link" data-key="t-analytics"> Registrar </a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="{% url 'core:lottoActivo' %}" class="nav-link" data-key="t-crm"> Listado </a>
@@ -284,7 +293,7 @@
                                         <div class="collapse menu-dropdown" id="LottoActivoInterRD">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                    <a href="{% url 'core:lotto_Activo_inter_rd_add' %}" class="nav-link" data-key="t-analytics"> Registrar </a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="{% url 'core:lottoActivoInterRD' %}" class="nav-link" data-key="t-crm"> Listado </a>
@@ -301,7 +310,7 @@
                                         <div class="collapse menu-dropdown" id="LottoRey">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                    <a href="{% url 'core:lotto_rey_add' %}" class="nav-link" data-key="t-analytics"> Registrar </a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="{% url 'core:lottoRey' %}" class="nav-link" data-key="t-crm"> Listado </a>
@@ -318,7 +327,7 @@
                                         <div class="collapse menu-dropdown" id="SelvaPlus">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                    <a href="{% url 'core:selva_plus_add' %}" class="nav-link" data-key="t-analytics"> Registrar </a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="{% url 'core:selvaPlus' %}" class="nav-link" data-key="t-crm"> Listado </a>
@@ -335,7 +344,7 @@
                                         <div class="collapse menu-dropdown" id="GuacharoActivo">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                    <a href="{% url 'core:guacharo_activo_add' %}" class="nav-link" data-key="t-analytics"> Registrar </a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="{% url 'core:guacharoActivo' %}" class="nav-link" data-key="t-crm"> Listado </a>
@@ -352,7 +361,7 @@
                                         <div class="collapse menu-dropdown" id="GranjaMillonaria">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                    <a href="{% url 'core:granja_millonaria_add' %}" class="nav-link" data-key="t-analytics"> Registrar </a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="{% url 'core:granjaMillonaria' %}" class="nav-link" data-key="t-crm"> Listado </a>
@@ -369,10 +378,28 @@
                                         <div class="collapse menu-dropdown" id="Granjazo">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                    <a href="{% url 'core:granjazo_add' %}" class="nav-link" data-key="t-analytics"> Registrar </a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="{% url 'core:granjazo' %}" class="nav-link" data-key="t-crm"> Listado </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    
+
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="#Terminalito" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="Terminalito">
+                                            <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Terminalito</span>
+                                        </a>
+                                        <div class="collapse menu-dropdown" id="Terminalito">
+                                            <ul class="nav nav-sm flex-column">
+                                                <li class="nav-item">
+                                                    <a href="{% url 'core:terminalito_add' %}" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{% url 'core:terminalito' %}" class="nav-link" data-key="t-crm"> Listado </a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -391,14 +418,14 @@
                             <div class="collapse menu-dropdown" id="listado_loterias">
                                 <ul class="nav nav-sm flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link menu-link" href="#triple_caliente" data-bs-toggle="collapse" role="button"
-                                            aria-expanded="false" aria-controls="triple_caliente">
+                                        <a class="nav-link menu-link" href="#triple_caliente_add" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="triple_caliente_add">
                                             <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Triple Caliente</span>
                                         </a>
-                                        <div class="collapse menu-dropdown" id="triple_caliente">
+                                        <div class="collapse menu-dropdown" id="triple_caliente_add">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                    <a href="{% url 'core:triple_caliente_add' %}" class="nav-link" data-key="t-analytics"> Registrar </a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="{% url 'core:triple_caliente' %}" class="nav-link" data-key="t-crm"> Listado </a>
@@ -408,14 +435,14 @@
                                     </li>
 
                                     <li class="nav-item">
-                                        <a class="nav-link menu-link" href="#triple_caracas" data-bs-toggle="collapse" role="button"
-                                            aria-expanded="false" aria-controls="triple_caracas">
+                                        <a class="nav-link menu-link" href="#triple_caracas_add" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="triple_caracas_add">
                                             <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Triple Caracas</span>
                                         </a>
-                                        <div class="collapse menu-dropdown" id="triple_caracas">
+                                        <div class="collapse menu-dropdown" id="triple_caracas_add">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                    <a href="{% url 'core:triple_caracas_add' %}" class="nav-link" data-key="t-analytics"> Registrar </a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="{% url 'core:triple_caracas' %}" class="nav-link" data-key="t-crm"> Listado </a>
@@ -425,14 +452,14 @@
                                     </li>
 
                                     <li class="nav-item">
-                                        <a class="nav-link menu-link" href="#triple_zulia" data-bs-toggle="collapse" role="button"
-                                            aria-expanded="false" aria-controls="triple_zulia">
+                                        <a class="nav-link menu-link" href="#triple_zulia_add" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="triple_zulia_add">
                                             <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Triple Zulia</span>
                                         </a>
-                                        <div class="collapse menu-dropdown" id="triple_zulia">
+                                        <div class="collapse menu-dropdown" id="triple_zulia_add">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                    <a href="{% url 'core:triple_zulia_add' %}" class="nav-link" data-key="t-analytics"> Registrar </a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="{% url 'core:triple_zulia' %}" class="nav-link" data-key="t-crm"> Listado </a>
@@ -442,14 +469,14 @@
                                     </li>
 
                                     <li class="nav-item">
-                                        <a class="nav-link menu-link" href="#triple_zamorano" data-bs-toggle="collapse" role="button"
-                                            aria-expanded="false" aria-controls="triple_zamorano">
+                                        <a class="nav-link menu-link" href="#triple_zamorano_add" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="triple_zamorano_add">
                                             <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Triple Zamorano</span>
                                         </a>
-                                        <div class="collapse menu-dropdown" id="triple_zamorano">
+                                        <div class="collapse menu-dropdown" id="triple_zamorano_add">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                    <a href="{% url 'core:triple_zamorano_add' %}" class="nav-link" data-key="t-analytics"> Registrar </a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="{% url 'core:triple_zamorano' %}" class="nav-link" data-key="t-crm"> Listado </a>
@@ -459,14 +486,14 @@
                                     </li>
 
                                     <li class="nav-item">
-                                        <a class="nav-link menu-link" href="#triple_chance" data-bs-toggle="collapse" role="button"
-                                            aria-expanded="false" aria-controls="triple_chance">
+                                        <a class="nav-link menu-link" href="#triple_chance_add" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="triple_chance_add">
                                             <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Triple Chance</span>
                                         </a>
-                                        <div class="collapse menu-dropdown" id="triple_chance">
+                                        <div class="collapse menu-dropdown" id="triple_chance_add">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                    <a href="{% url 'core:triple_chance_add' %}" class="nav-link" data-key="t-analytics"> Registrar </a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="{% url 'core:triple_chance' %}" class="nav-link" data-key="t-crm"> Listado </a>
@@ -476,14 +503,14 @@
                                     </li>
 
                                     <li class="nav-item">
-                                        <a class="nav-link menu-link" href="#triple_tachira" data-bs-toggle="collapse" role="button"
-                                            aria-expanded="false" aria-controls="triple_tachira">
+                                        <a class="nav-link menu-link" href="#triple_tachira_add" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="triple_tachira_add">
                                             <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Triple Tachira</span>
                                         </a>
-                                        <div class="collapse menu-dropdown" id="triple_tachira">
+                                        <div class="collapse menu-dropdown" id="triple_tachira_add">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                    <a href="{% url 'core:triple_tachira_add' %}" class="nav-link" data-key="t-analytics"> Registrar </a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="{% url 'core:triple_tachira' %}" class="nav-link" data-key="t-crm"> Listado </a>
@@ -493,14 +520,14 @@
                                     </li>
 
                                     <li class="nav-item">
-                                        <a class="nav-link menu-link" href="#trio_activo" data-bs-toggle="collapse" role="button"
-                                            aria-expanded="false" aria-controls="trio_activo">
+                                        <a class="nav-link menu-link" href="#trio_activo_add" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="trio_activo_add">
                                             <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Trio Activo</span>
                                         </a>
-                                        <div class="collapse menu-dropdown" id="trio_activo">
+                                        <div class="collapse menu-dropdown" id="trio_activo_add">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                    <a href="{% url 'core:trio_activo_add' %}" class="nav-link" data-key="t-analytics"> Registrar </a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="{% url 'core:trio_activo' %}" class="nav-link" data-key="t-crm"> Listado </a>
@@ -510,14 +537,14 @@
                                     </li>
 
                                     <li class="nav-item">
-                                        <a class="nav-link menu-link" href="#ricachona" data-bs-toggle="collapse" role="button"
-                                            aria-expanded="false" aria-controls="ricachona">
+                                        <a class="nav-link menu-link" href="#la_ricachona_add" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="la_ricachona_add">
                                             <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Ricachona</span>
                                         </a>
-                                        <div class="collapse menu-dropdown" id="ricachona">
+                                        <div class="collapse menu-dropdown" id="la_ricachona_add">
                                             <ul class="nav nav-sm flex-column">
                                                 <li class="nav-item">
-                                                    <a href="" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                    <a href="{% url 'core:la_ricachona_add' %}" class="nav-link" data-key="t-analytics"> Registrar </a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="{% url 'core:ricachona' %}" class="nav-link" data-key="t-crm"> Listado </a>
@@ -530,8 +557,30 @@
 
                         </li>
 
+                        <!-- <li class="menu-title"><span data-key="t-menu">Usuarios</span></li>
+                        <li class="nav-item">
+                            <a class="nav-link menu-link" href="#usuarios" data-bs-toggle="collapse" role="button"
+                                aria-expanded="false" aria-controls="usuarios">
+                                <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">Usuarios</span>
+                            </a>
 
-                        <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Pages</span></li>
+                            <div class="collapse menu-dropdown" id="usuarios">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <ul class="nav nav-sm flex-column">
+                                            <li class="nav-item">
+                                                <a href="{% url 'core:triple_caliente_add' %}" class="nav-link" data-key="t-analytics"> Registrar Nuevo Cliente</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="{% url 'core:triple_caliente' %}" class="nav-link" data-key="t-crm"> Listado </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </li> -->
+                        <!-- <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Pages</span></li>
 
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="#sidebarAuth" data-bs-toggle="collapse" role="button"
@@ -772,7 +821,7 @@
                                     </li>
                                 </ul>
                             </div>
-                        </li>
+                        </li> -->
 
                     </ul>
                 </div>

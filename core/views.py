@@ -1,12 +1,13 @@
 import json
 from datetime import time, date, timedelta
 from collections import defaultdict
+from django.apps import apps
 from django.core.exceptions import ValidationError
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.contrib.admin.views.decorators import staff_member_required
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import View, ListView
+from django.views.generic import View, ListView, CreateView
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.decorators import method_decorator
@@ -35,6 +36,7 @@ def ContextData(day):
         TripleTachira,
         TrioActivo,
         Ricachona,
+        Terminalito
     ]
 
     for model in models:
@@ -112,7 +114,9 @@ class LotteryView(View):
         print(context)
         return render(request, 'lotoview/index.html', context)
 
+# L I S T A D O S   D E   A N I M A L I T O S
 
+@method_decorator(csrf_exempt, name='dispatch')
 @method_decorator(staff_member_required, name='dispatch')
 class IndexView(View):
     def get(self, request):
@@ -140,7 +144,9 @@ class AdminChanceAnimalitos(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = "Listado de Animalitos"
         context['entity'] = 'ChanceAnimalitos'
-        context['create_url'] = reverse_lazy('core:lottery')
+        context['create_url'] = reverse_lazy('core:chance_animalitos_add')
+        context['url'] = reverse_lazy('core:chanceAnimalitos')
+        context['model_name'] = self.model.__name__
         return context
 
 @method_decorator(staff_member_required, name='dispatch')
@@ -153,7 +159,9 @@ class AdminGranjaPlus(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = "Listado de Animalitos"
         context['entity'] = 'GranjaPlus'
-        context['create_url'] = reverse_lazy('core:lottery')
+        context['create_url'] = reverse_lazy('core:granja_plus_add')
+        context['url'] = reverse_lazy('core:granjaPlus')
+        context['model_name'] = self.model.__name__
         return context
 
 @method_decorator(staff_member_required, name='dispatch')
@@ -166,7 +174,9 @@ class AdminLaGranjita(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = "Listado de Animalitos"
         context['entity'] = 'LaGranjita'
-        context['create_url'] = reverse_lazy('core:lottery')
+        context['create_url'] = reverse_lazy('core:la_granjita_add')
+        context['url'] = reverse_lazy('core:laGranjita')
+        context['model_name'] = self.model.__name__
         return context
 
 @method_decorator(staff_member_required, name='dispatch')
@@ -179,7 +189,9 @@ class AdminLaRicachona(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = "Listado de Animalitos"
         context['entity'] = 'LaRicachona'
-        context['create_url'] = reverse_lazy('core:lottery')
+        context['url'] = reverse_lazy('core:laRicachona')
+        context['create_url'] = reverse_lazy('core:ricachona_add')
+        context['model_name'] = self.model.__name__
         return context
 
 @method_decorator(staff_member_required, name='dispatch')
@@ -192,7 +204,9 @@ class AdminLottoActivo(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = "Listado de Animalitos"
         context['entity'] = 'LottoActivo'
-        context['create_url'] = reverse_lazy('core:lottery')
+        context['url'] = reverse_lazy('core:lottoActivo')
+        context['create_url'] = reverse_lazy('core:lotto_activo_add')
+        context['model_name'] = self.model.__name__
         return context
 
 @method_decorator(staff_member_required, name='dispatch')
@@ -205,7 +219,9 @@ class AdminLottoActivoInterRD(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = "Listado de Animalitos"
         context['entity'] = 'LottoActivoInterRD'
-        context['create_url'] = reverse_lazy('core:lottery')
+        context['url'] = reverse_lazy('core:lottoActivoInterRD')
+        context['create_url'] = reverse_lazy('core:lotto_Activo_inter_rd_add')
+        context['model_name'] = self.model.__name__
         return context
 
 @method_decorator(staff_member_required, name='dispatch')
@@ -218,7 +234,9 @@ class AdminLottoRey(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = "Listado de Animalitos"
         context['entity'] = 'LottoRey'
-        context['create_url'] = reverse_lazy('core:lottery')
+        context['url'] = reverse_lazy('core:lottoRey')
+        context['create_url'] = reverse_lazy('core:lotto_rey_add')
+        context['model_name'] = self.model.__name__
         return context
 
 @method_decorator(staff_member_required, name='dispatch')
@@ -231,7 +249,9 @@ class AdminSelvaPlus(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = "Listado de Animalitos"
         context['entity'] = 'SelvaPlus'
-        context['create_url'] = reverse_lazy('core:lottery')
+        context['model_name'] = self.model.__name__
+        context['url'] = reverse_lazy('core:selvaPlus')
+        context['create_url'] = reverse_lazy('core:selva_plus_add')
         return context
 
 @method_decorator(staff_member_required, name='dispatch')
@@ -244,7 +264,9 @@ class AdminGuacharoActivo(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = "Listado de Animalitos"
         context['entity'] = 'GuacharoActivo'
-        context['create_url'] = reverse_lazy('core:lottery')
+        context['model_name'] = self.model.__name__
+        context['url'] = reverse_lazy('core:guacharoActivo')
+        context['create_url'] = reverse_lazy('core:guacharo_activo_add')
         return context
 
 @method_decorator(staff_member_required, name='dispatch')
@@ -257,7 +279,9 @@ class AdminGranjaMillonaria(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = "Listado de Animalitos"
         context['entity'] = 'GranjaMillonaria'
-        context['create_url'] = reverse_lazy('core:lottery')
+        context['model_name'] = self.model.__name__
+        context['url'] = reverse_lazy('core:granjaMillonaria')
+        context['create_url'] = reverse_lazy('core:granja_millonaria_add')
         return context
 
 @method_decorator(staff_member_required, name='dispatch')
@@ -270,9 +294,27 @@ class AdminGranjazo(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = "Listado de Animalitos"
         context['entity'] = 'Granjazo'
-        context['create_url'] = reverse_lazy('core:lottery')
+        context['model_name'] = self.model.__name__
+        context['url'] = reverse_lazy('core:granjazo')
+        context['create_url'] = reverse_lazy('core:granjazo_add')
         return context
 
+@method_decorator(staff_member_required, name='dispatch')
+class AdminTerminalito(ListView):
+    model = Terminalito
+    template_name = "admin/erp/animalitos/list-view.html"
+    context_object_name = "context"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "Listado de Animalitos"
+        context['entity'] = 'Terminalito'
+        context['model_name'] = self.model.__name__
+        context['url'] = reverse_lazy('core:terminalito')
+        context['create_url'] = reverse_lazy('core:terminalito_add')
+        return context
+
+# L I S T A D O S   D E   L O T E R I A S
 @method_decorator(staff_member_required, name='dispatch')
 class AdminTripleCaliente(ListView):
     model = TripleCaliente
@@ -283,7 +325,9 @@ class AdminTripleCaliente(ListView):
         context = super().get_context_data(**kwargs)
         context['entity'] = "Listado de Loerias"
         context['title'] = 'TripleCaliente'
-        context['create_url'] = reverse_lazy('core:lottery')
+        
+        context['create_url'] = reverse_lazy('core:triple_caliente_add')
+        context['url'] = reverse_lazy('core:triple_caliente')
         context['model_name'] = self.model.__name__
         return context
 
@@ -297,7 +341,9 @@ class AdminTripleCaracas(ListView):
         context = super().get_context_data(**kwargs)
         context['entity'] = "Listado de Loerias"
         context['title']= 'TripleCaracas'
-        context['create_url'] = reverse_lazy('core:lottery')
+        
+        context['create_url'] = reverse_lazy('core:triple_caracas_add')
+        context['url'] = reverse_lazy('core:triple_caracas')
         context['model_name'] = self.model.__name__
         return context
 
@@ -311,7 +357,9 @@ class AdminTripleZulia(ListView):
         context = super().get_context_data(**kwargs)
         context['entity'] = "Listado de Loerias"
         context['title']= 'TripleZulia'
-        context['create_url'] = reverse_lazy('core:lottery')
+        
+        context['create_url'] = reverse_lazy('core:triple_zulia_add')
+        context['url'] = reverse_lazy('core:triple_zulia')
         context['model_name'] = self.model.__name__
         return context
 
@@ -325,7 +373,9 @@ class AdminTripleZamorano(ListView):
         context = super().get_context_data(**kwargs)
         context['entity'] = "Listado de Loerias"
         context['title']= 'TripleZamorano'
-        context['create_url'] = reverse_lazy('core:lottery')
+        
+        context['create_url'] = reverse_lazy('core:triple_zamorano_add')
+        context['url'] = reverse_lazy('core:triple_zamorano')
         context['model_name'] = self.model.__name__
         return context
 
@@ -339,7 +389,9 @@ class AdminTripleChance(ListView):
         context = super().get_context_data(**kwargs)
         context['entity'] = "Listado de Loerias"
         context['title']= 'TripleChance'
-        context['create_url'] = reverse_lazy('core:lottery')
+        
+        context['create_url'] = reverse_lazy('core:triple_chance_add')
+        context['url'] = reverse_lazy('core:triple_chance')
         context['model_name'] = self.model.__name__
         return context
 
@@ -353,7 +405,9 @@ class AdminTripleTachira(ListView):
         context = super().get_context_data(**kwargs)
         context['entity'] = "Listado de Loerias"
         context['title']= 'TripleTachira'
-        context['create_url'] = reverse_lazy('core:lottery')
+        
+        context['create_url'] = reverse_lazy('core:triple_tachira_add')
+        context['url'] = reverse_lazy('core:triple_tachira')
         context['model_name'] = self.model.__name__
         return context
 
@@ -367,7 +421,9 @@ class AdminTrioActivo(ListView):
         context = super().get_context_data(**kwargs)
         context['entity'] = "Listado de Loerias"
         context['title']= 'TrioActivo'
-        context['create_url'] = reverse_lazy('core:lottery')
+        
+        context['create_url'] = reverse_lazy('core:trio_activo_add')
+        context['url'] = reverse_lazy('core:trio_activo')
         context['model_name'] = self.model.__name__
         return context
 
@@ -381,12 +437,14 @@ class AdminRicachona(ListView):
         context = super().get_context_data(**kwargs)
         context['entity'] = "Listado de Loerias"
         context['title']= 'Ricachona'
-        context['create_url'] = reverse_lazy('core:lottery')
+        
+        context['create_url'] = reverse_lazy('core:la_ricachona_add')
+        context['url'] = reverse_lazy('core:ricachona')
         context['model_name'] = self.model.__name__
         return context
 
-# Ingreso de Resultados Agrupados por horarios
 
+#  I N G R E S O   D E   A N I M A L I T O S   P O R   H O R A R I O S
 @method_decorator(staff_member_required, name='dispatch')
 @method_decorator(csrf_exempt, name='dispatch')
 class AddGroupResultA(View):
@@ -403,11 +461,11 @@ class AddGroupResultA(View):
                     model = GuacharoActivo
                 elif model_name == 'SelvaPlus':
                     model = SelvaPlus
-
-                # Crear una nueva instancia del modelo y guardarla
-                instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
-                instance.full_clean()  # Validar la instancia
-                instance.save()
+                if(form_data['save']):
+                    # Crear una nueva instancia del modelo y guardarla
+                    instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
+                    instance.full_clean()  # Validar la instancia
+                    instance.save()
 
             # Devolver una respuesta de éxito al cliente
             return JsonResponse({'status': 'success', 'message': 'Los modelos se han guardado correctamente.'})
@@ -472,10 +530,11 @@ class AddGroupResultB(View):
                 elif model_name == 'LottoRey':
                     model = LottoRey
 
-                # Crear una nueva instancia del modelo y guardarla
-                instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
-                instance.full_clean()  # Validar la instancia
-                instance.save()
+                if(form_data['save']):
+                    # Crear una nueva instancia del modelo y guardarla
+                    instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
+                    instance.full_clean()  # Validar la instancia
+                    instance.save()
 
             # Devolver una respuesta de éxito al cliente
             return JsonResponse({'status': 'success', 'message': 'Los modelos se han guardado correctamente.'})
@@ -540,10 +599,11 @@ class AddGroupResultC(View):
                 elif model_name == 'GranjaMillonaria':
                     model = GranjaMillonaria
 
-                # Crear una nueva instancia del modelo y guardarla
-                instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
-                instance.full_clean()  # Validar la instancia
-                instance.save()
+                if(form_data['save']):
+                    # Crear una nueva instancia del modelo y guardarla
+                    instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
+                    instance.full_clean()  # Validar la instancia
+                    instance.save()
 
             # Devolver una respuesta de éxito al cliente
             return JsonResponse({'status': 'success', 'message': 'Los modelos se han guardado correctamente.'})
@@ -604,10 +664,11 @@ class AddGroupResultD(View):
                 if model_name == 'LaRicachona':
                     model = LaRicachona
 
-                # Crear una nueva instancia del modelo y guardarla
-                instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
-                instance.full_clean()  # Validar la instancia
-                instance.save()
+                if(form_data['save']):
+                    # Crear una nueva instancia del modelo y guardarla
+                    instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
+                    instance.full_clean()  # Validar la instancia
+                    instance.save()
 
             # Devolver una respuesta de éxito al cliente
             return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
@@ -664,10 +725,11 @@ class AddGroupResultE(View):
                 if model_name == 'Granjazo':
                     model = Granjazo
 
-                # Crear una nueva instancia del modelo y guardarla
-                instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
-                instance.full_clean()  # Validar la instancia
-                instance.save()
+                if(form_data['save']):
+                    # Crear una nueva instancia del modelo y guardarla
+                    instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
+                    instance.full_clean()  # Validar la instancia
+                    instance.save()
 
             # Devolver una respuesta de éxito al cliente
             return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
@@ -713,6 +775,69 @@ class AddGroupResultE(View):
 
 @method_decorator(staff_member_required, name='dispatch')
 @method_decorator(csrf_exempt, name='dispatch')
+class AddGroupResultF(View):
+    def post(self, request):
+        # Recibir los datos de los formularios
+        data = json.loads(request.body)
+
+        try:
+            # Validar los datos y guardarlos en el modelo correspondiente
+            for model_name, form_data in data.items():
+                if model_name == 'Terminalito':
+                    model = Terminalito
+
+                if(form_data['save']):
+                    # Crear una nueva instancia del modelo y guardarla
+                    instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
+                    instance.full_clean()  # Validar la instancia
+                    instance.save()
+
+            # Devolver una respuesta de éxito al cliente
+            return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
+
+        except ValidationError as e:
+            # Devolver una respuesta de error al cliente
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    def get(self, request):
+        context = {}
+        context['entity'] = "Registro de Animalitos"
+        context['title'] = 'Terminalito'
+        # Crear una lista con el nombre del modelo
+        model_names = ['Terminalito']
+        # Asignar la lista al contexto con el nombre 'model'
+        context['model'] = model_names
+
+        # Crear una lista de diccionarios con los choices del modelo
+        models = []
+        for model_name in model_names:
+            if model_name == 'Terminalito':
+                model = Terminalito
+
+            # Filtrar los registros de hoy
+            today = date.today()
+            today_records = model.objects.filter(date_sort=today)
+
+            # Obtener los horarios que ya se han registrado hoy
+            today_hours = [record.hour_sort for record in today_records]
+
+            # Excluir estos horarios al crear tus choices
+            hour_sort_choices = [choice for choice in model._meta.get_field('hour_sort').choices if choice[0] not in today_hours]
+
+            models.append({
+                'name': model_name,
+                'animalito_choices': model._meta.get_field('animalito').choices,
+                'hour_sort_choices': hour_sort_choices,
+            })
+
+        context['models'] = models
+
+        return render(request, 'admin/erp/animalitos/group_result_add.html', context)
+
+# I N G R E S O   D E   L O T E R I A S   P O R   H O R A R I O S 
+
+@method_decorator(staff_member_required, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
 class AddLoteryGroupResultA(View):
     def post(self, request):
         # Recibir los datos de los formularios
@@ -725,10 +850,11 @@ class AddLoteryGroupResultA(View):
                 if model_name == 'TripleCaliente':
                     model = TripleCaliente
 
-                # Crear una nueva instancia del modelo y guardarla
-                instance = model(hour_sort=form_data['hour'], a=form_data['a'], b=form_data['b'], c=form_data['c'], zod=form_data['zod'])
-                instance.full_clean()  # Validar la instancia
-                instance.save()
+                if(form_data['save']):
+                    # Crear una nueva instancia del modelo y guardarla
+                    instance = model(hour_sort=form_data['hour'], a=form_data['a'], b=form_data['b'], c=form_data['c'], zod=form_data['zod'])
+                    instance.full_clean()  # Validar la instancia
+                    instance.save()
             # Devolver una respuesta de éxito al cliente
             return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
 
@@ -785,11 +911,12 @@ class AddLoteryGroupResultB(View):
                     model = TripleCaracas
                 elif model_name == 'TripleChance':
                     model = TripleChance
-
-                # Crear una nueva instancia del modelo y guardarla
-                instance = model(hour_sort=form_data['hour'], a=form_data['a'], b=form_data['b'], c=form_data['c'], zod=form_data['zod'])
-                instance.full_clean()  # Validar la instancia
-                instance.save()
+                
+                if(form_data['save']):
+                    # Crear una nueva instancia del modelo y guardarla
+                    instance = model(hour_sort=form_data['hour'], a=form_data['a'], b=form_data['b'], c=form_data['c'], zod=form_data['zod'])
+                    instance.full_clean()  # Validar la instancia
+                    instance.save()
 
             # Devolver una respuesta de éxito al cliente
             return JsonResponse({'status': 'success', 'message': 'Los modelos se han guardado correctamente.'})
@@ -848,10 +975,12 @@ class AddLoteryGroupResultC(View):
                 if model_name == 'TripleZulia':
                     model = TripleZulia
 
-                # Crear una nueva instancia del modelo y guardarla
-                instance = model(hour_sort=form_data['hour'], a=form_data['a'], b=form_data['b'], c=form_data['c'], zod=form_data['zod'])
-                instance.full_clean()  # Validar la instancia
-                instance.save()
+                
+                if(form_data['save']):
+                    # Crear una nueva instancia del modelo y guardarla
+                    instance = model(hour_sort=form_data['hour'], a=form_data['a'], b=form_data['b'], c=form_data['c'], zod=form_data['zod'])
+                    instance.full_clean()  # Validar la instancia
+                    instance.save()
 
             # Devolver una respuesta de éxito al cliente
             return JsonResponse({'status': 'success', 'message': 'Los modelos se han guardado correctamente.'})
@@ -908,10 +1037,11 @@ class AddLoteryGroupResultD(View):
                 if model_name == 'TripleZamorano':
                     model = TripleZamorano
 
-                # Crear una nueva instancia del modelo y guardarla
-                instance = model(hour_sort=form_data['hour'], a=form_data['a'], c=form_data['c'], zod=form_data['zod'])
-                instance.full_clean()  # Validar la instancia
-                instance.save()
+                if(form_data['save']):
+                    # Crear una nueva instancia del modelo y guardarla
+                    instance = model(hour_sort=form_data['hour'], a=form_data['a'], c=form_data['c'], zod=form_data['zod'])
+                    instance.full_clean()  # Validar la instancia
+                    instance.save()
 
             # Devolver una respuesta de éxito al cliente
             return JsonResponse({'status': 'success', 'message': 'Los modelos se han guardado correctamente.'})
@@ -968,10 +1098,12 @@ class AddLoteryGroupResultE(View):
                 if model_name == 'TripleTachira':
                     model = TripleTachira
 
-                # Crear una nueva instancia del modelo y guardarla
-                instance = model(hour_sort=form_data['hour'], a=form_data['a'], b=form_data['b'], c=form_data['c'], zod=form_data['zod'])
-                instance.full_clean()  # Validar la instancia
-                instance.save()
+
+                if(form_data['save']):
+                    # Crear una nueva instancia del modelo y guardarla
+                    instance = model(hour_sort=form_data['hour'], a=form_data['a'], b=form_data['b'], c=form_data['c'], zod=form_data['zod'])
+                    instance.full_clean()  # Validar la instancia
+                    instance.save()
 
             # Devolver una respuesta de éxito al cliente
             return JsonResponse({'status': 'success', 'message': 'Los modelos se han guardado correctamente.'})
@@ -1028,10 +1160,11 @@ class AddLoteryGroupResultF(View):
                 if model_name == 'TrioActivo':
                     model = TrioActivo
 
-                # Crear una nueva instancia del modelo y guardarla
-                instance = model(hour_sort=form_data['hour'], a=form_data['a'])
-                instance.full_clean()  # Validar la instancia
-                instance.save()
+                if(form_data['save']):
+                    # Crear una nueva instancia del modelo y guardarla
+                    instance = model(hour_sort=form_data['hour'], a=form_data['a'])
+                    instance.full_clean()  # Validar la instancia
+                    instance.save()
 
             # Devolver una respuesta de éxito al cliente
             return JsonResponse({'status': 'success', 'message': 'Los modelos se han guardado correctamente.'})
@@ -1087,10 +1220,11 @@ class AddLoteryGroupResultG(View):
                 if model_name == 'Ricachona':
                     model = Ricachona
 
-                # Crear una nueva instancia del modelo y guardarla
-                instance = model(hour_sort=form_data['hour'], a=form_data['a'])
-                instance.full_clean()  # Validar la instancia
-                instance.save()
+                if(form_data['save']):
+                    # Crear una nueva instancia del modelo y guardarla
+                    instance = model(hour_sort=form_data['hour'], a=form_data['a'])
+                    instance.full_clean()  # Validar la instancia
+                    instance.save()
 
             # Devolver una respuesta de éxito al cliente
             return JsonResponse({'status': 'success', 'message': 'Los modelos se han guardado correctamente.'})
@@ -1132,3 +1266,1219 @@ class AddLoteryGroupResultG(View):
         context['models'] = models
 
         return render(request, 'admin/erp/loterias/group_result_add.html', context)
+
+
+# I N G R E S O   D E  A N I M A L I T O S    I N D I V I D U A L
+@method_decorator(staff_member_required, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
+class ChanceAnimalitosView(View):
+    def post(self, request):
+        # Recibir los datos de los formularios
+        data = json.loads(request.body)
+
+        try:
+            # Validar los datos y guardarlos en el modelo correspondiente
+            for model_name, form_data in data.items():
+                if model_name == 'ChanceAnimalitos':
+                    model = ChanceAnimalitos
+
+                # Crear una nueva instancia del modelo y guardarla
+                instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
+                instance.full_clean()  # Validar la instancia
+                instance.save()
+
+            # Devolver una respuesta de éxito al cliente
+            return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
+
+        except ValidationError as e:
+            # Devolver una respuesta de error al cliente
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    def get(self, request):
+        context = {}
+        context['entity'] = "Registro de Animalitos"
+        context['title'] = 'ChanceAnimalitos'
+        context['url'] = reverse_lazy('core:chanceAnimalitos')
+        # Crear una lista con el nombre del modelo
+        model_names = ['ChanceAnimalitos']
+        # Asignar la lista al contexto con el nombre 'model'
+        context['model'] = model_names
+
+        # Crear una lista de diccionarios con los choices del modelo
+        models = []
+        for model_name in model_names:
+            if model_name == 'ChanceAnimalitos':
+                model = ChanceAnimalitos
+
+            # Filtrar los registros de hoy
+            today = date.today()
+            today_records = model.objects.filter(date_sort=today)
+
+            # Obtener los horarios que ya se han registrado hoy
+            today_hours = [record.hour_sort for record in today_records]
+
+            # Excluir estos horarios al crear tus choices
+            hour_sort_choices = [choice for choice in model._meta.get_field('hour_sort').choices if choice[0] not in today_hours]
+
+            models.append({
+                'name': model_name,
+                'animalito_choices': model._meta.get_field('animalito').choices,
+                'hour_sort_choices': hour_sort_choices,
+            })
+
+        context['models'] = models
+
+        return render(request, 'admin/erp/animalitos/add_individual.html', context)
+
+@method_decorator(staff_member_required, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
+class GranjaPlusView(View):
+    def post(self, request):
+        # Recibir los datos de los formularios
+        data = json.loads(request.body)
+
+        try:
+            # Validar los datos y guardarlos en el modelo correspondiente
+            for model_name, form_data in data.items():
+                if model_name == 'GranjaPlus':
+                    model = GranjaPlus
+
+                # Crear una nueva instancia del modelo y guardarla
+                instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
+                instance.full_clean()  # Validar la instancia
+                instance.save()
+
+            # Devolver una respuesta de éxito al cliente
+            return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
+
+        except ValidationError as e:
+            # Devolver una respuesta de error al cliente
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    def get(self, request):
+        context = {}
+        context['entity'] = "Registro de Animalitos"
+        context['title'] = 'GranjaPlus'
+        # Crear una lista con el nombre del modelo
+        model_names = ['GranjaPlus']
+        context['url'] = reverse_lazy('core:granjaPlus')
+        # Asignar la lista al contexto con el nombre 'model'
+        context['model'] = model_names
+
+        # Crear una lista de diccionarios con los choices del modelo
+        models = []
+        for model_name in model_names:
+            if model_name == 'GranjaPlus':
+                model = GranjaPlus
+
+            # Filtrar los registros de hoy
+            today = date.today()
+            today_records = model.objects.filter(date_sort=today)
+
+            # Obtener los horarios que ya se han registrado hoy
+            today_hours = [record.hour_sort for record in today_records]
+
+            # Excluir estos horarios al crear tus choices
+            hour_sort_choices = [choice for choice in model._meta.get_field('hour_sort').choices if choice[0] not in today_hours]
+
+            models.append({
+                'name': model_name,
+                'animalito_choices': model._meta.get_field('animalito').choices,
+                'hour_sort_choices': hour_sort_choices,
+            })
+
+        context['models'] = models
+
+        return render(request, 'admin/erp/animalitos/add_individual.html', context)
+
+@method_decorator(staff_member_required, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
+class LaGranjitaView(View):
+    def post(self, request):
+        # Recibir los datos de los formularios
+        data = json.loads(request.body)
+
+        try:
+            # Validar los datos y guardarlos en el modelo correspondiente
+            for model_name, form_data in data.items():
+                if model_name == 'LaGranjita':
+                    model = LaGranjita
+
+                # Crear una nueva instancia del modelo y guardarla
+                instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
+                instance.full_clean()  # Validar la instancia
+                instance.save()
+
+            # Devolver una respuesta de éxito al cliente
+            return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
+
+        except ValidationError as e:
+            # Devolver una respuesta de error al cliente
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    def get(self, request):
+        context = {}
+        context['entity'] = "Registro de Animalitos"
+        context['title'] = 'LaGranjita'
+        context['url'] = reverse_lazy('core:laGranjita')
+        # Crear una lista con el nombre del modelo
+        model_names = ['LaGranjita']
+        # Asignar la lista al contexto con el nombre 'model'
+        context['model'] = model_names
+
+        # Crear una lista de diccionarios con los choices del modelo
+        models = []
+        for model_name in model_names:
+            if model_name == 'LaGranjita':
+                model = LaGranjita
+
+            # Filtrar los registros de hoy
+            today = date.today()
+            today_records = model.objects.filter(date_sort=today)
+
+            # Obtener los horarios que ya se han registrado hoy
+            today_hours = [record.hour_sort for record in today_records]
+
+            # Excluir estos horarios al crear tus choices
+            hour_sort_choices = [choice for choice in model._meta.get_field('hour_sort').choices if choice[0] not in today_hours]
+
+            models.append({
+                'name': model_name,
+                'animalito_choices': model._meta.get_field('animalito').choices,
+                'hour_sort_choices': hour_sort_choices,
+            })
+
+        context['models'] = models
+
+        return render(request, 'admin/erp/animalitos/add_individual.html', context)
+
+
+@method_decorator(staff_member_required, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
+class LaRicachonaView(View):
+    def post(self, request):
+        # Recibir los datos de los formularios
+        data = json.loads(request.body)
+
+        try:
+            # Validar los datos y guardarlos en el modelo correspondiente
+            for model_name, form_data in data.items():
+                if model_name == 'LaRicachona':
+                    model = LaRicachona
+
+                # Crear una nueva instancia del modelo y guardarla
+                instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
+                instance.full_clean()  # Validar la instancia
+                instance.save()
+
+            # Devolver una respuesta de éxito al cliente
+            return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
+
+        except ValidationError as e:
+            # Devolver una respuesta de error al cliente
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    def get(self, request):
+        context = {}
+        context['entity'] = "Registro de Animalitos"
+        context['title'] = 'LaRicachona'
+        context['url'] = reverse_lazy('core:laRicachona')
+        # Crear una lista con el nombre del modelo
+        model_names = ['LaRicachona']
+        # Asignar la lista al contexto con el nombre 'model'
+        context['model'] = model_names
+
+        # Crear una lista de diccionarios con los choices del modelo
+        models = []
+        for model_name in model_names:
+            if model_name == 'LaRicachona':
+                model = LaRicachona
+
+            # Filtrar los registros de hoy
+            today = date.today()
+            today_records = model.objects.filter(date_sort=today)
+
+            # Obtener los horarios que ya se han registrado hoy
+            today_hours = [record.hour_sort for record in today_records]
+
+            # Excluir estos horarios al crear tus choices
+            hour_sort_choices = [choice for choice in model._meta.get_field('hour_sort').choices if choice[0] not in today_hours]
+
+            models.append({
+                'name': model_name,
+                'animalito_choices': model._meta.get_field('animalito').choices,
+                'hour_sort_choices': hour_sort_choices,
+            })
+
+        context['models'] = models
+
+        return render(request, 'admin/erp/animalitos/add_individual.html', context)
+
+@method_decorator(staff_member_required, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
+class LottoActivoView(View):
+    def post(self, request):
+        # Recibir los datos de los formularios
+        data = json.loads(request.body)
+
+        try:
+            # Validar los datos y guardarlos en el modelo correspondiente
+            for model_name, form_data in data.items():
+                if model_name == 'LottoActivo':
+                    model = LottoActivo
+
+                # Crear una nueva instancia del modelo y guardarla
+                instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
+                instance.full_clean()  # Validar la instancia
+                instance.save()
+
+            # Devolver una respuesta de éxito al cliente
+            return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
+
+        except ValidationError as e:
+            # Devolver una respuesta de error al cliente
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    def get(self, request):
+        context = {}
+        context['entity'] = "Registro de Animalitos"
+        context['title'] = 'LottoActivo'
+        context['url'] = reverse_lazy('core:lottoActivo')
+        # Crear una lista con el nombre del modelo
+        model_names = ['LottoActivo']
+        # Asignar la lista al contexto con el nombre 'model'
+        context['model'] = model_names
+
+        # Crear una lista de diccionarios con los choices del modelo
+        models = []
+        for model_name in model_names:
+            if model_name == 'LottoActivo':
+                model = LottoActivo
+
+            # Filtrar los registros de hoy
+            today = date.today()
+            today_records = model.objects.filter(date_sort=today)
+
+            # Obtener los horarios que ya se han registrado hoy
+            today_hours = [record.hour_sort for record in today_records]
+
+            # Excluir estos horarios al crear tus choices
+            hour_sort_choices = [choice for choice in model._meta.get_field('hour_sort').choices if choice[0] not in today_hours]
+
+            models.append({
+                'name': model_name,
+                'animalito_choices': model._meta.get_field('animalito').choices,
+                'hour_sort_choices': hour_sort_choices,
+            })
+
+        context['models'] = models
+
+        return render(request, 'admin/erp/animalitos/group_result_add.html', context)
+
+
+@method_decorator(staff_member_required, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
+class LottoActivoInterRDView(View):
+    def post(self, request):
+        # Recibir los datos de los formularios
+        data = json.loads(request.body)
+
+        try:
+            # Validar los datos y guardarlos en el modelo correspondiente
+            for model_name, form_data in data.items():
+                if model_name == 'LottoActivoInterRD':
+                    model = LottoActivoInterRD
+
+                # Crear una nueva instancia del modelo y guardarla
+                instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
+                instance.full_clean()  # Validar la instancia
+                instance.save()
+
+            # Devolver una respuesta de éxito al cliente
+            return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
+
+        except ValidationError as e:
+            # Devolver una respuesta de error al cliente
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    def get(self, request):
+        context = {}
+        context['entity'] = "Registro de Animalitos"
+        context['title'] = 'LottoActivoInterRD'
+        context['url'] = reverse_lazy('core:lottoActivoInterRD')
+        # Crear una lista con el nombre del modelo
+        model_names = ['LottoActivoInterRD']
+        # Asignar la lista al contexto con el nombre 'model'
+        context['model'] = model_names
+
+        # Crear una lista de diccionarios con los choices del modelo
+        models = []
+        for model_name in model_names:
+            if model_name == 'LottoActivoInterRD':
+                model = LottoActivoInterRD
+
+            # Filtrar los registros de hoy
+            today = date.today()
+            today_records = model.objects.filter(date_sort=today)
+
+            # Obtener los horarios que ya se han registrado hoy
+            today_hours = [record.hour_sort for record in today_records]
+
+            # Excluir estos horarios al crear tus choices
+            hour_sort_choices = [choice for choice in model._meta.get_field('hour_sort').choices if choice[0] not in today_hours]
+
+            models.append({
+                'name': model_name,
+                'animalito_choices': model._meta.get_field('animalito').choices,
+                'hour_sort_choices': hour_sort_choices,
+            })
+
+        context['models'] = models
+
+        return render(request, 'admin/erp/animalitos/add_individual.html', context)
+
+@method_decorator(staff_member_required, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
+class LottoReyView(View):
+    def post(self, request):
+        # Recibir los datos de los formularios
+        data = json.loads(request.body)
+
+        try:
+            # Validar los datos y guardarlos en el modelo correspondiente
+            for model_name, form_data in data.items():
+                if model_name == 'LottoRey':
+                    model = LottoRey
+
+                # Crear una nueva instancia del modelo y guardarla
+                instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
+                instance.full_clean()  # Validar la instancia
+                instance.save()
+
+            # Devolver una respuesta de éxito al cliente
+            return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
+
+        except ValidationError as e:
+            # Devolver una respuesta de error al cliente
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    def get(self, request):
+        context = {}
+        context['entity'] = "Registro de Animalitos"
+        context['title'] = 'LottoRey'
+        context['url'] = reverse_lazy('core:lottoRey')
+        # Crear una lista con el nombre del modelo
+        model_names = ['LottoRey']
+        # Asignar la lista al contexto con el nombre 'model'
+        context['model'] = model_names
+
+        # Crear una lista de diccionarios con los choices del modelo
+        models = []
+        for model_name in model_names:
+            if model_name == 'LottoRey':
+                model = LottoRey
+
+            # Filtrar los registros de hoy
+            today = date.today()
+            today_records = model.objects.filter(date_sort=today)
+
+            # Obtener los horarios que ya se han registrado hoy
+            today_hours = [record.hour_sort for record in today_records]
+
+            # Excluir estos horarios al crear tus choices
+            hour_sort_choices = [choice for choice in model._meta.get_field('hour_sort').choices if choice[0] not in today_hours]
+
+            models.append({
+                'name': model_name,
+                'animalito_choices': model._meta.get_field('animalito').choices,
+                'hour_sort_choices': hour_sort_choices,
+            })
+
+        context['models'] = models
+
+        return render(request, 'admin/erp/animalitos/add_individual.html', context)
+
+@method_decorator(staff_member_required, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
+class SelvaPlusView(View):
+    def post(self, request):
+        # Recibir los datos de los formularios
+        data = json.loads(request.body)
+
+        try:
+            # Validar los datos y guardarlos en el modelo correspondiente
+            for model_name, form_data in data.items():
+                if model_name == 'SelvaPlus':
+                    model = SelvaPlus
+
+                # Crear una nueva instancia del modelo y guardarla
+                instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
+                instance.full_clean()  # Validar la instancia
+                instance.save()
+
+            # Devolver una respuesta de éxito al cliente
+            return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
+
+        except ValidationError as e:
+            # Devolver una respuesta de error al cliente
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    def get(self, request):
+        context = {}
+        context['entity'] = "Registro de Animalitos"
+        context['title'] = 'SelvaPlus'
+        context['url'] = reverse_lazy('core:selvaPlus')
+        # Crear una lista con el nombre del modelo
+        model_names = ['SelvaPlus']
+        # Asignar la lista al contexto con el nombre 'model'
+        context['model'] = model_names
+
+        # Crear una lista de diccionarios con los choices del modelo
+        models = []
+        for model_name in model_names:
+            if model_name == 'SelvaPlus':
+                model = SelvaPlus
+
+            # Filtrar los registros de hoy
+            today = date.today()
+            today_records = model.objects.filter(date_sort=today)
+
+            # Obtener los horarios que ya se han registrado hoy
+            today_hours = [record.hour_sort for record in today_records]
+
+            # Excluir estos horarios al crear tus choices
+            hour_sort_choices = [choice for choice in model._meta.get_field('hour_sort').choices if choice[0] not in today_hours]
+
+            models.append({
+                'name': model_name,
+                'animalito_choices': model._meta.get_field('animalito').choices,
+                'hour_sort_choices': hour_sort_choices,
+            })
+
+        context['models'] = models
+
+        return render(request, 'admin/erp/animalitos/add_individual.html', context)
+
+
+@method_decorator(staff_member_required, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
+class GuacharoActivoView(View):
+    def post(self, request):
+        # Recibir los datos de los formularios
+        data = json.loads(request.body)
+
+        try:
+            # Validar los datos y guardarlos en el modelo correspondiente
+            for model_name, form_data in data.items():
+                if model_name == 'GuacharoActivo':
+                    model = GuacharoActivo
+
+                # Crear una nueva instancia del modelo y guardarla
+                instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
+                instance.full_clean()  # Validar la instancia
+                instance.save()
+
+            # Devolver una respuesta de éxito al cliente
+            return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
+
+        except ValidationError as e:
+            # Devolver una respuesta de error al cliente
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    def get(self, request):
+        context = {}
+        context['entity'] = "Registro de Animalitos"
+        context['title'] = 'GuacharoActivo'
+        context['url'] = reverse_lazy('core:guacharoActivo')
+        # Crear una lista con el nombre del modelo
+        model_names = ['GuacharoActivo']
+        # Asignar la lista al contexto con el nombre 'model'
+        context['model'] = model_names
+
+        # Crear una lista de diccionarios con los choices del modelo
+        models = []
+        for model_name in model_names:
+            if model_name == 'GuacharoActivo':
+                model = GuacharoActivo
+
+            # Filtrar los registros de hoy
+            today = date.today()
+            today_records = model.objects.filter(date_sort=today)
+
+            # Obtener los horarios que ya se han registrado hoy
+            today_hours = [record.hour_sort for record in today_records]
+
+            # Excluir estos horarios al crear tus choices
+            hour_sort_choices = [choice for choice in model._meta.get_field('hour_sort').choices if choice[0] not in today_hours]
+
+            models.append({
+                'name': model_name,
+                'animalito_choices': model._meta.get_field('animalito').choices,
+                'hour_sort_choices': hour_sort_choices,
+            })
+
+        context['models'] = models
+
+        return render(request, 'admin/erp/animalitos/add_individual.html', context)
+
+@method_decorator(staff_member_required, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
+class GranjaMillonariaView(View):
+    def post(self, request):
+        # Recibir los datos de los formularios
+        data = json.loads(request.body)
+
+        try:
+            # Validar los datos y guardarlos en el modelo correspondiente
+            for model_name, form_data in data.items():
+                if model_name == 'GranjaMillonaria':
+                    model = GranjaMillonaria
+
+                # Crear una nueva instancia del modelo y guardarla
+                instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
+                instance.full_clean()  # Validar la instancia
+                instance.save()
+
+            # Devolver una respuesta de éxito al cliente
+            return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
+
+        except ValidationError as e:
+            # Devolver una respuesta de error al cliente
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    def get(self, request):
+        context = {}
+        context['entity'] = "Registro de Animalitos"
+        context['title'] = 'GranjaMillonaria'
+        context['url'] = reverse_lazy('core:granjaMillonaria')
+        # Crear una lista con el nombre del modelo
+        model_names = ['GranjaMillonaria']
+        # Asignar la lista al contexto con el nombre 'model'
+        context['model'] = model_names
+
+        # Crear una lista de diccionarios con los choices del modelo
+        models = []
+        for model_name in model_names:
+            if model_name == 'GranjaMillonaria':
+                model = GranjaMillonaria
+
+            # Filtrar los registros de hoy
+            today = date.today()
+            today_records = model.objects.filter(date_sort=today)
+
+            # Obtener los horarios que ya se han registrado hoy
+            today_hours = [record.hour_sort for record in today_records]
+
+            # Excluir estos horarios al crear tus choices
+            hour_sort_choices = [choice for choice in model._meta.get_field('hour_sort').choices if choice[0] not in today_hours]
+
+            models.append({
+                'name': model_name,
+                'animalito_choices': model._meta.get_field('animalito').choices,
+                'hour_sort_choices': hour_sort_choices,
+            })
+
+        context['models'] = models
+
+        return render(request, 'admin/erp/animalitos/add_individual.html', context)
+
+@method_decorator(staff_member_required, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
+class GranjazoView(View):
+    def post(self, request):
+        # Recibir los datos de los formularios
+        data = json.loads(request.body)
+
+        try:
+            # Validar los datos y guardarlos en el modelo correspondiente
+            for model_name, form_data in data.items():
+                if model_name == 'Granjazo':
+                    model = Granjazo
+
+                # Crear una nueva instancia del modelo y guardarla
+                instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
+                instance.full_clean()  # Validar la instancia
+                instance.save()
+
+            # Devolver una respuesta de éxito al cliente
+            return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
+
+        except ValidationError as e:
+            # Devolver una respuesta de error al cliente
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    def get(self, request):
+        context = {}
+        context['entity'] = "Registro de Animalitos"
+        context['title'] = 'Granjazo'
+        context['url'] = reverse_lazy('core:granjazo')
+        # Crear una lista con el nombre del modelo
+        model_names = 'Granjazo'
+        # Asignar la lista al contexto con el nombre 'model'
+        context['model'] = model_names
+
+        # Crear una lista de diccionarios con los choices del modelo
+        model = Granjazo
+        models = []
+        # Filtrar los registros de hoy
+        today = date.today()
+        today_records = model.objects.filter(date_sort=today)
+
+        # Obtener los horarios que ya se han registrado hoy
+        today_hours = [record.hour_sort for record in today_records]
+
+        # Excluir estos horarios al crear tus choices
+        hour_sort_choices = [choice for choice in model._meta.get_field('hour_sort').choices if choice[0] not in today_hours]
+
+        models.append({
+                'name': model_names,
+                'animalito_choices': model._meta.get_field('animalito').choices,
+                'hour_sort_choices': hour_sort_choices,
+            })
+
+        context['models'] = models
+
+        return render(request, 'admin/erp/animalitos/add_individual.html', context)
+
+
+@method_decorator(staff_member_required, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
+class TerminalitoView(View):
+    def post(self, request):
+        # Recibir los datos de los formularios
+        data = json.loads(request.body)
+
+        try:
+            # Validar los datos y guardarlos en el modelo correspondiente
+            for model_name, form_data in data.items():
+                if model_name == 'Terminalito':
+                    model = Terminalito
+
+                # Crear una nueva instancia del modelo y guardarla
+                instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
+                instance.full_clean()  # Validar la instancia
+                instance.save()
+
+            # Devolver una respuesta de éxito al cliente
+            return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
+
+        except ValidationError as e:
+            # Devolver una respuesta de error al cliente
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    def get(self, request):
+        context = {}
+        context['entity'] = "Registro de Animalitos"
+        context['title'] = 'Terminalito'
+        context['url'] = reverse_lazy('core:terminalito')
+        # Crear una lista con el nombre del modelo
+        model_names = 'Terminalito'
+        # Asignar la lista al contexto con el nombre 'model'
+        context['model'] = model_names
+
+        # Crear una lista de diccionarios con los choices del modelo
+        model = Terminalito
+        models = []
+        # Filtrar los registros de hoy
+        today = date.today()
+        today_records = model.objects.filter(date_sort=today)
+
+        # Obtener los horarios que ya se han registrado hoy
+        today_hours = [record.hour_sort for record in today_records]
+
+        # Excluir estos horarios al crear tus choices
+        hour_sort_choices = [choice for choice in model._meta.get_field('hour_sort').choices if choice[0] not in today_hours]
+
+        models.append({
+                'name': model_names,
+                'animalito_choices': model._meta.get_field('animalito').choices,
+                'hour_sort_choices': hour_sort_choices,
+            })
+
+        context['models'] = models
+
+        return render(request, 'admin/erp/animalitos/add_individual.html', context)
+
+# I N G R E S O   D E  L O T E R I A S  I N D I V I D U A L
+@method_decorator(staff_member_required, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
+class TripleCalienteView(View):
+    def post(self, request):
+        # Recibir los datos de los formularios
+        data = json.loads(request.body)
+        print(data)
+
+        try:
+            # Validar los datos y guardarlos en el modelo correspondiente
+            for model_name, form_data in data.items():
+                if model_name == 'TripleCaliente':
+                    model = TripleCaliente
+
+                # Crear una nueva instancia del modelo y guardarla
+                instance = model(hour_sort=form_data['hour'], a=form_data['a'], b=form_data['b'], c=form_data['c'], zod=form_data['zod'])
+                instance.full_clean()  # Validar la instancia
+                instance.save()
+            # Devolver una respuesta de éxito al cliente
+            return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
+
+        except ValidationError as e:
+            # Devolver una respuesta de error al cliente
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    def get(self, request):
+        context = {}
+        context['entity'] = "Registro de Loterias"
+        context['title'] = 'TripleCaliente'
+        context['url'] = reverse_lazy('core:triple_caliente')
+        # Crear una lista con el nombre del modelo
+        model_name = 'TripleCaliente'
+        # Asignar la lista al contexto con el nombre 'model'
+        context['model'] = model_name
+
+        # Crear una lista de diccionarios con los choices del modelo
+        models = []
+        model = TripleCaliente
+
+            # Filtrar los registros de hoy
+        today = date.today()
+        today_records = model.objects.filter(date_sort=today)
+
+            # Obtener los horarios que ya se han registrado hoy
+        today_hours = [record.hour_sort for record in today_records]
+
+            # Excluir estos horarios al crear tus choices
+        hour_sort_choices = [choice for choice in model._meta.get_field('hour_sort').choices if choice[0] not in today_hours]
+
+        models.append({
+                'name': model_name,
+                'hour_sort_choices': hour_sort_choices,
+                'zod_choices': model._meta.get_field('zod').choices,
+            })
+
+        context['models'] = models
+
+        return render(request, 'admin/erp/loterias/individual_add.html', context)
+
+@method_decorator(staff_member_required, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
+class TripleCaracasView(View):
+    def post(self, request):
+        # Recibir los datos de los formularios
+        data = json.loads(request.body)
+        print(data)
+
+        try:
+            # Validar los datos y guardarlos en el modelo correspondiente
+            for model_name, form_data in data.items():
+                if model_name == 'TripleCaracas':
+                    model = TripleCaracas
+
+                # Crear una nueva instancia del modelo y guardarla
+                instance = model(hour_sort=form_data['hour'], a=form_data['a'], b=form_data['b'], c=form_data['c'], zod=form_data['zod'])
+                instance.full_clean()  # Validar la instancia
+                instance.save()
+            # Devolver una respuesta de éxito al cliente
+            return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
+
+        except ValidationError as e:
+            # Devolver una respuesta de error al cliente
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    def get(self, request):
+        context = {}
+        context['entity'] = "Registro de Loterias"
+        context['title'] = 'TripleCaracas'
+        context['url'] = reverse_lazy('core:triple_caracas')
+        # Crear una lista con el nombre del modelo
+        model_name = 'TripleCaracas'
+        # Asignar la lista al contexto con el nombre 'model'
+        context['model'] = model_name
+
+        # Crear una lista de diccionarios con los choices del modelo
+        models = []
+        model = TripleCaracas
+
+            # Filtrar los registros de hoy
+        today = date.today()
+        today_records = model.objects.filter(date_sort=today)
+
+            # Obtener los horarios que ya se han registrado hoy
+        today_hours = [record.hour_sort for record in today_records]
+
+            # Excluir estos horarios al crear tus choices
+        hour_sort_choices = [choice for choice in model._meta.get_field('hour_sort').choices if choice[0] not in today_hours]
+
+        models.append({
+                'name': model_name,
+                'hour_sort_choices': hour_sort_choices,
+                'zod_choices': model._meta.get_field('zod').choices,
+            })
+
+        context['models'] = models
+
+        return render(request, 'admin/erp/loterias/individual_add.html', context)
+
+@method_decorator(staff_member_required, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
+class TripleZuliaView(View):
+    def post(self, request):
+        # Recibir los datos de los formularios
+        data = json.loads(request.body)
+        print(data)
+
+        try:
+            # Validar los datos y guardarlos en el modelo correspondiente
+            for model_name, form_data in data.items():
+                if model_name == 'TripleZulia':
+                    model = TripleZulia
+
+                # Crear una nueva instancia del modelo y guardarla
+                instance = model(hour_sort=form_data['hour'], a=form_data['a'], b=form_data['b'], c=form_data['c'], zod=form_data['zod'])
+                instance.full_clean()  # Validar la instancia
+                instance.save()
+            # Devolver una respuesta de éxito al cliente
+            return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
+
+        except ValidationError as e:
+            # Devolver una respuesta de error al cliente
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    def get(self, request):
+        context = {}
+        context['entity'] = "Registro de Loterias"
+        context['title'] = 'TripleZulia'
+        context['url'] = reverse_lazy('core:triple_zulia')
+        # Crear una lista con el nombre del modelo
+        model_name = 'TripleZulia'
+        # Asignar la lista al contexto con el nombre 'model'
+        context['model'] = model_name
+
+        # Crear una lista de diccionarios con los choices del modelo
+        models = []
+        model = TripleZulia
+
+            # Filtrar los registros de hoy
+        today = date.today()
+        today_records = model.objects.filter(date_sort=today)
+
+            # Obtener los horarios que ya se han registrado hoy
+        today_hours = [record.hour_sort for record in today_records]
+
+            # Excluir estos horarios al crear tus choices
+        hour_sort_choices = [choice for choice in model._meta.get_field('hour_sort').choices if choice[0] not in today_hours]
+
+        models.append({
+                'name': model_name,
+                'hour_sort_choices': hour_sort_choices,
+                'zod_choices': model._meta.get_field('zod').choices,
+            })
+
+        context['models'] = models
+
+        return render(request, 'admin/erp/loterias/individual_add.html', context)
+
+@method_decorator(staff_member_required, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
+class TripleZamoranoView(View):
+    def post(self, request):
+        # Recibir los datos de los formularios
+        data = json.loads(request.body)
+        print(data)
+
+        try:
+            # Validar los datos y guardarlos en el modelo correspondiente
+            for model_name, form_data in data.items():
+                if model_name == 'TripleZamorano':
+                    model = TripleZamorano
+
+                # Crear una nueva instancia del modelo y guardarla
+                instance = model(hour_sort=form_data['hour'], a=form_data['a'], c=form_data['c'], zod=form_data['zod'])
+                instance.full_clean()  # Validar la instancia
+                instance.save()
+            # Devolver una respuesta de éxito al cliente
+            return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
+
+        except ValidationError as e:
+            # Devolver una respuesta de error al cliente
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    def get(self, request):
+        context = {}
+        context['entity'] = "Registro de Loterias"
+        context['title'] = 'TripleZamorano'
+        # Crear una lista con el nombre del modelo
+        model_name = 'TripleZamorano'
+        context['url'] = reverse_lazy('core:triple_zamorano')
+        # Asignar la lista al contexto con el nombre 'model'
+        context['model'] = model_name
+
+        # Crear una lista de diccionarios con los choices del modelo
+        models = []
+        model = TripleZamorano
+
+            # Filtrar los registros de hoy
+        today = date.today()
+        today_records = model.objects.filter(date_sort=today)
+
+            # Obtener los horarios que ya se han registrado hoy
+        today_hours = [record.hour_sort for record in today_records]
+
+            # Excluir estos horarios al crear tus choices
+        hour_sort_choices = [choice for choice in model._meta.get_field('hour_sort').choices if choice[0] not in today_hours]
+
+        models.append({
+                'name': model_name,
+                'hour_sort_choices': hour_sort_choices,
+                'zod_choices': model._meta.get_field('zod').choices,
+            })
+
+        context['models'] = models
+
+        return render(request, 'admin/erp/loterias/individual_add.html', context)
+
+@method_decorator(staff_member_required, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
+class TripleChanceView(View):
+    def post(self, request):
+        # Recibir los datos de los formularios
+        data = json.loads(request.body)
+        print(data)
+
+        try:
+            # Validar los datos y guardarlos en el modelo correspondiente
+            for model_name, form_data in data.items():
+                if model_name == 'TripleChance':
+                    model = TripleChance
+
+                # Crear una nueva instancia del modelo y guardarla
+                instance = model(hour_sort=form_data['hour'], a=form_data['a'], b=form_data['b'], c=form_data['c'], zod=form_data['zod'])
+                instance.full_clean()  # Validar la instancia
+                instance.save()
+            # Devolver una respuesta de éxito al cliente
+            return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
+
+        except ValidationError as e:
+            # Devolver una respuesta de error al cliente
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    def get(self, request):
+        context = {}
+        context['entity'] = "Registro de Loterias"
+        context['title'] = 'TripleChance'
+        context['url'] = reverse_lazy('core:triple_chance')
+        # Crear una lista con el nombre del modelo
+        model_name = 'TripleChance'
+        # Asignar la lista al contexto con el nombre 'model'
+        context['model'] = model_name
+
+        # Crear una lista de diccionarios con los choices del modelo
+        models = []
+        model = TripleChance
+
+            # Filtrar los registros de hoy
+        today = date.today()
+        today_records = model.objects.filter(date_sort=today)
+
+            # Obtener los horarios que ya se han registrado hoy
+        today_hours = [record.hour_sort for record in today_records]
+
+            # Excluir estos horarios al crear tus choices
+        hour_sort_choices = [choice for choice in model._meta.get_field('hour_sort').choices if choice[0] not in today_hours]
+
+        models.append({
+                'name': model_name,
+                'hour_sort_choices': hour_sort_choices,
+                'zod_choices': model._meta.get_field('zod').choices,
+            })
+
+        context['models'] = models
+
+        return render(request, 'admin/erp/loterias/individual_add.html', context)
+
+@method_decorator(staff_member_required, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
+class TripleTachiraView(View):
+    def post(self, request):
+        # Recibir los datos de los formularios
+        data = json.loads(request.body)
+        print(data)
+
+        try:
+            # Validar los datos y guardarlos en el modelo correspondiente
+            for model_name, form_data in data.items():
+                if model_name == 'TripleTachira':
+                    model = TripleTachira
+
+                # Crear una nueva instancia del modelo y guardarla
+                instance = model(hour_sort=form_data['hour'], a=form_data['a'], b=form_data['b'], c=form_data['c'], zod=form_data['zod'])
+                instance.full_clean()  # Validar la instancia
+                instance.save()
+            # Devolver una respuesta de éxito al cliente
+            return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
+
+        except ValidationError as e:
+            # Devolver una respuesta de error al cliente
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    def get(self, request):
+        context = {}
+        context['entity'] = "Registro de Loterias"
+        context['title'] = 'TripleTachira'
+        context['url'] = reverse_lazy('core:triple_tachira')
+        # Crear una lista con el nombre del modelo
+        model_name = 'TripleTachira'
+        # Asignar la lista al contexto con el nombre 'model'
+        context['model'] = model_name
+
+        # Crear una lista de diccionarios con los choices del modelo
+        models = []
+        model = TripleTachira
+
+            # Filtrar los registros de hoy
+        today = date.today()
+        today_records = model.objects.filter(date_sort=today)
+
+            # Obtener los horarios que ya se han registrado hoy
+        today_hours = [record.hour_sort for record in today_records]
+
+            # Excluir estos horarios al crear tus choices
+        hour_sort_choices = [choice for choice in model._meta.get_field('hour_sort').choices if choice[0] not in today_hours]
+
+        models.append({
+                'name': model_name,
+                'hour_sort_choices': hour_sort_choices,
+                'zod_choices': model._meta.get_field('zod').choices,
+            })
+
+        context['models'] = models
+
+        return render(request, 'admin/erp/loterias/individual_add.html', context)
+
+@method_decorator(staff_member_required, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
+class TrioActivoView(View):
+    def post(self, request):
+        # Recibir los datos de los formularios
+        data = json.loads(request.body)
+        print(data)
+
+        try:
+            # Validar los datos y guardarlos en el modelo correspondiente
+            for model_name, form_data in data.items():
+                if model_name == 'TrioActivo':
+                    model = TrioActivo
+
+                # Crear una nueva instancia del modelo y guardarla
+                instance = model(hour_sort=form_data['hour'], a=form_data['a'], )
+                instance.full_clean()  # Validar la instancia
+                instance.save()
+            # Devolver una respuesta de éxito al cliente
+            return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
+
+        except ValidationError as e:
+            # Devolver una respuesta de error al cliente
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    def get(self, request):
+        context = {}
+        context['entity'] = "Registro de Loterias"
+        context['title'] = 'TrioActivo'
+        context['url'] = reverse_lazy('core:trio_activo')
+        # Crear una lista con el nombre del modelo
+        model_name = 'TrioActivo'
+        # Asignar la lista al contexto con el nombre 'model'
+        context['model'] = model_name
+
+        # Crear una lista de diccionarios con los choices del modelo
+        models = []
+        model = TrioActivo
+
+            # Filtrar los registros de hoy
+        today = date.today()
+        today_records = model.objects.filter(date_sort=today)
+
+            # Obtener los horarios que ya se han registrado hoy
+        today_hours = [record.hour_sort for record in today_records]
+
+            # Excluir estos horarios al crear tus choices
+        hour_sort_choices = [choice for choice in model._meta.get_field('hour_sort').choices if choice[0] not in today_hours]
+
+        models.append({
+                'name': model_name,
+                'hour_sort_choices': hour_sort_choices,
+            })
+
+        context['models'] = models
+
+        return render(request, 'admin/erp/loterias/individual_add.html', context)
+
+@method_decorator(staff_member_required, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
+class RicachonaView(View):
+    def post(self, request):
+        # Recibir los datos de los formularios
+        data = json.loads(request.body)
+        print(data)
+
+        try:
+            # Validar los datos y guardarlos en el modelo correspondiente
+            for model_name, form_data in data.items():
+                if model_name == 'Ricachona':
+                    model = Ricachona
+
+                # Crear una nueva instancia del modelo y guardarla
+                instance = model(hour_sort=form_data['hour'], a=form_data['a'])
+                instance.full_clean()  # Validar la instancia
+                instance.save()
+            # Devolver una respuesta de éxito al cliente
+            return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
+
+        except ValidationError as e:
+            # Devolver una respuesta de error al cliente
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    def get(self, request):
+        context = {}
+        context['entity'] = "Registro de Loterias"
+        context['title'] = 'Ricachona'
+        context['url'] = reverse_lazy('core:ricachona')
+        # Crear una lista con el nombre del modelo
+        model_name = 'Ricachona'
+        # Asignar la lista al contexto con el nombre 'model'
+        context['model'] = model_name
+
+        # Crear una lista de diccionarios con los choices del modelo
+        models = []
+        model = Ricachona
+
+            # Filtrar los registros de hoy
+        today = date.today()
+        today_records = model.objects.filter(date_sort=today)
+
+            # Obtener los horarios que ya se han registrado hoy
+        today_hours = [record.hour_sort for record in today_records]
+
+            # Excluir estos horarios al crear tus choices
+        hour_sort_choices = [choice for choice in model._meta.get_field('hour_sort').choices if choice[0] not in today_hours]
+
+        models.append({
+                'name': model_name,
+                'hour_sort_choices': hour_sort_choices,
+            })
+
+        context['models'] = models
+
+        return render(request, 'admin/erp/loterias/individual_add.html', context)
+
+# VISTAS AJAX
+@csrf_exempt
+def ajax_delete_view(request):
+    id = request.POST.get('id')
+    model_name = request.POST.get('model_name')
+    Model = apps.get_model('core', model_name)
+    try:
+        object = Model.objects.get(id=id)
+        object.delete()
+        return JsonResponse({'success': True})
+    except Model.DoesNotExist:
+        return JsonResponse({'success': False, 'error': 'Object does not exist'})
