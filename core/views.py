@@ -14,6 +14,7 @@ from django.utils.decorators import method_decorator
 from .models import *
 # Create your views here.
 
+
 def ContextData(day):
     context = {}
     models = [ 
