@@ -148,3 +148,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'core:index'
 LOGIN_URL = 'account_login'
+ACCOUNT_EMAIL_REQUIRED = False
+
+ACCOUNT_ADAPTER = 'config.customAdapters.CustomAccountAdapter'

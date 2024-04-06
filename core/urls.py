@@ -19,6 +19,8 @@ from core.views import (
     AdminGuacharoActivo,
     AdminGranjaMillonaria,
     AdminGranjazo,
+    AdminTerminalito,
+    AdminFruitaGana,
 
     # Listados Loterias
     AdminTripleCaliente,
@@ -29,7 +31,6 @@ from core.views import (
     AdminTripleChance,
     AdminTrioActivo,
     AdminRicachona,
-    AdminTerminalito,
 
     # Vistas de Resultados por grupo:
     AddGroupResultA,
@@ -59,6 +60,7 @@ from core.views import (
     GranjaMillonariaView,
     GranjazoView,
     TerminalitoView,
+    FruitaGanaView,
 
     TripleCalienteView,
     TripleCaracasView,
@@ -68,6 +70,10 @@ from core.views import (
     TripleTachiraView,
     TrioActivoView,
     RicachonaView,
+
+    # USUARIOS
+    RegisterUserView,
+    UserListView,
 
     # AJAX VIEW
     # DeleteObjectView,
@@ -94,7 +100,7 @@ urlpatterns = [
     path("administrador/granjaMillonaria", view=AdminGranjaMillonaria.as_view(), name="granjaMillonaria"),
     path("administrador/granjazo", view=AdminGranjazo.as_view(), name="granjazo"),
     path("administrador/terminalito", view=AdminTerminalito.as_view(), name="terminalito"),
-    # path("administrador/granjazo", view=AdminGranjazo.as_view(), name="granjazo"),
+    path("administrador/fruitaGana", view=AdminFruitaGana.as_view(), name="fruitaGana"),
 
     # URLS LISTADOS DE LOTERIAS
     path("administrador/triple_caliente", view=AdminTripleCaliente.as_view(), name="triple_caliente"),
@@ -136,6 +142,7 @@ urlpatterns = [
     path("administrador/granja_millonaria_add", view=GranjaMillonariaView.as_view(), name="granja_millonaria_add"),
     path("administrador/granjazo_add", view=GranjazoView.as_view(), name="granjazo_add"),
     path("administrador/terminalito_add", view=TerminalitoView.as_view(), name="terminalito_add"),
+    path("administrador/fruitaGana_add", view=FruitaGanaView.as_view(), name="fruitaGana_add"),
 
 
     path("administrador/triple_caliente_add", view=TripleCalienteView.as_view(), name="triple_caliente_add"),
@@ -147,6 +154,9 @@ urlpatterns = [
     path("administrador/trio_activo_add", view=TrioActivoView.as_view(), name="trio_activo_add"),
     path("administrador/la_ricachona_add", view=RicachonaView.as_view(), name="la_ricachona_add"),
 
+    # USUARIOS
+    path("administrador/users/register", view=RegisterUserView.as_view(), name="user_register"),
+    path('users/', UserListView.as_view(), name='user_list'),
 
     # AJAX VIEW
     

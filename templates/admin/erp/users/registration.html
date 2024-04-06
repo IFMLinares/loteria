@@ -1,0 +1,121 @@
+{% extends "admin/partials/base.html" %}
+{% load static %}
+
+{% block title %}
+Listado de Categorias
+{% endblock title %}
+
+{% block extra_css %}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+{% endblock extra_css %}
+
+{% block content %}
+<div class="main-content">
+    <div class="page-content">
+        <div class="container-fluid">
+            {% block pagetitle %}
+            {% include "admin/partials/page-title.html" %}
+            {% endblock pagetitle %}
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Registro de Usuarios</h5>
+                        </div>
+                        <div class="card-body">
+                            <form action="" id="user-form">
+                                <div class="col-lg-4">
+                                    <label for="id_username" class="form-label">Nombre de usuario:</label>
+                                    <input type="text" class="form-control" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus required aria-describedby="id_username_helptext" id="id_username">
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="id_password1" class="form-label">Contraseña:</label>
+                                    <input type="password" class="form-control" name="password1" autocomplete="new-password" required aria-describedby="id_password1_helptext" id="id_password1">
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="id_password2" class="form-label">Contraseña (confirmación):</label>
+                                    <input type="password" class="form-control" name="password2" autocomplete="new-password" required aria-describedby="id_password2_helptext" id="id_password2">
+                                </div>
+                            
+                                <!-- <label for="">Nombre de usuario:</label>
+                                <input type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus required aria-describedby="id_username_helptext" id="id_username">
+                                
+                                <label for="">Contraseña:</label>
+                                <input type="password" name="password1" autocomplete="new-password" required aria-describedby="id_password1_helptext" id="id_password1">
+
+                                
+                                <label for="">Contraseña (confirmación):</label>
+                                <input type="password" name="password2" autocomplete="new-password" required aria-describedby="id_password2_helptext" id="id_password2"> -->
+                                <!-- {{ form.as_p }} -->
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <button type="button" class="btn btn-primary waves-effect waves-light" id="btnTest">Añadir Nuevo registro</button>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <button type="submit" class="btn btn-primary waves-effect waves-light" id="myButton">Añadir Nuevo registro</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% block footer %}
+    {% include "admin/partials/footer.html" %}
+    {% endblock footer %}
+</div>
+{% endblock content %}
+
+{% block extra_js %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="{% static 'administrador/js/sweetalert2/sweet-alert-2-11.js'%}"></script>
+<script src="{% static 'administrador/js/functions.js'%}"></script>
+<script src="{% static 'administrador/js/pages/select2.init.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        $('#myButton').click(function() {
+        $('#user-form').submit();
+    });
+        $('#user-form').on('submit', function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '{% url "core:user_register" %}',
+                data: $(this).serialize(),
+                success: function(response) {
+                    // Manejar la respuesta del servidor
+                    if (response.status == 'success') {
+                        Swal.fire({
+                            title: '¡Éxito!',
+                            text: response.message,
+                            icon: 'success'
+                        }).then(function() {
+                            // Redireccionar a una URL después de hacer clic en el botón "OK"
+                            window.location.href = '{% url "core:user_list" %}';
+                        });
+                    } else if (response.status == 'error') {
+                        Swal.fire({
+                            title: 'Error!',
+                            text: response.message,
+                            icon: 'error'
+                        });
+                    }
+                }
+            });
+        });
+    });
+    </script>
+    
+{% endblock extra_js %}

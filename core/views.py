@@ -4,10 +4,13 @@ from collections import defaultdict
 from django.apps import apps
 from django.core.exceptions import ValidationError
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import View, ListView, CreateView
+from django.views.generic import View, ListView
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.utils.decorators import method_decorator
@@ -28,6 +31,8 @@ def ContextData(day):
         LottoActivoInterRD,
         GranjaMillonaria,
         Granjazo,
+        Terminalito,
+        FruitaGana,
         TripleCaliente,
         TripleCaracas,
         TripleZamorano,
@@ -36,7 +41,6 @@ def ContextData(day):
         TripleTachira,
         TrioActivo,
         Ricachona,
-        Terminalito
     ]
 
     for model in models:
@@ -111,7 +115,6 @@ class LotteryView(View):
     def get(self, request):
         context = ContextData(date.today())
         context['yesterday'] = ContextData(date.today() - timedelta(days=1))
-        print(context)
         return render(request, 'lotoview/index.html', context)
 
 # L I S T A D O S   D E   A N I M A L I T O S
@@ -312,6 +315,21 @@ class AdminTerminalito(ListView):
         context['model_name'] = self.model.__name__
         context['url'] = reverse_lazy('core:terminalito')
         context['create_url'] = reverse_lazy('core:terminalito_add')
+        return context
+
+@method_decorator(staff_member_required, name='dispatch')
+class AdminFruitaGana(ListView):
+    model = FruitaGana
+    template_name = "admin/erp/animalitos/list-view.html"
+    context_object_name = "context"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "Listado de Animalitos"
+        context['entity'] = 'FruitaGana'
+        context['model_name'] = self.model.__name__
+        context['url'] = reverse_lazy('core:fruitaGana')
+        context['create_url'] = reverse_lazy('core:fruitaGana_add')
         return context
 
 # L I S T A D O S   D E   L O T E R I A S
@@ -598,6 +616,8 @@ class AddGroupResultC(View):
                     model = LottoActivo
                 elif model_name == 'GranjaMillonaria':
                     model = GranjaMillonaria
+                elif model_name == 'FruitaGana':
+                    model = FruitaGana
 
                 if(form_data['save']):
                     # Crear una nueva instancia del modelo y guardarla
@@ -615,9 +635,9 @@ class AddGroupResultC(View):
     def get(self, request):
         context = {}
         context['entity'] = "Registro de Animalitos"
-        context['title'] = 'Chance Animalitos-Lotto Activo-Granja Millonaria'
+        context['title'] = 'Chance Animalitos-Lotto Activo-Granja Millonaria-FruitaGana'
         # Crear una lista con los nombres de los modelos
-        model_names = ['ChanceAnimalitos', 'LottoActivo', 'GranjaMillonaria']
+        model_names = ['ChanceAnimalitos', 'LottoActivo', 'GranjaMillonaria', 'FruitaGana']
         # Asignar la lista al contexto con el nombre 'model'
         context['model'] = model_names
 
@@ -630,6 +650,8 @@ class AddGroupResultC(View):
                 model = LottoActivo
             elif model_name == 'GranjaMillonaria':
                 model = GranjaMillonaria
+            elif model_name == 'FruitaGana':
+                model = FruitaGana
 
             # Filtrar los registros de hoy
             today = date.today()
@@ -1940,7 +1962,6 @@ class GranjazoView(View):
 
         return render(request, 'admin/erp/animalitos/add_individual.html', context)
 
-
 @method_decorator(staff_member_required, name='dispatch')
 @method_decorator(csrf_exempt, name='dispatch')
 class TerminalitoView(View):
@@ -1978,6 +1999,64 @@ class TerminalitoView(View):
 
         # Crear una lista de diccionarios con los choices del modelo
         model = Terminalito
+        models = []
+        # Filtrar los registros de hoy
+        today = date.today()
+        today_records = model.objects.filter(date_sort=today)
+
+        # Obtener los horarios que ya se han registrado hoy
+        today_hours = [record.hour_sort for record in today_records]
+
+        # Excluir estos horarios al crear tus choices
+        hour_sort_choices = [choice for choice in model._meta.get_field('hour_sort').choices if choice[0] not in today_hours]
+
+        models.append({
+                'name': model_names,
+                'animalito_choices': model._meta.get_field('animalito').choices,
+                'hour_sort_choices': hour_sort_choices,
+            })
+
+        context['models'] = models
+
+        return render(request, 'admin/erp/animalitos/add_individual.html', context)
+
+@method_decorator(staff_member_required, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
+class FruitaGanaView(View):
+    def post(self, request):
+        # Recibir los datos de los formularios
+        data = json.loads(request.body)
+
+        try:
+            # Validar los datos y guardarlos en el modelo correspondiente
+            for model_name, form_data in data.items():
+                if model_name == 'FruitaGana':
+                    model = FruitaGana
+
+                # Crear una nueva instancia del modelo y guardarla
+                instance = model(hour_sort=form_data['hour'], animalito=form_data['animal'])
+                instance.full_clean()  # Validar la instancia
+                instance.save()
+
+            # Devolver una respuesta de éxito al cliente
+            return JsonResponse({'status': 'success', 'message': 'El modelo se ha guardado correctamente.'})
+
+        except ValidationError as e:
+            # Devolver una respuesta de error al cliente
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    def get(self, request):
+        context = {}
+        context['entity'] = "Registro de Animalitos"
+        context['title'] = 'FruitaGana'
+        context['url'] = reverse_lazy('core:fruitaGana')
+        # Crear una lista con el nombre del modelo
+        model_names = 'FruitaGana'
+        # Asignar la lista al contexto con el nombre 'model'
+        context['model'] = model_names
+
+        # Crear una lista de diccionarios con los choices del modelo
+        model = FruitaGana
         models = []
         # Filtrar los registros de hoy
         today = date.today()
@@ -2418,7 +2497,6 @@ class RicachonaView(View):
     def post(self, request):
         # Recibir los datos de los formularios
         data = json.loads(request.body)
-        print(data)
 
         try:
             # Validar los datos y guardarlos en el modelo correspondiente
@@ -2469,6 +2547,40 @@ class RicachonaView(View):
         context['models'] = models
 
         return render(request, 'admin/erp/loterias/individual_add.html', context)
+
+
+# V I S T A S   D E  U S U A R I O S
+@method_decorator(staff_member_required, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
+class RegisterUserView(View):
+    def get(self, request):
+        form = UserCreationForm()
+        return render(request, 'admin/erp/users/registration.html', {'form': form})
+
+    def post(self, request):
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return JsonResponse({'status': 'success', 'message': 'El usuario se ha guardado correctamente.'})
+        else:
+            return JsonResponse({'status': 'error', 'message': 'El usuario No se ha podido registrar.'})
+
+@method_decorator(staff_member_required, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
+class UserListView(ListView):
+    model = User
+    template_name = 'admin/erp/users/user_list.html'  # Cambia esto a la ruta de tu plantilla
+    context_object_name = 'users'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['entity'] = "Listado de Usuarios"
+        context['title']= 'Usuarios'
+        
+        context['create_url'] = reverse_lazy('core:user_register')
+        context['url'] = reverse_lazy('core:user_register')
+        context['model_name'] = self.model.__name__
+        return context
 
 # VISTAS AJAX
 @csrf_exempt

@@ -1,0 +1,135 @@
+{% extends "admin/partials/base.html" %}
+{% load static %}
+{% block title %}Listado de Categorias{% endblock title %}
+{% block extra_css %}
+    <!--datatable css-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" />
+    <!--datatable responsive css-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css" />
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
+
+{% endblock extra_css %}
+{% block content %}
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div class="page-content">
+                <div class="container-fluid">
+
+                    {% block pagetitle %}
+                    {% include "admin/partials/page-title.html" %}
+                    {% endblock pagetitle %}
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">{{ title }}</h5>
+                                </div>
+                                <div class="card-body">
+                                    <table id="list-datatable" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Nombre de usuario</th>
+                                                <th>¿Admin?</th>
+                                                <th>Último inicio de sesión</th>
+                                                <th>Fecha de incorporación</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for user in users %}
+                                            <tr>
+                                                <td>{{ user.username }}</td>
+                                                <td>{{ user.is_staff|yesno:"Sí,No" }}</td>
+                                                <td>{{ user.last_login }}</td>
+                                                <td>{{ user.date_joined }}</td>
+                                                <td>
+                                                    <!-- Aquí puedes agregar las acciones que quieras -->
+                                                </td>
+                                            </tr>
+                                            {% empty %}
+                                            <tr>
+                                                <td colspan="5">No hay usuarios disponibles</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+
+                                <div class="card-body">
+                                    <a href="{{ create_url }}" class="btn btn-primary waves-effect waves-light" id="btnTest">Añadir Nuevo registro</a>
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </div>
+                <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+        {% block footer %}
+        {% include "admin/partials/footer.html" %}
+        {% endblock footer %}
+        </div>
+        <!-- end main content-->
+{% endblock content %}
+{% block extra_js %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!--datatable js-->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript">
+        var spanishData = "{% static 'administrador/js/erp/datatables/spanish.txt' %}";
+    </script>
+    <script src="{% static 'js/erp/datatables/datatable-list.js' %}"></script>
+    <script src="{% static 'administrador/js/erp/datatables/datatable-list.js' %}"></script>
+    <script src="{% static 'administrador/js/sweetalert2/sweet-alert-2-11.js'%}"></script>
+    <script src="{% static 'administrador/js/functions.js'%}"></script>
+    <script src="{% static 'administrador/js/pages/select2.init.js' %}"></script>
+    <script>
+            function deleteItem(button) {
+                var id = button.getAttribute('data-id');
+                var model_name = button.getAttribute('data-model');
+
+                $.ajax({
+                    url: "{% url 'core:ajax_delete_view' %}",
+                    type: 'POST',
+                    data: {
+                        'id': id,
+                        'model_name': model_name,
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.success) {
+                            Swal.fire({
+                                title: '¡Éxito!',
+                                text: 'El elemento se eliminó correctamente.',
+                                icon: 'success'
+                            }).then(function() {
+                                // Redireccionar a una URL después de hacer clic en el botón "OK"
+                                window.location.href = '{{ url }}';
+                            });
+                        } else {
+                            Swal.fire({
+                                title: '¡Error!',
+                                text: data.error,
+                                icon: 'error'
+                            });
+                        }
+                    }
+                });
+            }
+        </script>
+
+{% endblock extra_js %}

@@ -2,6 +2,9 @@ from django.db import models
 from datetime import datetime
 from django.conf import settings
 from django.core.exceptions import ValidationError
+from django.contrib.sessions.models import Session
+from django.contrib.auth.models import User
+from django.db import models
 import re
 
 from channels.layers import get_channel_layer
@@ -82,6 +85,16 @@ def validate_numeric(value):
     if not re.match('^[0-9]*$', value):
         raise ValidationError('El valor debe ser numérico')
 # Create your models here.
+
+class LoggedInUser(models.Model):
+    user = models.OneToOneField(User, related_name='logged_in_user', on_delete=models.CASCADE, null=True, blank=True)
+    session_key = models.CharField(max_length=32, null=True, blank=True)
+
+def create_logged_in_user(sender, instance, created, **kwargs):
+    if created:
+        LoggedInUser.objects.create(user=instance)
+
+models.signals.post_save.connect(create_logged_in_user, sender=User)
 
 # modelos de los animalitos 
 
@@ -306,6 +319,25 @@ class Terminalito(models.Model):
 
     def get_image_path(self):
         return join(settings.STATIC_URL, f'img/terminalito/r{self.animalito}.jpg')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)  # Llama al método save original
+
+        # Llama a la función para enviar el mensaje
+        enviar_mensaje(self)
+
+class FruitaGana(models.Model):
+    hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES, verbose_name="Hora del sorteo")
+    animalito = models.CharField(max_length=3, choices=FRUITA_CHOICES, verbose_name="Nro ")
+    date_sort = models.DateField(auto_now=True)
+
+    class Meta:
+        unique_together = ('hour_sort', 'date_sort',)
+        verbose_name = 'Fruita Gana'
+        verbose_name_plural = 'Fruita Gana'
+
+    def get_image_path(self):
+        return join(settings.STATIC_URL, f'img/fruita_gana/{self.animalito}.png')
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)  # Llama al método save original
