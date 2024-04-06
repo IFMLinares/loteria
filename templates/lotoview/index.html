@@ -37,6 +37,7 @@
         {% include "lotoview/include_loterias_1.html" %}
 
         <!-- Include de información día anterior -->
+        {% include "lotoview/include_animalitos_yesterday.html" %}
 
       </div>
 
@@ -55,18 +56,18 @@
   AOS.init();
 </script>
 <script type="text/javascript">
-  // var date = new Date();
-  // date.setDate(date.getDate() - 1);
-  // var day = date.getDate();
-  // var month = date.getMonth() + 1;
-  // var year = date.getFullYear();
+  var date = new Date();
+  date.setDate(date.getDate() - 1);
+  var day = date.getDate();
+  var month = date.getMonth() + 1;
+  var year = date.getFullYear();
 
-  // day = (day < 10) ? '0' + day : day;
-  // month = (month < 10) ? '0' + month : month;
+  day = (day < 10) ? '0' + day : day;
+  month = (month < 10) ? '0' + month : month;
 
-  // var yesterday = day + '/' + month + '/' + year;
-  // console.log(yesterday)
-  // $('#yesterday').text('RESULTADO DE LOS ANIMALITOS ' + yesterday);
+  var yesterday = day + '/' + month + '/' + year;
+  console.log(yesterday)
+  $('#yesterday').text('RESULTADO DE LOS ANIMALITOS ' + yesterday);
 
   function actualizarFechaHora() {
       let ahora = new Date();
@@ -84,6 +85,7 @@
 
   // Actualiza la fecha y la hora cada segundo
   setInterval(actualizarFechaHora, 1000);
+
 </script>
 <script type="text/javascript">
   let horarios = {
@@ -124,7 +126,7 @@ function connect() {
           location.reload();
       }else{
         let tablaId = data.modelo;
-        let modelos = ['TripleCaliente', 'TripleCaracas', 'TripleZulia', 'TripleZamorano', 'TripleChance', 'TripleTachira', 'TrioActivo', 'Ricachona'];
+        let modelos = ['TripleCaliente', 'TripleCaracas', 'TripleZulia', 'TripleZamorano', 'TripleChance', 'TripleTachira', 'TrioActivo', 'Ricachona','FruitaGana'];
         if (modelos.includes(tablaId)) {
             if (tablaId === 'TrioActivo' || tablaId === 'Ricachona') {
                 let tablas = document.querySelectorAll(`.${tablaId}`);

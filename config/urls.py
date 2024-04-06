@@ -17,7 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.admin.views.decorators import staff_member_required
-from django.conf import settings 
+from django.conf import settings
+from .views import CustomLoginView
 
 admin.site.login = staff_member_required(
     admin.site.login, login_url=settings.LOGIN_URL
@@ -26,5 +27,6 @@ admin.site.login = staff_member_required(
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
+    path('accounts/login/', CustomLoginView.as_view(), name='account_login'),
     path('accounts/', include('allauth.urls')),
 ]
