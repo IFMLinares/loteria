@@ -86,15 +86,15 @@ def validate_numeric(value):
         raise ValidationError('El valor debe ser numérico')
 # Create your models here.
 
-class LoggedInUser(models.Model):
-    user = models.OneToOneField(User, related_name='logged_in_user', on_delete=models.CASCADE, null=True, blank=True)
-    session_key = models.CharField(max_length=32, null=True, blank=True)
+# class LoggedInUser(models.Model):
+#     user = models.OneToOneField(User, related_name='logged_in_user', on_delete=models.CASCADE, null=True, blank=True)
+#     session_key = models.CharField(max_length=32, null=True, blank=True)
 
-def create_logged_in_user(sender, instance, created, **kwargs):
-    if created:
-        LoggedInUser.objects.create(user=instance)
+# def create_logged_in_user(sender, instance, created, **kwargs):
+#     if created:
+#         LoggedInUser.objects.create(user=instance)
 
-models.signals.post_save.connect(create_logged_in_user, sender=User)
+# models.signals.post_save.connect(create_logged_in_user, sender=User)
 
 # modelos de los animalitos 
 
