@@ -78,3 +78,169 @@
         {% endwith %}
     </div>
 </div>
+
+<!-- {% load static %}
+<div class="cuadro">
+    <div class="cuadro1">
+        <div class="cuadroLadoalado">
+            <div class="cuadroTexto">
+                <h5>KINO TACHIRA</h5>
+            </div>
+            <div class="cuadroImagen">
+                <img src="{% static 'img/loteria/kino.png' %}" alt="" id="foto1" />
+            </div>
+        </div>
+    </div>
+    <div class="cuadro2">
+        <div class="cuadroHora">
+            <h5 style="visibility: hidden;">01:00 PM</h5>
+        </div>
+        {% with records=Ricachona %}
+            <div class="cuadroTabla" style="display: flex; justify-content: center;">
+                {% for record in records %}
+                    {% if forloop.counter <= 4 %}
+                        <table class="Ricachona tabla_loteria"> 
+                            <tr>
+                                <td>{{ record.a }}</td>
+                            </tr> 
+                        </table>   
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endwith %}
+        
+        <div class="cuadroHora">
+          <h5 style="visibility: hidden;">01:00 PM</h5>
+      </div>
+        {% with records=Ricachona %}
+            <div class="cuadroTabla" style="display: flex; justify-content: center;">
+                {% for record in records %}
+                    {% if forloop.counter > 4 and forloop.counter <= 8 %}
+                    <table class="Ricachona tabla_loteria"> 
+                            <tr>
+                                <td>{{ record.a }}</td>
+                            </tr> 
+                        </table>   
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endwith %}
+        
+        <div class="cuadroHora">
+          <h5 style="visibility: hidden;">01:00 PM</h5>
+      </div>
+        {% with records=Ricachona %}
+            <div class="cuadroTabla" style="display: flex; justify-content: center;">
+                {% for record in records %}
+                    {% if forloop.counter > 8 and forloop.counter <= 12 %}
+                    <table class="Ricachona tabla_loteria"> 
+                            <tr>
+                                <td>{{ record.a }}</td>
+                            </tr> 
+                        </table>   
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endwith %}
+
+        <div class="cuadroHora">
+            <h5 style="visibility: hidden;">01:00 PM</h5>
+        </div>
+          {% with records=Ricachona %}
+              <div class="cuadroTabla" style="display: flex; justify-content: center;">
+                  {% for record in records %}
+                      {% if forloop.counter > 8 and forloop.counter <= 12 %}
+                      <table class="Ricachona tabla_loteria"> 
+                              <tr>
+                                  <td>{{ record.a }}</td>
+                              </tr> 
+                          </table>   
+                      {% endif %}
+                  {% endfor %}
+              </div>
+          {% endwith %}
+          <div class="cuadroHora">
+            <h5 style="visibility: hidden;">01:00 PM</h5>
+        </div>
+          {% with records=Ricachona %}
+              <div class="cuadroTabla" style="display: flex; justify-content: center;">
+                  {% for record in records %}
+                      {% if forloop.counter > 8 and forloop.counter <= 12 %}
+                      <table class="Ricachona tabla_loteria">
+                               
+                              <tr>
+                                  <td>{{ record.a }}</td>
+                              </tr> 
+                          </table>   
+                      {% endif %}
+                  {% endfor %}
+              </div>
+          {% endwith %}
+    </div>
+</div> -->
+
+<!-- {% load static %}
+<div class="cuadro">
+    <div class="cuadro1">
+        <div class="cuadroLadoalado">
+            <div class="cuadroTexto">
+                <h5>KINGO TACHIRA</h5>
+            </div>
+            <div class="cuadroImagen">
+                <img src="{% static 'img/loteria/kingo.png' %}" alt="" id="foto1" />
+            </div>
+        </div>
+    </div>
+    <div class="cuadro2">
+        <div class="cuadroHora">
+            <h5 style="visibility: hidden;">01:00 PM</h5>
+        </div>
+        {% with records=Ricachona %}
+            <div class="cuadroTabla" style="display: flex; justify-content: center;">
+                {% for record in records %}
+                    {% if forloop.counter <= 4 %}
+                        <table class="Ricachona tabla_loteria"> 
+                            <tr>
+                                <td>{{ record.a }}</td>
+                            </tr> 
+                        </table>   
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endwith %}
+        
+        <div class="cuadroHora">
+          <h5 style="visibility: hidden;">01:00 PM</h5>
+      </div>
+        {% with records=Ricachona %}
+            <div class="cuadroTabla" style="display: flex; justify-content: center;">
+                {% for record in records %}
+                    {% if forloop.counter > 4 and forloop.counter <= 8 %}
+                    <table class="Ricachona tabla_loteria"> 
+                            <tr>
+                                <td>{{ record.a }}</td>
+                            </tr> 
+                        </table>   
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endwith %}
+        
+        <div class="cuadroHora">
+          <h5 style="visibility: hidden;">01:00 PM</h5>
+      </div>
+        {% with records=Ricachona %}
+            <div class="cuadroTabla" style="display: flex; justify-content: center;">
+                {% for record in records %}
+                    {% if forloop.counter > 8 and forloop.counter <= 12 %}
+                    <table class="Ricachona tabla_loteria"> 
+                            <tr>
+                                <td>{{ record.a }}</td>
+                            </tr> 
+                        </table>   
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endwith %} 
+    </div>
+</div> -->
