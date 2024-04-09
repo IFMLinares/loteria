@@ -73,7 +73,8 @@
                                                 9:00AM - 8:00PM <br> 
                                                 Granja Millonaria <br> 
                                                 Lotto Activo <br> 
-                                                Chance Animalitos
+                                                Chance Animalitos <br> 
+                                                Fruita Gana
                                             </span>
                                         </a>
                                     </li>
@@ -387,7 +388,6 @@
                                         </div>
                                     </li>
                                     
-
                                     <li class="nav-item">
                                         <a class="nav-link menu-link" href="#Terminalito" data-bs-toggle="collapse" role="button"
                                             aria-expanded="false" aria-controls="Terminalito">
@@ -400,6 +400,23 @@
                                                 </li>
                                                 <li class="nav-item">
                                                     <a href="{% url 'core:terminalito' %}" class="nav-link" data-key="t-crm"> Listado </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link menu-link" href="#fruitaGana" data-bs-toggle="collapse" role="button"
+                                            aria-expanded="false" aria-controls="fruitaGana">
+                                            <i class="las la-tachometer-alt"></i> <span data-key="t-dashboards">FruitaGana</span>
+                                        </a>
+                                        <div class="collapse menu-dropdown" id="fruitaGana">
+                                            <ul class="nav nav-sm flex-column">
+                                                <li class="nav-item">
+                                                    <a href="{% url 'core:fruitaGana_add' %}" class="nav-link" data-key="t-analytics"> Registrar </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="{% url 'core:fruitaGana' %}" class="nav-link" data-key="t-crm"> Listado </a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -557,7 +574,7 @@
 
                         </li>
 
-                        <!-- <li class="menu-title"><span data-key="t-menu">Usuarios</span></li>
+                        <li class="menu-title"><span data-key="t-menu">Usuarios</span></li>
                         <li class="nav-item">
                             <a class="nav-link menu-link" href="#usuarios" data-bs-toggle="collapse" role="button"
                                 aria-expanded="false" aria-controls="usuarios">
@@ -569,17 +586,17 @@
                                     <li class="nav-item">
                                         <ul class="nav nav-sm flex-column">
                                             <li class="nav-item">
-                                                <a href="{% url 'core:triple_caliente_add' %}" class="nav-link" data-key="t-analytics"> Registrar Nuevo Cliente</a>
+                                                <a href="{% url 'core:user_register' %}" class="nav-link" data-key="t-analytics"> Registrar Nuevo Cliente</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="{% url 'core:triple_caliente' %}" class="nav-link" data-key="t-crm"> Listado </a>
+                                                <a href="{% url 'core:user_list' %}" class="nav-link" data-key="t-crm"> Listado </a>
                                             </li>
                                         </ul>
                                     </li>
                                 </ul>
                             </div>
 
-                        </li> -->
+                        </li>
                         <!-- <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Pages</span></li>
 
                         <li class="nav-item">
@@ -823,6 +840,7 @@
                             </div>
                         </li> -->
 
+                        
                     </ul>
                 </div>
                 <!-- Sidebar -->

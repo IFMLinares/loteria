@@ -5,7 +5,13 @@ class AdminLoginRedirectMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        response = self.get_response(request)
         if request.path == '/admin/login/' and request.user.is_authenticated:
-            return redirect('core:index')
+            if request.user.is_staff:
+                # Si el usuario es un administrador, redirígelo a 'core:index'
+                return redirect('core:index')
+            else:
+                # Si el usuario no es un administrador, redirígelo a 'core:lottery'
+                return redirect('core:lottery')
+
+        response = self.get_response(request)
         return response

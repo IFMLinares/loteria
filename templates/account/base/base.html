@@ -65,5 +65,22 @@
     <script src="{% static 'administrador/js/pages/particles.app.js'%}"></script>
     <!-- password-addon init -->
     <script src="{% static 'administrador/js/pages/password-addon.init.js'%}"></script>
+    <script src="{% static 'administrador/js/sweetalert2/sweet-alert-2-11.js'%}"></script>
+    <script src="{% static 'administrador/js/functions.js'%}"></script>
+    <script src="{% static 'administrador/js/pages/select2.init.js' %}"></script>
+    <script>
+    {% if messages %}
+            var errors = '';
+            {% for message in messages %}
+                errors += '{{ message }}\n';
+            {% endfor %}
+            Swal.fire({
+                title: 'Error!',
+                text: errors,
+                icon: "error",
+                // footer: '<a href="#">Why do I have this issue?</a>'
+            });
+    {% endif %}
+    </script>
 </body>
 </html>
