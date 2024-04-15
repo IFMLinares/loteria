@@ -113,15 +113,21 @@ def ContextData(day):
                     })
     return context
 
+
 class LotteryView(View):
     def get(self, request):
         context = ContextData(date.today())
         context['yesterday'] = ContextData(date.today() - timedelta(days=1))
-        # Get the video with the name "video_1" from the database
-        video = get_object_or_404(VideoModel, name='video_1')
         
+        # Try to get the video with the name "video_1" from the database
+        try:
+            video = VideoModel.objects.get(name='video_1')
+        except VideoModel.DoesNotExist:
+            video = None
+
         # Add the video to the context
         context['video'] = video
+
         return render(request, 'lotoview/index.html', context)
 
 # L I S T A D O S   D E   A N I M A L I T O S
@@ -136,9 +142,12 @@ class IndexView(View):
         context['title'] = "Inicio"
         context['entity'] = 'Pagina de inicio'
         
-        # Get the video with the name "video_1" from the database
-        video = get_object_or_404(VideoModel, name='video_1')
-        
+        # Try to get the video with the name "video_1" from the database
+        try:
+            video = VideoModel.objects.get(name='video_1')
+        except VideoModel.DoesNotExist:
+            video = None
+
         # Add the video to the context
         context['video'] = video
 
@@ -2629,3 +2638,18 @@ def upload_video(request):
         return JsonResponse({'message': 'Video uploaded successfully'})
     else:
         return JsonResponse({'error': 'Invalid request'})
+
+@csrf_exempt
+def delete_video(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        try:
+            video_to_delete = VideoModel.objects.get(name=name)
+            os.remove(os.path.join(settings.MEDIA_ROOT, str(video_to_delete.video)))
+            video_to_delete.delete()
+            return JsonResponse({'message': 'Video deleted successfully'})
+        except VideoModel.DoesNotExist:
+            return JsonResponse({'error': 'Video does not exist'})
+    else:
+        return JsonResponse({'error': 'Invalid request'})
+

@@ -65,6 +65,7 @@
                     </div><!--end row-->
 
                     
+                    {% if video != None %}
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card">
@@ -73,7 +74,7 @@
                                 </div>
 
                                 <div class="card-body" style="display: flex; justify-content: center; align-items: center; height: 500px;">
-                                    <video width="" height="500" controls muted playsinline preload  class="pb-xl-4 pt-xl-4"> 
+                                    <video width="" height="500" controls muted playsinline preload  class="pb-xl-1 pt-xl-2"> 
                                         <source src="{{ video.video.url }}" type="video/mp4">
                                         Tu navegador no soporta la etiqueta de video.
                                       </video>
@@ -81,6 +82,18 @@
                             </div>
                         </div><!--end col-->
                     </div><!--end row-->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-grid gap-2" >
+                                        <button class="btn btn-danger" type="button" id="delete-button">Eliminar video</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
 
 
                 </div>
@@ -150,6 +163,37 @@ $(document).ready(function () {
                 });
             }
         });
+    });
+});
+
+$('#delete-button').on('click', function(e) {
+    e.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: '{% url 'core:delete_video' %}',
+        data: {
+            'name': 'video_1',
+            'csrfmiddlewaretoken': '{{ csrf_token }}'
+        },
+        success: function(data) {
+            Swal.fire({
+                title: '¡Éxito!',
+                text: data.message,
+                icon: 'success'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#reload-button').click();
+                    window.location.reload();
+                }
+            })
+        },
+        error: function(data) {
+            Swal.fire({
+                title: '¡Error!',
+                text:  data.error,
+                icon: 'error'
+            });
+        }
     });
 });
 
