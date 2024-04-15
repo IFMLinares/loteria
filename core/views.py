@@ -2635,7 +2635,7 @@ def upload_video(request):
         video_model = VideoModel(name=name, video=video)
         video_model.save()
 
-        return JsonResponse({'message': 'Video uploaded successfully'})
+        return JsonResponse({'message': 'Video Subido con exito!'})
     else:
         return JsonResponse({'error': 'Invalid request'})
 
@@ -2647,9 +2647,9 @@ def delete_video(request):
             video_to_delete = VideoModel.objects.get(name=name)
             os.remove(os.path.join(settings.MEDIA_ROOT, str(video_to_delete.video)))
             video_to_delete.delete()
-            return JsonResponse({'message': 'Video deleted successfully'})
+            return JsonResponse({'message': 'Video eliminado satisfactoriamente!'})
         except VideoModel.DoesNotExist:
-            return JsonResponse({'error': 'Video does not exist'})
+            return JsonResponse({'error': 'Video no existe'})
     else:
         return JsonResponse({'error': 'Invalid request'})
 
