@@ -82,4 +82,5 @@ admin.site.register(TripleTachira, TripleTachiraAdmin)
 admin.site.register(TrioActivo, TrioActivoAdmin)
 admin.site.register(Ricachona, RicachonaAdmin)
 
+admin.site.register(VideoModel)
 

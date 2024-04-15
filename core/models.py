@@ -12,6 +12,7 @@ from asgiref.sync import async_to_sync
 
 from os.path import join
 from .tuples import *
+import os
 
 def enviar_mensaje(self):
     datos = {
@@ -95,6 +96,16 @@ def validate_numeric(value):
 #         LoggedInUser.objects.create(user=instance)
 
 # models.signals.post_save.connect(create_logged_in_user, sender=User)
+
+# videos
+from django.db import models
+import os
+
+class VideoModel(models.Model):
+    name = models.CharField(max_length=255)
+    video = models.FileField(upload_to='videos/')
+
+
 
 # modelos de los animalitos 
 

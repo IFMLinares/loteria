@@ -77,7 +77,8 @@ from core.views import (
 
     # AJAX VIEW
     # DeleteObjectView,
-    ajax_delete_view
+    ajax_delete_view,
+    upload_video,
 )
 
 app_name = "core"
@@ -162,4 +163,5 @@ urlpatterns = [
     
     # path("administrador/ajax/delete_view", view=DeleteObjectView.as_view(), name="ajax_delete_view"),
     path('administrador/ajax/delete_view/', ajax_delete_view, name='ajax_delete_view'),
+    path('administrador/ajax/upload_video/', upload_video, name='upload_video'),
 ]

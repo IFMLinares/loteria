@@ -8,7 +8,12 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap.min.css" />
 
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.dataTables.min.css">
+    <!-- dropzone css -->
+    <link rel="stylesheet" href="{% static 'administrador/libs/dropzone/dist/dropzone.css'%}" type="text/css" />
 
+    <!-- Filepond css -->
+    <link rel="stylesheet" href="{% static 'administrador/libs/filepond/dist/filepond.min.css'%}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'administrador/libs/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css'%}">
 {% endblock extra_css %}
 {% block content %}
         <!-- ============================================================== -->
@@ -18,7 +23,6 @@
 
             <div class="page-content">
                 <div class="container-fluid">
-
                     {% block pagetitle %}
                     {% include "admin/partials/page-title.html" %}
                     {% endblock pagetitle %}
@@ -38,6 +42,47 @@
                             </div>
                         </div><!--end col-->
                     </div><!--end row-->
+
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Subir Video</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form id="videoForm" method="post" enctype="multipart/form-data">
+                                        <input type="hidden" name="name" required value="video_1">
+                                        <input type="file" name="video" required>
+                                        <button type="submit" value="Upload" class="btn btn-primary bg-gradient waves-effect waves-light">
+                                            <i class="las la-save" style="font-size: 20px;"></i>
+                                            Guardar Registro
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                    </div><!--end row-->
+
+                    
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Video Actual</h5>
+                                </div>
+
+                                <div class="card-body" style="display: flex; justify-content: center; align-items: center; height: 500px;">
+                                    <video width="" height="500" controls muted playsinline preload  class="pb-xl-4 pt-xl-4"> 
+                                        <source src="{{ video.video.url }}" type="video/mp4">
+                                        Tu navegador no soporta la etiqueta de video.
+                                      </video>
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                    </div><!--end row-->
+
+
                 </div>
                 <!-- container-fluid -->
             </div>
@@ -60,25 +105,53 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+        <!-- dropzone min -->
+    <script src="{% static 'administrador/libs/dropzone/dist/dropzone-min.js'%}"></script>
+    <script src="{% static 'administrador/js/pages/form-file-upload.init.js'%}"></script>
     <script type="text/javascript">
         var spanishData = "{% static 'js/erp/datatables/spanish.txt' %}";
     </script>
     <script src="{% static 'administrador/js/erp/datatables/datatable-list.js' %}"></script>
-    <script>
-        $(document).ready(function() {
-            $('#reload-button').click(function() {
-                $.ajax({
-                    type: "POST",
-                    url: window.location.href,  // Asegúrate de que esta URL apunta a tu vista IndexView
-                    data: {
-                        'reload': 'reload'
-                    },
-                    success: function(data) {
-                        console.log("Solicitud POST enviada correctamente");
+    <script src="{% static 'js/reload.js' %}"></script>
+    <script src="{% static 'administrador/js/sweetalert2/sweet-alert-2-11.js'%}"></script>
+    <script src="{% static 'administrador/js/functions.js'%}"></script>
+<script>
+$(document).ready(function () {
+    $('#videoForm').on('submit', function(e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+        $.ajax({
+            type: 'POST',
+            url: '{% url 'core:upload_video' %}',
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+                Swal.fire({
+                    title: '¡Éxito!',
+                    text: data.message,
+                    icon: 'success'
+                }).then((result) => {
+                    // Recarga la página cuando se cierre la ventana de Swal
+                    if (result.isConfirmed) {
+                        $('#reload-button').click();
+                        window.location.reload();
                     }
-                });
-            });
-        });
-    </script>
+                })
 
+            },
+            error: function(data) {
+                Swal.fire({
+                    title: '¡Error!',
+                    text:  data.error,
+                    icon: 'error'
+                    // footer: '<a href="#">Why do I have this issue?</a>'
+                });
+            }
+        });
+    });
+});
+
+</script>
 {% endblock extra_js %}

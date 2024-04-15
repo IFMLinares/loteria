@@ -13,8 +13,10 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import View, ListView
 from django.urls import reverse_lazy
 from django.utils import timezone
+from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
 from .models import *
+from django.conf import settings
 # Create your views here.
 
 def ContextData(day):
@@ -115,9 +117,16 @@ class LotteryView(View):
     def get(self, request):
         context = ContextData(date.today())
         context['yesterday'] = ContextData(date.today() - timedelta(days=1))
+        # Get the video with the name "video_1" from the database
+        video = get_object_or_404(VideoModel, name='video_1')
+        
+        # Add the video to the context
+        context['video'] = video
         return render(request, 'lotoview/index.html', context)
 
 # L I S T A D O S   D E   A N I M A L I T O S
+
+
 
 @method_decorator(csrf_exempt, name='dispatch')
 @method_decorator(staff_member_required, name='dispatch')
@@ -126,6 +135,12 @@ class IndexView(View):
         context = {}
         context['title'] = "Inicio"
         context['entity'] = 'Pagina de inicio'
+        
+        # Get the video with the name "video_1" from the database
+        video = get_object_or_404(VideoModel, name='video_1')
+        
+        # Add the video to the context
+        context['video'] = video
 
         return render(request, 'admin/erp/index/index.html', context)
     
@@ -2594,3 +2609,23 @@ def ajax_delete_view(request):
         return JsonResponse({'success': True})
     except Model.DoesNotExist:
         return JsonResponse({'success': False, 'error': 'Object does not exist'})
+
+
+@csrf_exempt
+def upload_video(request):
+    if request.method == 'POST':
+        video = request.FILES['video']
+        name = request.POST['name']
+        try:
+            video_to_delete = VideoModel.objects.get(name=name)
+            os.remove(os.path.join(settings.MEDIA_ROOT, str(video_to_delete.video)))
+            video_to_delete.delete()
+        except VideoModel.DoesNotExist:
+            pass
+
+        video_model = VideoModel(name=name, video=video)
+        video_model.save()
+
+        return JsonResponse({'message': 'Video uploaded successfully'})
+    else:
+        return JsonResponse({'error': 'Invalid request'})

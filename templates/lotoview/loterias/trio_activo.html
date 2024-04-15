@@ -14,15 +14,84 @@
             </div>
         </div>
     </div>
+    {% if day == "today" %}
+        <div class="cuadro2">
+            <div class="cuadroHora">
+                <h5 style="visibility: hidden;">01:00 PM</h5>
+            </div>
+            {% with records=TrioActivo %}
+                <div class="cuadroTabla" style="display: flex; justify-content: center;">
+                    {% for record in records %}
+                        {% if forloop.counter <= 4 %}
+                            <table class="TrioActivo tabla_loteria">
+                                <thead>
+                                    <tr> 
+                                        <th>{{ record.hour_sort }}</th>
+                                    </tr> 
+                                </thead> 
+                                <tr>
+                                    <td>{{ record.a }}</td>
+                                </tr> 
+                            </table>   
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endwith %}
+            
+            <div class="cuadroHora">
+            <h5 style="visibility: hidden;">01:00 PM</h5>
+        </div>
+            {% with records=TrioActivo %}
+                <div class="cuadroTabla" style="display: flex; justify-content: center;">
+                    {% for record in records %}
+                        {% if forloop.counter > 4 and forloop.counter <= 8 %}
+                        <table class="TrioActivo tabla_loteria">
+                                <thead>
+                                    <tr> 
+                                        <th>{{ record.hour_sort }}</th>
+                                    </tr> 
+                                </thead> 
+                                <tr>
+                                    <td>{{ record.a }}</td>
+                                </tr> 
+                            </table>   
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endwith %}
+            
+            <div class="cuadroHora">
+            <h5 style="visibility: hidden;">01:00 PM</h5>
+        </div>
+            {% with records=TrioActivo %}
+                <div class="cuadroTabla" style="display: flex; justify-content: center;">
+                    {% for record in records %}
+                        {% if forloop.counter > 8 and forloop.counter <= 12 %}
+                        <table class="TrioActivo tabla_loteria">
+                                <thead>
+                                    <tr> 
+                                        <th>{{ record.hour_sort }}</th>
+                                    </tr> 
+                                </thead> 
+                                <tr>
+                                    <td>{{ record.a }}</td>
+                                </tr> 
+                            </table>   
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endwith %}
+        </div>
+    {% else %}
     <div class="cuadro2">
         <div class="cuadroHora">
             <h5 style="visibility: hidden;">01:00 PM</h5>
         </div>
-        {% with records=TrioActivo %}
+        {% with records=yesterday.TrioActivo %}
             <div class="cuadroTabla" style="display: flex; justify-content: center;">
                 {% for record in records %}
                     {% if forloop.counter <= 4 %}
-                        <table class="TrioActivo tabla_loteria">
+                        <table class=" tabla_loteria">
                             <thead>
                                 <tr> 
                                     <th>{{ record.hour_sort }}</th>
@@ -38,13 +107,13 @@
         {% endwith %}
         
         <div class="cuadroHora">
-          <h5 style="visibility: hidden;">01:00 PM</h5>
-      </div>
-        {% with records=TrioActivo %}
+        <h5 style="visibility: hidden;">01:00 PM</h5>
+    </div>
+        {% with records=yesterday.TrioActivo %}
             <div class="cuadroTabla" style="display: flex; justify-content: center;">
                 {% for record in records %}
                     {% if forloop.counter > 4 and forloop.counter <= 8 %}
-                    <table class="TrioActivo tabla_loteria">
+                    <table class=" tabla_loteria">
                             <thead>
                                 <tr> 
                                     <th>{{ record.hour_sort }}</th>
@@ -60,13 +129,13 @@
         {% endwith %}
         
         <div class="cuadroHora">
-          <h5 style="visibility: hidden;">01:00 PM</h5>
-      </div>
-        {% with records=TrioActivo %}
+        <h5 style="visibility: hidden;">01:00 PM</h5>
+    </div>
+        {% with records=yesterday.TrioActivo %}
             <div class="cuadroTabla" style="display: flex; justify-content: center;">
                 {% for record in records %}
                     {% if forloop.counter > 8 and forloop.counter <= 12 %}
-                    <table class="TrioActivo tabla_loteria">
+                    <table class=" tabla_loteria">
                             <thead>
                                 <tr> 
                                     <th>{{ record.hour_sort }}</th>
@@ -81,4 +150,5 @@
             </div>
         {% endwith %}
     </div>
+    {% endif %}
 </div>

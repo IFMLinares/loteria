@@ -1,4 +1,4 @@
-<!-- {% load static %}
+{% load static %}
 <div class="cuadro">
     <div class="cuadro1">
         <div class="cuadroLadoalado">
@@ -10,237 +10,141 @@
             </div>
         </div>
     </div>
-    <div class="cuadro2">
-        <div class="cuadroHora">
+    {% if day == "today" %}
+        <div class="cuadro2">
+            <div class="cuadroHora">
+                <h5 style="visibility: hidden;">01:00 PM</h5>
+            </div>
+            {% with records=Ricachona %}
+                <div class="cuadroTabla" style="display: flex; justify-content: center;">
+                    {% for record in records %}
+                        {% if forloop.counter <= 4 %}
+                            <table class="Ricachona tabla_loteria">
+                                <thead>
+                                    <tr> 
+                                        <th>{{ record.hour_sort }}</th>
+                                    </tr> 
+                                </thead> 
+                                <tr>
+                                    <td>{{ record.a }}</td>
+                                </tr> 
+                            </table>   
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endwith %}
+            
+            <div class="cuadroHora">
             <h5 style="visibility: hidden;">01:00 PM</h5>
         </div>
-        {% with records=Ricachona %}
-            <div class="cuadroTabla" style="display: flex; justify-content: center;">
-                {% for record in records %}
-                    {% if forloop.counter <= 4 %}
+            {% with records=Ricachona %}
+                <div class="cuadroTabla" style="display: flex; justify-content: center;">
+                    {% for record in records %}
+                        {% if forloop.counter > 4 and forloop.counter <= 8 %}
                         <table class="Ricachona tabla_loteria">
-                            <thead>
-                                <tr> 
-                                    <th>{{ record.hour_sort }}</th>
+                                <thead>
+                                    <tr> 
+                                        <th>{{ record.hour_sort }}</th>
+                                    </tr> 
+                                </thead> 
+                                <tr>
+                                    <td>{{ record.a }}</td>
                                 </tr> 
-                            </thead> 
-                            <tr>
-                                <td>{{ record.a }}</td>
-                            </tr> 
-                        </table>   
-                    {% endif %}
-                {% endfor %}
-            </div>
-        {% endwith %}
-        
-        <div class="cuadroHora">
-          <h5 style="visibility: hidden;">01:00 PM</h5>
-      </div>
-        {% with records=Ricachona %}
-            <div class="cuadroTabla" style="display: flex; justify-content: center;">
-                {% for record in records %}
-                    {% if forloop.counter > 4 and forloop.counter <= 8 %}
-                    <table class="Ricachona tabla_loteria">
-                            <thead>
-                                <tr> 
-                                    <th>{{ record.hour_sort }}</th>
+                            </table>   
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endwith %}
+            
+            <div class="cuadroHora">
+            <h5 style="visibility: hidden;">01:00 PM</h5>
+        </div>
+            {% with records=Ricachona %}
+                <div class="cuadroTabla" style="display: flex; justify-content: center;">
+                    {% for record in records %}
+                        {% if forloop.counter > 8 and forloop.counter <= 12 %}
+                        <table class="Ricachona tabla_loteria">
+                                <thead>
+                                    <tr> 
+                                        <th>{{ record.hour_sort }}</th>
+                                    </tr> 
+                                </thead> 
+                                <tr>
+                                    <td>{{ record.a }}</td>
                                 </tr> 
-                            </thead> 
-                            <tr>
-                                <td>{{ record.a }}</td>
-                            </tr> 
-                        </table>   
-                    {% endif %}
-                {% endfor %}
+                            </table>   
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endwith %}
+        </div>
+    {% else %}
+        <div class="cuadro2">
+            <div class="cuadroHora">
+                <h5 style="visibility: hidden;">01:00 PM</h5>
             </div>
-        {% endwith %}
-        
-        <div class="cuadroHora">
-          <h5 style="visibility: hidden;">01:00 PM</h5>
-      </div>
-        {% with records=Ricachona %}
-            <div class="cuadroTabla" style="display: flex; justify-content: center;">
-                {% for record in records %}
-                    {% if forloop.counter > 8 and forloop.counter <= 12 %}
-                    <table class="Ricachona tabla_loteria">
-                            <thead>
-                                <tr> 
-                                    <th>{{ record.hour_sort }}</th>
+            {% with records=yesterday.Ricachona %}
+                <div class="cuadroTabla" style="display: flex; justify-content: center;">
+                    {% for record in records %}
+                        {% if forloop.counter <= 4 %}
+                            <table class=" tabla_loteria">
+                                <thead>
+                                    <tr> 
+                                        <th>{{ record.hour_sort }}</th>
+                                    </tr> 
+                                </thead> 
+                                <tr>
+                                    <td>{{ record.a }}</td>
                                 </tr> 
-                            </thead> 
-                            <tr>
-                                <td>{{ record.a }}</td>
-                            </tr> 
-                        </table>   
-                    {% endif %}
-                {% endfor %}
-            </div>
-        {% endwith %}
-    </div>
-</div> -->
-
-<!-- {% load static %}
-<div class="cuadro">
-    <div class="cuadro1">
-        <div class="cuadroLadoalado">
-            <div class="cuadroTexto">
-                <h5>KINO TACHIRA</h5>
-            </div>
-            <div class="cuadroImagen">
-                <img src="{% static 'img/loteria/kino.png' %}" alt="" id="foto1" />
-            </div>
-        </div>
-    </div>
-    <div class="cuadro2">
-        <div class="cuadroHora">
+                            </table>   
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endwith %}
+            
+            <div class="cuadroHora">
             <h5 style="visibility: hidden;">01:00 PM</h5>
         </div>
-        {% with records=Ricachona %}
-            <div class="cuadroTabla" style="display: flex; justify-content: center;">
-                {% for record in records %}
-                    {% if forloop.counter <= 4 %}
-                        <table class="Ricachona tabla_loteria"> 
-                            <tr>
-                                <td>{{ record.a }}</td>
-                            </tr> 
-                        </table>   
-                    {% endif %}
-                {% endfor %}
-            </div>
-        {% endwith %}
-        
-        <div class="cuadroHora">
-          <h5 style="visibility: hidden;">01:00 PM</h5>
-      </div>
-        {% with records=Ricachona %}
-            <div class="cuadroTabla" style="display: flex; justify-content: center;">
-                {% for record in records %}
-                    {% if forloop.counter > 4 and forloop.counter <= 8 %}
-                    <table class="Ricachona tabla_loteria"> 
-                            <tr>
-                                <td>{{ record.a }}</td>
-                            </tr> 
-                        </table>   
-                    {% endif %}
-                {% endfor %}
-            </div>
-        {% endwith %}
-        
-        <div class="cuadroHora">
-          <h5 style="visibility: hidden;">01:00 PM</h5>
-      </div>
-        {% with records=Ricachona %}
-            <div class="cuadroTabla" style="display: flex; justify-content: center;">
-                {% for record in records %}
-                    {% if forloop.counter > 8 and forloop.counter <= 12 %}
-                    <table class="Ricachona tabla_loteria"> 
-                            <tr>
-                                <td>{{ record.a }}</td>
-                            </tr> 
-                        </table>   
-                    {% endif %}
-                {% endfor %}
-            </div>
-        {% endwith %}
-
-        <div class="cuadroHora">
+            {% with records=yesterday.Ricachona %}
+                <div class="cuadroTabla" style="display: flex; justify-content: center;">
+                    {% for record in records %}
+                        {% if forloop.counter > 4 and forloop.counter <= 8 %}
+                        <table class=" tabla_loteria">
+                                <thead>
+                                    <tr> 
+                                        <th>{{ record.hour_sort }}</th>
+                                    </tr> 
+                                </thead> 
+                                <tr>
+                                    <td>{{ record.a }}</td>
+                                </tr> 
+                            </table>   
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endwith %}
+            
+            <div class="cuadroHora">
             <h5 style="visibility: hidden;">01:00 PM</h5>
         </div>
-          {% with records=Ricachona %}
-              <div class="cuadroTabla" style="display: flex; justify-content: center;">
-                  {% for record in records %}
-                      {% if forloop.counter > 8 and forloop.counter <= 12 %}
-                      <table class="Ricachona tabla_loteria"> 
-                              <tr>
-                                  <td>{{ record.a }}</td>
-                              </tr> 
-                          </table>   
-                      {% endif %}
-                  {% endfor %}
-              </div>
-          {% endwith %}
-          <div class="cuadroHora">
-            <h5 style="visibility: hidden;">01:00 PM</h5>
+            {% with records=yesterday.Ricachona %}
+                <div class="cuadroTabla" style="display: flex; justify-content: center;">
+                    {% for record in records %}
+                        {% if forloop.counter > 8 and forloop.counter <= 12 %}
+                        <table class=" tabla_loteria">
+                                <thead>
+                                    <tr> 
+                                        <th>{{ record.hour_sort }}</th>
+                                    </tr> 
+                                </thead> 
+                                <tr>
+                                    <td>{{ record.a }}</td>
+                                </tr> 
+                            </table>   
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endwith %}
         </div>
-          {% with records=Ricachona %}
-              <div class="cuadroTabla" style="display: flex; justify-content: center;">
-                  {% for record in records %}
-                      {% if forloop.counter > 8 and forloop.counter <= 12 %}
-                      <table class="Ricachona tabla_loteria">
-                               
-                              <tr>
-                                  <td>{{ record.a }}</td>
-                              </tr> 
-                          </table>   
-                      {% endif %}
-                  {% endfor %}
-              </div>
-          {% endwith %}
-    </div>
-</div> -->
-
-{% load static %}
-<div class="cuadro">
-    <div class="cuadro1">
-        <div class="cuadroLadoalado">
-            <div class="cuadroTexto">
-                <h5>KINGO TACHIRA</h5>
-            </div>
-            <div class="cuadroImagen">
-                <img src="{% static 'img/loteria/kingo.png' %}" alt="" id="foto1" />
-            </div>
-        </div>
-    </div>
-    <div class="cuadro2">
-        <div class="cuadroHora">
-            <h5 style="visibility: hidden;">01:00 PM</h5>
-        </div>
-        {% with records=Ricachona %}
-            <div class="cuadroTabla" style="display: flex; justify-content: center;">
-                {% for record in records %}
-                    {% if forloop.counter <= 4 %}
-                        <table class="Ricachona tabla_loteria"> 
-                            <tr>
-                                <td>{{ record.a }}</td>
-                            </tr> 
-                        </table>   
-                    {% endif %}
-                {% endfor %}
-            </div>
-        {% endwith %}
-        
-        <div class="cuadroHora">
-          <h5 style="visibility: hidden;">01:00 PM</h5>
-      </div>
-        {% with records=Ricachona %}
-            <div class="cuadroTabla" style="display: flex; justify-content: center;">
-                {% for record in records %}
-                    {% if forloop.counter > 4 and forloop.counter <= 8 %}
-                    <table class="Ricachona tabla_loteria"> 
-                            <tr>
-                                <td>{{ record.a }}</td>
-                            </tr> 
-                        </table>   
-                    {% endif %}
-                {% endfor %}
-            </div>
-        {% endwith %}
-        
-        <div class="cuadroHora">
-          <h5 style="visibility: hidden;">01:00 PM</h5>
-      </div>
-        {% with records=Ricachona %}
-            <div class="cuadroTabla" style="display: flex; justify-content: center;">
-                {% for record in records %}
-                    {% if forloop.counter > 8 and forloop.counter <= 12 %}
-                    <table class="Ricachona tabla_loteria"> 
-                            <tr>
-                                <td>{{ record.a }}</td>
-                            </tr> 
-                        </table>   
-                    {% endif %}
-                {% endfor %}
-            </div>
-        {% endwith %} 
-    </div>
+    {% endif %}
 </div>

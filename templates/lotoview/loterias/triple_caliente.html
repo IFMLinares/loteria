@@ -16,36 +16,69 @@
     </div>
     <div class="cuadro2">
         
-    {% with records=TripleCaliente %}
-    {% for record in records %}
-      <div class="cuadroLadoalado">
-        <div class="cuadroHora">
-            <h5>{{ record.hour_sort }}</h5>
-        </div>
-        <table class="TripleCaliente-{{ forloop.counter }} tabla_loteria" >
-          <thead>
+    {% if day == "today" %}
+      {% with records=TripleCaliente %}
+        {% for record in records %}
+        <div class="cuadroLadoalado">
+          <div class="cuadroHora">
+              <h5>{{ record.hour_sort }}</h5>
+          </div>
+          <table class="TripleCaliente-{{ forloop.counter }} tabla_loteria" >
+            <thead>
+              <tr>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>ZOD</th>
+              </tr>
+            </thead>
             <tr>
-              <th>A</th>
-              <th>B</th>
-              <th>C</th>
-              <th>ZOD</th>
+              <td>{{ record.a }}</td>
+              <td>{{ record.b }}</td>
+              <td>{{ record.c }}</td>
+              <td style="color: red">{{ record.zod }}</td>
+              <!-- <td>000</td>
+              <td>000</td>
+              <td>000</td>
+              <td style="color: red">000</td> -->
             </tr>
-          </thead>
-          <tr>
-            <td>{{ record.a }}</td>
-            <td>{{ record.b }}</td>
-            <td>{{ record.c }}</td>
-            <td style="color: red">{{ record.zod }}</td>
-            <!-- <td>000</td>
-            <td>000</td>
-            <td>000</td>
-            <td style="color: red">000</td> -->
-          </tr>
-        </table>
-      </div>
-      {% endfor %}
+          </table>
+        </div>
+      
+        {% endfor %}
       {% endwith %}
 
+      {% else %}
+        {% with records=yesterday.TripleCaliente %}
+          {% for record in records %}
+            <div class="cuadroLadoalado">
+              <div class="cuadroHora">
+                  <h5>{{ record.hour_sort }}</h5>
+              </div>
+              <table class="TripleCaliente-{{ forloop.counter }} tabla_loteria" >
+                <thead>
+                  <tr>
+                    <th>A</th>
+                    <th>B</th>
+                    <th>C</th>
+                    <th>ZOD</th>
+                  </tr>
+                </thead>
+                <tr>
+                  <td>{{ record.a }}</td>
+                  <td>{{ record.b }}</td>
+                  <td>{{ record.c }}</td>
+                  <td style="color: red">{{ record.zod }}</td>
+                  <!-- <td>000</td>
+                  <td>000</td>
+                  <td>000</td>
+                  <td style="color: red">000</td> -->
+                </tr>
+              </table>
+            </div>
+          {% endfor %}
+        {% endwith %}
+      {% endif %}
     </div>
     <div class="cuadro3"></div>
   </div>
