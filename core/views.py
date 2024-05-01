@@ -124,9 +124,23 @@ class LotteryView(View):
             video = VideoModel.objects.get(name='video_1')
         except VideoModel.DoesNotExist:
             video = None
+        
+        # Try to get the video with the name "video_1" from the database
+        try:
+            video_2 = VideoModel.objects.get(name='video_2')
+        except VideoModel.DoesNotExist:
+            video_2 = None
+
+        # Try to get the video with the name "video_1" from the database
+        try:
+            video_3 = VideoModel.objects.get(name='video_3')
+        except VideoModel.DoesNotExist:
+            video_3 = None
 
         # Add the video to the context
         context['video'] = video
+        context['video_2'] = video_2
+        context['video_3'] = video_3
 
         return render(request, 'lotoview/index.html', context)
 
@@ -147,9 +161,23 @@ class IndexView(View):
             video = VideoModel.objects.get(name='video_1')
         except VideoModel.DoesNotExist:
             video = None
+        
+        # Try to get the video with the name "video_1" from the database
+        try:
+            video_2 = VideoModel.objects.get(name='video_2')
+        except VideoModel.DoesNotExist:
+            video_2 = None
+
+        # Try to get the video with the name "video_1" from the database
+        try:
+            video_3 = VideoModel.objects.get(name='video_3')
+        except VideoModel.DoesNotExist:
+            video_3 = None
 
         # Add the video to the context
         context['video'] = video
+        context['video_2'] = video_2
+        context['video_3'] = video_3
 
         return render(request, 'admin/erp/index/index.html', context)
     

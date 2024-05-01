@@ -40,8 +40,15 @@
         {% include "lotoview/include_loterias.html" %}
         {% include "lotoview/include_loterias_1.html" %}
 
+        {% if video_2 != None %}
+            {% include "lotoview/include_videos_2.html" %}
+        {% endif %}
+
         <!-- Include de información día anterior -->
         {% include "lotoview/include_animalitos_yesterday.html" %}
+        {% if video_3 != None %}
+            {% include "lotoview/include_videos_3.html" %}
+        {% endif %}
         {% include "lotoview/include_loterias_yesterday.html" %}
 
       </div>

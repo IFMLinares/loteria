@@ -100,6 +100,118 @@
                     </div>
                     {% endif %}
 
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Subir Video</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form id="videoForm_2" method="post" enctype="multipart/form-data">
+                                        <input type="hidden" name="name" required value="video_2">
+                                        <input type="file" name="video" required>
+                                        <button type="submit" value="Upload" class="btn btn-primary bg-gradient waves-effect waves-light">
+                                            <i class="las la-save" style="font-size: 20px;"></i>
+                                            Guardar Registro
+                                        </button>
+                                    </form>
+                                    <!-- Barra de progreso -->
+                                    <br>
+                                    <div class="progress" style="display: none;">
+                                        <div id="progress-bar-2" class="progress-bar progress-bar-striped" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                    </div><!--end row-->
+
+                    
+                    {% if video_2 != None %}
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Video Actual</h5>
+                                </div>
+
+                                <div class="card-body" style="display: flex; justify-content: center; align-items: center; height: 500px;">
+                                    <video width="" height="500" controls muted playsinline preload  class="pb-xl-1 pt-xl-2"> 
+                                        <source src="{{ video_2.video.url }}" type="video/mp4">
+                                        Tu navegador no soporta la etiqueta de video.
+                                      </video>
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                    </div><!--end row-->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-grid gap-2" >
+                                        <button class="btn btn-danger" type="button" id="delete-button-2">Eliminar video</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Subir Video</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form id="videoForm_3" method="post" enctype="multipart/form-data">
+                                        <input type="hidden" name="name" required value="video_3">
+                                        <input type="file" name="video" required>
+                                        <button type="submit" value="Upload" class="btn btn-primary bg-gradient waves-effect waves-light">
+                                            <i class="las la-save" style="font-size: 20px;"></i>
+                                            Guardar Registro
+                                        </button>
+                                    </form>
+                                    <!-- Barra de progreso -->
+                                    <br>
+                                    <div class="progress" style="display: none;">
+                                        <div id="progress-bar-3" class="progress-bar progress-bar-striped" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                    </div><!--end row-->
+
+                    
+                    {% if video_3 != None %}
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title mb-0">Video Actual</h5>
+                                </div>
+
+                                <div class="card-body" style="display: flex; justify-content: center; align-items: center; height: 500px;">
+                                    <video width="" height="500" controls muted playsinline preload  class="pb-xl-1 pt-xl-2"> 
+                                        <source src="{{ video_3.video.url }}" type="video/mp4">
+                                        Tu navegador no soporta la etiqueta de video.
+                                      </video>
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                    </div><!--end row-->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-grid gap-2" >
+                                        <button class="btn btn-danger" type="button" id="delete-button-3">Eliminar video</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
 
                 </div>
                 <!-- container-fluid -->
@@ -189,6 +301,117 @@ $(document).ready(function () {
 });
 
 
+$('#videoForm_2').on('submit', function(e) {
+    e.preventDefault();
+    var formData = new FormData(this);
+
+    // Crea un nuevo objeto XMLHttpRequest
+    var xhr = new XMLHttpRequest();
+
+    // Configura la solicitud POST
+    xhr.open('POST', '{% url 'core:upload_video' %}', true);
+
+    // Muestra la barra de progreso
+    $('.progress').show();
+
+    // Configura la barra de progreso
+    xhr.upload.onprogress = function(e) {
+        if (e.lengthComputable) {
+            var percentComplete = (e.loaded / e.total) * 100;
+            $('#progress-bar-2').css('width', percentComplete + '%').attr('aria-valuenow', percentComplete);
+            if (percentComplete === 100) {
+                $('#progress-bar-2').removeClass('bg-primary').addClass('bg-success');
+            }
+        }
+    };
+
+    // Configura las respuestas de éxito y error
+    xhr.onload = function() {
+        // Oculta la barra de progreso
+        $('.progress').hide();
+
+        if (xhr.status === 200) {
+            var data = JSON.parse(xhr.responseText);
+            Swal.fire({
+                title: '¡Éxito!',
+                text: data.message,
+                icon: 'success'
+            }).then((result) => {
+                // Recarga la página cuando se cierre la ventana de Swal
+                if (result.isConfirmed) {
+                    window.location.reload();
+                }
+            });
+        } else {
+            var data = JSON.parse(xhr.responseText);
+            Swal.fire({
+                title: '¡Error!',
+                text:  data.error,
+                icon: 'error'
+            });
+        }
+    };
+
+    // Envia la solicitud
+    xhr.send(formData);
+});
+
+
+$('#videoForm_3').on('submit', function(e) {
+    e.preventDefault();
+    var formData = new FormData(this);
+
+    // Crea un nuevo objeto XMLHttpRequest
+    var xhr = new XMLHttpRequest();
+
+    // Configura la solicitud POST
+    xhr.open('POST', '{% url 'core:upload_video' %}', true);
+
+    // Muestra la barra de progreso
+    $('.progress').show();
+
+    // Configura la barra de progreso
+    xhr.upload.onprogress = function(e) {
+        if (e.lengthComputable) {
+            var percentComplete = (e.loaded / e.total) * 100;
+            $('#progress-bar-3').css('width', percentComplete + '%').attr('aria-valuenow', percentComplete);
+            if (percentComplete === 100) {
+                $('#progress-bar-3').removeClass('bg-primary').addClass('bg-success');
+            }
+        }
+    };
+
+    // Configura las respuestas de éxito y error
+    xhr.onload = function() {
+        // Oculta la barra de progreso
+        $('.progress').hide();
+
+        if (xhr.status === 200) {
+            var data = JSON.parse(xhr.responseText);
+            Swal.fire({
+                title: '¡Éxito!',
+                text: data.message,
+                icon: 'success'
+            }).then((result) => {
+                // Recarga la página cuando se cierre la ventana de Swal
+                if (result.isConfirmed) {
+                    window.location.reload();
+                }
+            });
+        } else {
+            var data = JSON.parse(xhr.responseText);
+            Swal.fire({
+                title: '¡Error!',
+                text:  data.error,
+                icon: 'error'
+            });
+        }
+    };
+
+    // Envia la solicitud
+    xhr.send(formData);
+});
+
 
 
     $('#delete-button').on('click', function(e) {
@@ -221,8 +444,68 @@ $(document).ready(function () {
         }
     });
 });
-});
 
+$('#delete-button-2').on('click', function(e) {
+    e.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: '{% url 'core:delete_video' %}',
+        data: {
+            'name': 'video_2',
+            'csrfmiddlewaretoken': '{{ csrf_token }}'
+        },
+        success: function(data) {
+            Swal.fire({
+                title: '¡Éxito!',
+                text: data.message,
+                icon: 'success'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#reload-button').click();
+                    window.location.reload();
+                }
+            })
+        },
+        error: function(data) {
+            Swal.fire({
+                title: '¡Error!',
+                text:  data.error,
+                icon: 'error'
+            });
+        }
+    });
+});
+$('#delete-button-3').on('click', function(e) {
+    e.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: '{% url 'core:delete_video' %}',
+        data: {
+            'name': 'video_3',
+            'csrfmiddlewaretoken': '{{ csrf_token }}'
+        },
+        success: function(data) {
+            Swal.fire({
+                title: '¡Éxito!',
+                text: data.message,
+                icon: 'success'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#reload-button').click();
+                    window.location.reload();
+                }
+            })
+        },
+        error: function(data) {
+            Swal.fire({
+                title: '¡Error!',
+                text:  data.error,
+                icon: 'error'
+            });
+        }
+    });
+});
+});
 
 
 </script>
