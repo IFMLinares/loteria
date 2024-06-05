@@ -74,6 +74,7 @@ from core.views import (
     # USUARIOS
     RegisterUserView,
     UserListView,
+    VideosDelDiaListView,
 
     # AJAX VIEW
     # DeleteObjectView,
@@ -159,6 +160,7 @@ urlpatterns = [
     # USUARIOS
     path("administrador/users/register", view=RegisterUserView.as_view(), name="user_register"),
     path('users/', UserListView.as_view(), name='user_list'),
+    path('videos/today/', VideosDelDiaListView.as_view(), name='videos-del-dia'),
 
     # AJAX VIEW
     

@@ -2601,6 +2601,16 @@ class RicachonaView(View):
         return render(request, 'admin/erp/loterias/individual_add.html', context)
 
 
+class VideosDelDiaListView(ListView):
+    model = VideoModel
+    template_name = 'lotoview/today_vid.html'  # Nombre de tu template
+    context_object_name = 'videos'
+
+    def get_queryset(self):
+        # Filtramos los videos que tienen la fecha de creación igual a hoy
+        hoy = timezone.localtime(timezone.now()).date()
+        return VideoModel.objects.filter(fecha_creacion__date=hoy)
+
 # V I S T A S   D E  U S U A R I O S
 @method_decorator(staff_member_required, name='dispatch')
 @method_decorator(csrf_exempt, name='dispatch')

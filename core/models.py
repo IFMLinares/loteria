@@ -13,6 +13,7 @@ from asgiref.sync import async_to_sync
 from os.path import join
 from .tuples import *
 import os
+from django.utils import timezone
 
 def enviar_mensaje(self):
     datos = {
@@ -104,6 +105,10 @@ import os
 class VideoModel(models.Model):
     name = models.CharField(max_length=255)
     video = models.FileField(upload_to='videos/')
+    fecha_creacion = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+
+    def was_uploaded_today(self):
+        return self.fecha_creacion.date() == timezone.localtime(timezone.now()).date()
 
 
 
