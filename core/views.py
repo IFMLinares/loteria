@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import View, ListView
+from django.views.generic import View, ListView, CreateView
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.shortcuts import get_object_or_404
@@ -138,14 +138,26 @@ class LotteryView(View):
             video_3 = None
 
         # Add the video to the context
+        time_view = TimeView.objects.first()
+        context['time'] = time_view.time_in_milliseconds
         context['video'] = video
         context['video_2'] = video_2
         context['video_3'] = video_3
 
         return render(request, 'lotoview/index.html', context)
 
-# L I S T A D O S   D E   A N I M A L I T O S
 
+class VideosDelDiaListView(ListView):
+    model = VideoModelToday
+    template_name = 'lotoview/today_vid.html'  # Nombre de tu template
+    context_object_name = 'videos'
+
+    def get_queryset(self):
+        # Filtramos los videos que tienen la fecha de creación igual a hoy
+        hoy = timezone.localtime(timezone.now()).date()
+        return VideoModelToday.objects.filter(fecha_creacion__date=hoy)
+
+# L I S T A D O S   D E   A N I M A L I T O S
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -175,6 +187,9 @@ class IndexView(View):
             video_3 = None
 
         # Add the video to the context
+        time_view = TimeView.objects.first()
+        time_in_seconds = time_view.time_in_milliseconds // 1000
+        context['time'] = time_in_seconds
         context['video'] = video
         context['video_2'] = video_2
         context['video_3'] = video_3
@@ -393,7 +408,7 @@ class AdminTripleCaliente(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['entity'] = "Listado de Loerias"
+        context['entity'] = "Listado de Loterias"
         context['title'] = 'TripleCaliente'
         
         context['create_url'] = reverse_lazy('core:triple_caliente_add')
@@ -409,7 +424,7 @@ class AdminTripleCaracas(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['entity'] = "Listado de Loerias"
+        context['entity'] = "Listado de Loterias"
         context['title']= 'TripleCaracas'
         
         context['create_url'] = reverse_lazy('core:triple_caracas_add')
@@ -425,7 +440,7 @@ class AdminTripleZulia(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['entity'] = "Listado de Loerias"
+        context['entity'] = "Listado de Loterias"
         context['title']= 'TripleZulia'
         
         context['create_url'] = reverse_lazy('core:triple_zulia_add')
@@ -441,7 +456,7 @@ class AdminTripleZamorano(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['entity'] = "Listado de Loerias"
+        context['entity'] = "Listado de Loterias"
         context['title']= 'TripleZamorano'
         
         context['create_url'] = reverse_lazy('core:triple_zamorano_add')
@@ -457,7 +472,7 @@ class AdminTripleChance(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['entity'] = "Listado de Loerias"
+        context['entity'] = "Listado de Loterias"
         context['title']= 'TripleChance'
         
         context['create_url'] = reverse_lazy('core:triple_chance_add')
@@ -473,7 +488,7 @@ class AdminTripleTachira(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['entity'] = "Listado de Loerias"
+        context['entity'] = "Listado de Loterias"
         context['title']= 'TripleTachira'
         
         context['create_url'] = reverse_lazy('core:triple_tachira_add')
@@ -489,7 +504,7 @@ class AdminTrioActivo(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['entity'] = "Listado de Loerias"
+        context['entity'] = "Listado de Loterias"
         context['title']= 'TrioActivo'
         
         context['create_url'] = reverse_lazy('core:trio_activo_add')
@@ -505,11 +520,28 @@ class AdminRicachona(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['entity'] = "Listado de Loerias"
+        context['entity'] = "Listado de Loterias"
         context['title']= 'Ricachona'
         
         context['create_url'] = reverse_lazy('core:la_ricachona_add')
         context['url'] = reverse_lazy('core:ricachona')
+        context['model_name'] = self.model.__name__
+        return context
+
+
+@method_decorator(staff_member_required, name='dispatch')
+class VideoModelTodayListView(ListView):
+    model = VideoModelToday
+    template_name = "admin/erp/upload/list-view.html"
+    context_object_name = "context"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['entity'] = "Listado de Videos"
+        context['title']= 'Videos'
+        
+        context['create_url'] = reverse_lazy('core:videos_upload')
+        context['url'] = reverse_lazy('core:videos_list')
         context['model_name'] = self.model.__name__
         return context
 
@@ -2600,16 +2632,20 @@ class RicachonaView(View):
 
         return render(request, 'admin/erp/loterias/individual_add.html', context)
 
+@method_decorator(staff_member_required, name='dispatch')
+class UploadVideo(CreateView):
+    model = VideoModelToday
+    fields = '__all__'
+    template_name = 'admin/erp/upload/videos.html'  # Nombre de tu template
 
-class VideosDelDiaListView(ListView):
-    model = VideoModel
-    template_name = 'lotoview/today_vid.html'  # Nombre de tu template
-    context_object_name = 'videos'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['entity'] = "Pestaña de videos - Registro de Videos"
+        context['title'] = 'Videos'
+        context['url'] = reverse_lazy('core:videos_upload')
 
-    def get_queryset(self):
-        # Filtramos los videos que tienen la fecha de creación igual a hoy
-        hoy = timezone.localtime(timezone.now()).date()
-        return VideoModel.objects.filter(fecha_creacion__date=hoy)
+        # No llamamos al método super().get() para evitar renderizar el formulario
+        return context
 
 # V I S T A S   D E  U S U A R I O S
 @method_decorator(staff_member_required, name='dispatch')
@@ -2657,7 +2693,6 @@ def ajax_delete_view(request):
     except Model.DoesNotExist:
         return JsonResponse({'success': False, 'error': 'Object does not exist'})
 
-
 @csrf_exempt
 def upload_video(request):
     if request.method == 'POST':
@@ -2691,3 +2726,28 @@ def delete_video(request):
     else:
         return JsonResponse({'error': 'Invalid request'})
 
+@csrf_exempt
+def upload_video_today_page(request):
+    if request.method == 'POST':
+        video = request.FILES['video']
+        video_model = VideoModelToday(video=video)
+        video_model.save()
+
+        return JsonResponse({'message': 'Video Subido con exito!'})
+    else:
+        return JsonResponse({'error': 'Invalid request'})
+
+@csrf_exempt
+def update_time_pages(request):
+    if request.method == 'POST':
+        try:
+            new_time_seconds = int(request.POST.get('time'))  # Obtén el valor del tiempo en segundos
+            new_time_milliseconds = new_time_seconds * 1000  # Convierte a milisegundos
+            time_view = TimeView.objects.first()  # Obtén el único registro
+            time_view.time_in_milliseconds = new_time_milliseconds
+            time_view.save()  # Guarda los cambios en la base de datos
+            return JsonResponse({'message': 'Tiempo actualizado con éxito!'})
+        except ValueError:
+            return JsonResponse({'error': 'Valor de tiempo no válido'})
+    else:
+        return JsonResponse({'error': 'Solicitud inválida'})

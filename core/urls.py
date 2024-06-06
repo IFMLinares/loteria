@@ -75,12 +75,16 @@ from core.views import (
     RegisterUserView,
     UserListView,
     VideosDelDiaListView,
+    UploadVideo,
+    VideoModelTodayListView,
 
     # AJAX VIEW
     # DeleteObjectView,
     ajax_delete_view,
     upload_video,
     delete_video,
+    upload_video_today_page,
+    update_time_pages,
 )
 
 app_name = "core"
@@ -156,6 +160,10 @@ urlpatterns = [
     path("administrador/triple_tachira_add", view=TripleTachiraView.as_view(), name="triple_tachira_add"),
     path("administrador/trio_activo_add", view=TrioActivoView.as_view(), name="trio_activo_add"),
     path("administrador/la_ricachona_add", view=RicachonaView.as_view(), name="la_ricachona_add"),
+    path("administrador/videos/upload", view=UploadVideo.as_view(), name="videos_upload"),
+    path("administrador/videos/list", view=VideoModelTodayListView.as_view(), name="videos_list"),
+
+    
 
     # USUARIOS
     path("administrador/users/register", view=RegisterUserView.as_view(), name="user_register"),
@@ -167,5 +175,7 @@ urlpatterns = [
     # path("administrador/ajax/delete_view", view=DeleteObjectView.as_view(), name="ajax_delete_view"),
     path('administrador/ajax/delete_view/', ajax_delete_view, name='ajax_delete_view'),
     path('administrador/ajax/upload_video/', upload_video, name='upload_video'),
+    path('administrador/ajax/upload_video_today_page/', upload_video_today_page, name='upload_video_today_page'),
     path('administrador/ajax/delete_video/', delete_video, name='delete_video'),
+    path('administrador/ajax/update_time/', update_time_pages, name='update_time'),
 ]

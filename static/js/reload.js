@@ -17,7 +17,7 @@ var ReloadManager = (function() {
     return {
         iniciar: function() {
             $('#reload-button').click(reloadPage);
-        }
+        },
     };
 })();
 

@@ -60,7 +60,7 @@ class TripleChanceAdmin(admin.ModelAdmin):
     list_display = ('hour_sort', 'a', 'b', 'c', 'zod', 'date_sort')
 
 # admin.site.register(LoggedInUser)
-
+admin.site.register(TimeView),
 admin.site.register(ChanceAnimalitos, ChanceAnimalitosAdmin)
 admin.site.register(GranjaPlus, GranjaPlusAdmin)
 admin.site.register(LaGranjita, LaGranjitaAdmin)

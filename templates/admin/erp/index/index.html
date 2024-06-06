@@ -35,9 +35,15 @@
                                 </div>
                                 <div class="card-body">
                                     <button id="reload-button" class="btn btn-primary">Recargar páginas</button>
+                                    
                                 </div>
-
                                 <div class="card-body">
+                                    <div class="col-lg-4">
+                                        <label for="id_username" class="form-label">Tiempo de visualización por página actual {{ time }} segundos:</label>
+                                        <input type="number" value="{{ time }}" class="form-control" name="time" maxlength="150" autocapitalize="none" autocomplete="time" autofocus required id="time">
+                                        <br>
+                                        <button id="time_button" class="btn btn-primary" type="button">Guardar Tiempo</button>
+                                    </div>
                                 </div>
                             </div>
                         </div><!--end col-->
@@ -245,7 +251,7 @@
 <script>
 $(document).ready(function () {
 
-    $('#videoForm').on('submit', function(e) {
+$('#videoForm').on('submit', function(e) {
     e.preventDefault();
     var formData = new FormData(this);
 
@@ -299,7 +305,6 @@ $(document).ready(function () {
     // Envia la solicitud
     xhr.send(formData);
 });
-
 
 $('#videoForm_2').on('submit', function(e) {
     e.preventDefault();
@@ -355,8 +360,6 @@ $('#videoForm_2').on('submit', function(e) {
     // Envia la solicitud
     xhr.send(formData);
 });
-
-
 $('#videoForm_3').on('submit', function(e) {
     e.preventDefault();
     var formData = new FormData(this);
@@ -412,9 +415,7 @@ $('#videoForm_3').on('submit', function(e) {
     xhr.send(formData);
 });
 
-
-
-    $('#delete-button').on('click', function(e) {
+$('#delete-button').on('click', function(e) {
     e.preventDefault();
     $.ajax({
         type: 'POST',
@@ -444,7 +445,6 @@ $('#videoForm_3').on('submit', function(e) {
         }
     });
 });
-
 $('#delete-button-2').on('click', function(e) {
     e.preventDefault();
     $.ajax({
@@ -508,5 +508,33 @@ $('#delete-button-3').on('click', function(e) {
 });
 
 
+$('#time_button').on('click', function(){{
+    event.preventDefault()
+    if($('#time').val() > 0 ){
+        $.ajax({
+            url: "{% url 'core:update_time' %}",
+            type: 'POST',
+            data: {
+                'time' : $('#time').val(),
+            },
+            dataType: 'json',
+            success: function(response) {
+                // Manejar la respuesta del servidor
+                $('#reload-button').trigger('click')
+                    Swal.fire({
+                        title: '¡Éxito!',
+                        text: response.message,
+                        icon: 'success'
+                    }).then(function() {
+                        // Redireccionar a una URL después de hacer clic en el botón "OK"
+                        window.location.href = '{{url}}';
+                        
+                    });
+            }
+        });
+    }else{
+        alert('tiempo no valido')
+    }
+}})
 </script>
 {% endblock extra_js %}

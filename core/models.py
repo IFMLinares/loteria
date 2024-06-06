@@ -110,8 +110,29 @@ class VideoModel(models.Model):
     def was_uploaded_today(self):
         return self.fecha_creacion.date() == timezone.localtime(timezone.now()).date()
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)  # Llama al método save original
+        # Llama a la función para enviar el mensaje
+        enviar_mensaje(self)
 
+class VideoModelToday(models.Model):
+    video = models.FileField(upload_to='videos/')
+    fecha_creacion = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
+    def was_uploaded_today(self):
+        return self.fecha_creacion.date() == timezone.localtime(timezone.now()).date()
+    
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)  # Llama al método save original
+
+        # Llama a la función para enviar el mensaje
+        enviar_mensaje(self)
+
+class TimeView(models.Model):
+    time_in_milliseconds = models.PositiveIntegerField(unique=True)
+
+    def __str__(self):
+        return f"Tiempo de visualización actual: {self.time_in_milliseconds} ms"
 # modelos de los animalitos 
 
 class ChanceAnimalitos(models.Model):
