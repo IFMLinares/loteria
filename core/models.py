@@ -125,9 +125,6 @@ class VideoModelToday(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)  # Llama al método save original
 
-        # Llama a la función para enviar el mensaje
-        enviar_mensaje(self)
-
 class TimeView(models.Model):
     time_in_milliseconds = models.PositiveIntegerField(unique=True)
 
