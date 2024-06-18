@@ -79,51 +79,39 @@
   AOS.init();
 </script>
 <script>
-  $(function(){
-var actualizarHora = function(){
-  var fecha = new Date(),
-      hora = fecha.getHours(),
-      minutos = fecha.getMinutes(),
-      segundos = fecha.getSeconds(),
-      diaSemana = fecha.getDay(),
-      dia = fecha.getDate(),
-      mes = fecha.getMonth(),
-      anio = fecha.getFullYear(),
-      ampm;
-  
-  var $pHoras = $("#horas"),
-      $pSegundos = $("#segundos"),
-      $pMinutos = $("#minutos"),
-      $pAMPM = $("#ampm"),
-      $pDiaSemana = $("#diaSemana"),
-      $pDia = $("#dia"),
-      $pMes = $("#mes"),
-      $pAnio = $("#anio");
-  var semana = ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'];
-  var meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-  
-  $pDiaSemana.text(semana[diaSemana]);
-  $pDia.text(dia);
-  $pMes.text(meses[mes]);
-  $pAnio.text(anio);
-  if(hora>=12){
-    hora = hora - 12;
-    ampm = "PM";
-  }else{
-    ampm = "AM";
-  }
-  if(hora == 0){
-    hora = 12;
-  }
-  if(hora<10){$pHoras.text("0"+hora)}else{$pHoras.text(hora)};
-  if(minutos<10){$pMinutos.text("0"+minutos)}else{$pMinutos.text(minutos)};
-  if(segundos<10){$pSegundos.text("0"+segundos)}else{$pSegundos.text(segundos)};
-  $pAMPM.text(ampm);
-  
-};
+function startTime() {
+    var today = new Date();
+    var hr = today.getHours();
+    var min = today.getMinutes();
+    var sec = today.getSeconds();
+    ap = (hr < 12) ? "<span>AM</span>" : "<span>PM</span>";
+    hr = (hr == 0) ? 12 : hr;
+    hr = (hr > 12) ? hr - 12 : hr;
+    //Add a zero in front of numbers<10
+    hr = checkTime(hr);
+    min = checkTime(min);
+    sec = checkTime(sec);
+    document.getElementById("clock").innerHTML = hr + ":" + min + ":" + sec + " " + ap;
+    
+    var months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Deciembre'];
+    var days = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
+    var curWeekDay = days[today.getDay()];
+    var curDay = today.getDate();
+    var curMonth = months[today.getMonth()];
+    var curYear = today.getFullYear();
+    var date = curWeekDay+", "+curDay+" "+curMonth+" "+curYear;
+    document.getElementById("date").innerHTML = date;
+    
+    var time = setTimeout(function(){ startTime() }, 500);
+}
+function checkTime(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
 
 
-actualizarHora();
-var intervalo = setInterval(actualizarHora,1000);
-});
+
+window.onload = startTime();
 </script> 
