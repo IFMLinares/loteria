@@ -1,0 +1,71 @@
+
+{% for video in videos %}
+{% with video_actual=video %}
+<div
+class="carousel-item {% if forloop.counter == 1 %}  {% endif %}"
+id="video__{{ forloop.counter }}"
+>
+<div class="cuadroCentral">
+  <!-- /* cuadro basado en el header que contiene: logo / titulo junto con hora / numero de telefono */ -->
+  <!-- {% include "lotoview/header.html" %} -->
+  <!-- /* cuadro basado en el header que contiene: logo / titulo junto con hora / numero de telefono */ -->
+  <div
+    class="cuadro-central"
+    data-aos="zoom-in-down"
+    data-aos-easing="linear"
+    data-aos-duration="1500"
+  >
+    <style>
+      .video {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100vh;
+      }
+      video {
+        height: 100%;
+        width: 100%;
+        background-color: black;
+      }
+    </style>
+            <div class="contenedor">
+              <div class="widget">
+                <div class="fecha">
+                  <p id="diaSemana" class="diaSemana"></p>
+                  <p id="dia" class="dia"></p>
+                  <p>de</p>
+                  <p id="mes" class="mes"></p>
+                  <p>del</p>
+                  <p id="anio" class="anio"></p>
+                </div>
+                <div class="reloj">
+                  <p id="horas" class="horas"></p>
+                  <p>:</p>
+                  <p id="minutos" class="minutos"></p>
+                  <p>:</p>
+                  <div class="cajaSegundos">
+                    <p id="segundos" class="segundos"></p>
+                    <p id="ampm" class="ampm"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+    <div class="video">
+      <video
+        controls
+        muted
+        playsinline
+        preload
+        id="video_promo_{{ forloop.counter }}"
+      >
+        <source
+          src="{{ video_actual.video.url }}"
+          type="video/mp4"
+        />
+      </video>
+    </div>
+  </div>
+</div>
+</div>            {% endwith %}
+{% endfor %}

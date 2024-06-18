@@ -30,59 +30,39 @@
       data-bs-interval="8000"
     >
       <div class="carousel-inner">
-        <!-- Include de loterias del dia en -->
 
-        {% for video in videos %}
-            {% with video_actual=video %}
-            <div
-            class="carousel-item {% if forloop.counter == 1 %} active {% endif %}"
-            id="video__{{ forloop.counter }}"
-          >
-            <div class="cuadroCentral">
-              <!-- /* cuadro basado en el header que contiene: logo / titulo junto con hora / numero de telefono */ -->
-              <!-- {% include "lotoview/header.html" %} -->
-              <!-- /* cuadro basado en el header que contiene: logo / titulo junto con hora / numero de telefono */ -->
-              <div
-                class="cuadro-central"
-                data-aos="zoom-in-down"
-                data-aos-easing="linear"
-                data-aos-duration="1500"
-              >
-                <style>
-                  .video {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 100%;
-                    height: 100vh;
-                  }
-                  video {
-                    height: 100%;
-                    width: 100%;
-                    background-color: black;
-                  }
-                </style>
-                <div class="video">
-                  <video
-                    controls
-                    muted
-                    playsinline
-                    preload
-                    id="video_promo_{{ forloop.counter }}"
-                  >
-                    <source
-                      src="{{ video_actual.video.url }}"
-                      type="video/mp4"
-                    />
-                  </video>
-                </div>
+        <!-- <div class="contenedor">
+          <div class="widget">
+            <div class="fecha">
+              <p id="diaSemana" class="diaSemana"></p>
+              <p id="dia" class="dia"></p>
+              <p>de</p>
+              <p id="mes" class="mes"></p>
+              <p>del</p>
+              <p id="anio" class="anio"></p>
+            </div>
+            <div class="reloj">
+              <p id="horas" class="horas"></p>
+              <p>:</p>
+              <p id="minutos" class="minutos"></p>
+              <p>:</p>
+              <div class="cajaSegundos">
+                <p id="segundos" class="segundos"></p>
+                <p id="ampm" class="ampm"></p>
               </div>
             </div>
           </div>
-          
-            {% endwith %}
-        {% endfor %}
+        </div> -->
+        <!-- Include de loterias del dia en -->  
+        {% include "lotoview/videoActual/relojDigital.html" %}    
+        {% include "lotoview/videoActual/animalito.html" %}    
+        {% include "lotoview/videoActual/animalitos.html" %}    
+        {% include "lotoview/videoActual/video_actual.html" %}    
+
+ 
+
       </div>
+
       {% include "lotoview/buttons.html" %}
     </div>
   </body>
@@ -98,3 +78,52 @@
 <script>
   AOS.init();
 </script>
+<script>
+  $(function(){
+var actualizarHora = function(){
+  var fecha = new Date(),
+      hora = fecha.getHours(),
+      minutos = fecha.getMinutes(),
+      segundos = fecha.getSeconds(),
+      diaSemana = fecha.getDay(),
+      dia = fecha.getDate(),
+      mes = fecha.getMonth(),
+      anio = fecha.getFullYear(),
+      ampm;
+  
+  var $pHoras = $("#horas"),
+      $pSegundos = $("#segundos"),
+      $pMinutos = $("#minutos"),
+      $pAMPM = $("#ampm"),
+      $pDiaSemana = $("#diaSemana"),
+      $pDia = $("#dia"),
+      $pMes = $("#mes"),
+      $pAnio = $("#anio");
+  var semana = ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'];
+  var meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  
+  $pDiaSemana.text(semana[diaSemana]);
+  $pDia.text(dia);
+  $pMes.text(meses[mes]);
+  $pAnio.text(anio);
+  if(hora>=12){
+    hora = hora - 12;
+    ampm = "PM";
+  }else{
+    ampm = "AM";
+  }
+  if(hora == 0){
+    hora = 12;
+  }
+  if(hora<10){$pHoras.text("0"+hora)}else{$pHoras.text(hora)};
+  if(minutos<10){$pMinutos.text("0"+minutos)}else{$pMinutos.text(minutos)};
+  if(segundos<10){$pSegundos.text("0"+segundos)}else{$pSegundos.text(segundos)};
+  $pAMPM.text(ampm);
+  
+};
+
+
+actualizarHora();
+var intervalo = setInterval(actualizarHora,1000);
+});
+</script> 
