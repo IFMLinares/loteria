@@ -113,6 +113,48 @@ def ContextData(day):
                     })
     return context
 
+def ContextData_vid(day):
+    context = {}
+    models = [ 
+        GuacharoActivo,
+        LottoActivo,
+        LaGranjita,
+        SelvaPlus,
+    ]
+
+    for model in models:
+        model_name = model.__name__
+        hours = [choice[0] for choice in model._meta.get_field('hour_sort').choices]
+        records = model.objects.filter(date_sort=day)
+        records_dict = {record.hour_sort: record for record in records}
+
+        context[model_name] = []
+        for hour in hours:
+            if hour in records_dict:
+                record = records_dict[hour]
+                hour_numeric = int(hour[:2])  # Extraemos las dos primeras cifras como número
+                group_animal = 1 if 8 <= hour_numeric <= 12 else 2
+                context[model_name].append({
+                    'hour_sort': record.hour_sort,
+                    'animalito': record.animalito,
+                    'animalito_name': dict(model._meta.get_field('animalito').choices)[record.animalito],
+                    'image_path': record.get_image_path(),
+                    'group_animal': group_animal,
+                })
+            else:
+                hour_numeric = int(hour[:2])  # Extraemos las dos primeras cifras como número
+                group_animal = 1 if 8 <= hour_numeric <= 12 else 2
+                context[model_name].append({
+                    'hour_sort': hour,
+                    'animalito': '---',
+                    'animalito_name': '---',
+                    'image_path': '----------',
+                    'group_animal': group_animal,
+                })
+    return context
+
+
+
 
 class LotteryView(View):
     def get(self, request):
@@ -156,6 +198,11 @@ class VideosDelDiaListView(ListView):
         # Filtramos los videos que tienen la fecha de creación igual a hoy
         hoy = timezone.localtime(timezone.now()).date()
         return VideoModelToday.objects.filter(fecha_creacion__date=hoy)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['animalitos'] = ContextData_vid(date.today())
+        return context
 
 # L I S T A D O S   D E   A N I M A L I T O S
 

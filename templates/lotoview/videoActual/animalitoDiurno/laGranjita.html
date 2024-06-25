@@ -1,3 +1,4 @@
+{% load static %}
 <div class="cuadro">
     <div class="cuadro1">
         <div class="cuadroLadoaladoAnimalito">
@@ -6,7 +7,7 @@
                 
             </div>
             <div class="cuadroImagen">
-                <img src="./img/lagranjita/granjita.png" alt="" id="foto1">
+              <img src="{% static 'img/lagranjita/granjita.png' %}" alt="" id="foto1" />
             </div>
         </div>
     </div>
@@ -20,42 +21,21 @@
             <th>Animal</th>
           </tr> 
         </thead> 
-        <tr>
-          <td>07:00 AM</td>
-          <td>--</td>
-          <td>--</td>
-          <td><img src="./img/chanceenlinea/0.png" alt="" width="75px" height="50px"></td>
-        </tr> 
-        <tr>
-          <td>08:00 AM</td>
-          <td>--</td>
-          <td>--</td>
-          <td><img src="./img/chanceenlinea/0.png" alt="" width="75px" height="50px"></td>
+        
+        {% for animalito in animalitos.GuacharoActivo %}
+        <tr class="div_group_{{animalito.group_animal}}">
+          <td>{{ animalito.hour_sort }}</td>
+          <td>{{ animalito.animalito }}</td>
+          <td>{{ animalito.animalito_name }}</td>
+          <td>
+            {% if animalito.image_path != '----------' %}
+                <img src="{{ animalito.image_path }}" alt="{{ animalito.animalito_name }}" width="75px" height="50px" />
+            {% else %}
+            <img src="{% static 'img/logo.png' %}" style="opacity: 0.5;" alt="" width="75px" height="50px" />
+            {% endif %}
+          </td>
         </tr>
-        <tr>
-          <td>09:00 AM</td>
-          <td>--</td>
-          <td>--</td>
-          <td><img src="./img/chanceenlinea/0.png" alt="" width="75px" height="50px"></td>
-        </tr>
-        <tr>
-          <td>10:00 AM</td>
-          <td>--</td>
-          <td>--</td>
-          <td><img src="./img/chanceenlinea/0.png" alt="" width="75px" height="50px"></td>
-        </tr>
-        <tr>
-          <td>11:00 AM</td>
-          <td>--</td>
-          <td>--</td>
-          <td><img src="./img/chanceenlinea/0.png" alt="" width="75px" height="50px"></td>
-        </tr>
-        <tr>
-          <td>12:00 PM</td>
-          <td>--</td>
-          <td>--</td>
-          <td><img src="./img/chanceenlinea/0.png" alt="" width="75px" height="50px"></td>
-        </tr>
+        {% endfor %}
  
       </table>   
         

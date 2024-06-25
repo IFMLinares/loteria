@@ -31,32 +31,9 @@
     >
       <div class="carousel-inner">
 
-        <!-- <div class="contenedor">
-          <div class="widget">
-            <div class="fecha">
-              <p id="diaSemana" class="diaSemana"></p>
-              <p id="dia" class="dia"></p>
-              <p>de</p>
-              <p id="mes" class="mes"></p>
-              <p>del</p>
-              <p id="anio" class="anio"></p>
-            </div>
-            <div class="reloj">
-              <p id="horas" class="horas"></p>
-              <p>:</p>
-              <p id="minutos" class="minutos"></p>
-              <p>:</p>
-              <div class="cajaSegundos">
-                <p id="segundos" class="segundos"></p>
-                <p id="ampm" class="ampm"></p>
-              </div>
-            </div>
-          </div>
-        </div> -->
         <!-- Include de loterias del dia en -->  
         {% include "lotoview/videoActual/relojDigital.html" %}    
         {% include "lotoview/videoActual/animalito.html" %}    
-        {% include "lotoview/videoActual/animalitos.html" %}    
         {% include "lotoview/videoActual/video_actual.html" %}    
 
  
@@ -114,4 +91,18 @@ function checkTime(i) {
 
 
 window.onload = startTime();
+
+$(document).ready(function() {
+            // Obtener la hora actual
+            const now = new Date();
+            const hour = now.getHours();
+            const minutes = now.getMinutes();
+
+            // Verificar las condiciones y aplicar las clases
+            if ((hour >= 1 && hour < 12) || (hour === 12 && minutes < 50)) {
+                $('.div_group_2').addClass('d-none');
+            } else {
+                $('.div_group_1').addClass('d-none');
+            }
+        });
 </script> 
