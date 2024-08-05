@@ -1,0 +1,21 @@
+.cuadro{
+    background-image: url(../img/comic.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.cuadro2 table{
+    justify-content: space-around !important;
+}
+
+.cuadro2 table td{
+    background-color: transparent;
+}
+
+.cuadro2 table td img{
+    border: 1.5px solid black;
+    width: 125px !important;
+    height: 90px !important;
+}
+
+ 

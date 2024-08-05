@@ -13,29 +13,40 @@
     </div>
     <div class="cuadro2">
       <table >
-        <thead>
-          <tr> 
-            <th>Hora</th>
-            <th>Número</th>
-            <th>Nombre</th>
-            <th>Animal</th>
-          </tr> 
-        </thead>
-        {% for animalito in animalitos.LottoActivo %}
-        <tr class="div_group_{{animalito.group_animal}}">
-          <td>{{ animalito.hour_sort }}</td>
-          <td>{{ animalito.animalito }}</td>
-          <td>{{ animalito.animalito_name }}</td>
-          <td>
-            {% if animalito.image_path != '----------' %}
-                <img src="{{ animalito.image_path }}" alt="{{ animalito.animalito_name }}" width="75px" height="50px" />
-            {% else %}
-            <img src="{% static 'img/logo.png' %}" style="opacity: 0.5;" alt="" width="75px" height="50px" />
-            {% endif %}
-          </td>
-        </tr>
-        {% endfor %}
-
+        <style>  
+          tr th {
+          background-color: blue;
+          color:white;
+          text-align: center;
+          border-radius: 10px;  
+          padding: 10px;   
+          font-size: 12px;
+         }     
+         .tTable{ 
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-wrap: wrap; 
+         }
+         .tTable tr{
+          margin-left: 5px;
+         }
+        </style>   
+        <tbody class="tTable">
+          {% for animalito in animalitos.LottoActivo %}
+          <tr>
+            <td>
+              {% if animalito.image_path != '----------' %}
+              <img src="{{ animalito.image_path }}" alt="{{ animalito.animalito_name }}" style="width:175px !important; height:175px !important;" />
+              {% else %}
+              <img src="{% static 'img/logo.png' %}" style="opacity: 0.5;" alt="" style="width:175px !important; height:175px !important;"/>
+              {% endif %}
+            </td> 
+            <th style="display: block;">{{ animalito.hour_sort }}</th> 
+          </tr>  
+          {% endfor %}
+        </tbody> 
+ 
       </table>  
         
     </div>

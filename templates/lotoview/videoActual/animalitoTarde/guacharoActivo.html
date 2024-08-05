@@ -11,51 +11,40 @@
         </div>
     </div>
     <div class="cuadro2">
-      <table >
-        <thead>
-          <tr> 
-            <th>Hora</th>
-            <th>Número</th>
-            <th>Nombre</th>
-            <th>Animal</th>
-          </tr> 
-        </thead> 
-        <tr>
-          <td>01:00 PM</td>
-          <td>--</td>
-          <td>--</td>
-          <td><img src="./img/chanceenlinea/0.png" alt="" width="75px" height="50px"></td>
-        </tr>
-        <tr>
-          <td>02:00 PM</td>
-          <td>--</td>
-          <td>--</td>
-          <td><img src="./img/chanceenlinea/0.png" alt="" width="75px" height="50px"></td>
-        </tr>
-        <tr>
-          <td>03:00 PM</td>
-          <td>--</td>
-          <td>--</td>
-          <td><img src="./img/chanceenlinea/0.png" alt="" width="75px" height="50px"></td>
-        </tr>
-        <tr>
-          <td>04:00 PM</td>
-          <td>--</td>
-          <td>--</td>
-          <td><img src="./img/chanceenlinea/0.png" alt="" width="75px" height="50px"></td>
-        </tr>
-        <tr>
-          <td>05:00 PM</td>
-          <td>--</td>
-          <td>--</td>
-          <td><img src="./img/chanceenlinea/0.png" alt="" width="75px" height="50px"></td>
-        </tr>
-        <tr>
-          <td>06:00 PM</td>
-          <td>--</td>
-          <td>--</td>
-          <td><img src="./img/chanceenlinea/0.png" alt="" width="75px" height="50px"></td>
-        </tr>
+      <table >  
+        <style>  
+          tr th {
+          background-color: blue;
+          color:white;
+          text-align: center;
+          border-radius: 10px;  
+          padding: 10px;   
+          font-size: 12px;
+         }     
+         .tTable{ 
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-wrap: wrap; 
+         }
+         .tTable tr{
+          margin-left: 5px;
+         }
+        </style>  
+        <tbody class="tTable">
+          {% for animalito in animalitos.GuacharoActivo %}
+          <tr>
+            <td>
+              {% if animalito.image_path != '----------' %}
+              <img src="{{ animalito.image_path }}" alt="{{ animalito.animalito_name }}" style="width:175px !important; height:175px !important;">
+              {% else %}
+              <img src="{% static 'img/logo.png' %}" style="opacity: 0.5;" alt="" width="75px" height="50px" />
+              {% endif %}
+            </td> 
+            <th style="display: block;">{{ animalito.hour_sort }}</th> 
+          </tr>  
+          {% endfor %}
+        </tbody>  
       </table>  
         
     </div>
