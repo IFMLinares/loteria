@@ -34,7 +34,7 @@ var WebSocketManager = (function() {
 
         webSocket.onmessage = function(e) {
             let data = JSON.parse(e.data);
-            // console.log(data)
+            console.log(data)
             if (data === 'reload') {
                 location.reload();
             }else{

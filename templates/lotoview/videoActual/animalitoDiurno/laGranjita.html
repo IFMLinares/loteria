@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="cuadro2">
-      <table >
+      <table  id="LaGranjita">
         <style>  
           tr th {
           background-color: blue;
@@ -33,7 +33,7 @@
          }
         </style>   
         <tbody class="tTable">
-          {% for animalito in animalitos.GuacharoActivo %}
+          {% for animalito in animalitos.LaGranjita %}
           <tr>
             <td>
               {% if animalito.image_path != '----------' %}
