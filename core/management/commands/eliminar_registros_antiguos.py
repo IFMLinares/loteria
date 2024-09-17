@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 from datetime import timedelta
 from django.utils import timezone
 
-from .models import (
+from ...models import (
     ChanceAnimalitos,
     FruitaGana,
     GranjaMillonaria,
@@ -27,7 +27,7 @@ from .models import (
 )
 
 class Command(BaseCommand):
-    help = 'Elimina registros antiguos de todos los modelos'
+    help = 'eliminar_registros_antiguos'
 
     def handle(self, *args, **kwargs):
         modelos = [

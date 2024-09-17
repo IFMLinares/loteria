@@ -1,5 +1,6 @@
 from django.db import models
-from datetime import datetime
+from datetime import datetime, timedelta
+
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.contrib.sessions.models import Session
@@ -150,6 +151,11 @@ class ChanceAnimalitos(models.Model):
 
         # Llama a la función para enviar el mensaje
         enviar_mensaje(self)
+    
+    @classmethod
+    def eliminar_registros_antiguos(cls):
+        fecha_limite = timezone.now().date() - timedelta(days=2)
+        cls.objects.filter(date_sort__lt=fecha_limite).delete()
 
 class GranjaPlus(models.Model):
     hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES_GP, verbose_name="Hora del sorteo")
@@ -169,6 +175,11 @@ class GranjaPlus(models.Model):
 
         # Llama a la función para enviar el mensaje
         enviar_mensaje(self)
+        
+    @classmethod
+    def eliminar_registros_antiguos(cls):
+        fecha_limite = timezone.now().date() - timedelta(days=2)
+        cls.objects.filter(date_sort__lt=fecha_limite).delete()
 
 class LaGranjita(models.Model):
     hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES_LG, verbose_name="Hora del sorteo")
@@ -187,7 +198,13 @@ class LaGranjita(models.Model):
         super().save(*args, **kwargs)  # Llama al método save original
 
         # Llama a la función para enviar el mensaje
+        
         enviar_mensaje(self)
+        
+    @classmethod
+    def eliminar_registros_antiguos(cls):
+        fecha_limite = timezone.now().date() - timedelta(days=2)
+        cls.objects.filter(date_sort__lt=fecha_limite).delete()
 
 class LaRicachona(models.Model):
     hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES_RC, verbose_name="Hora del sorteo")
@@ -206,7 +223,13 @@ class LaRicachona(models.Model):
         super().save(*args, **kwargs)  # Llama al método save original
 
         # Llama a la función para enviar el mensaje
+        
         enviar_mensaje(self)
+        
+    @classmethod
+    def eliminar_registros_antiguos(cls):
+        fecha_limite = timezone.now().date() - timedelta(days=2)
+        cls.objects.filter(date_sort__lt=fecha_limite).delete()
 
 class LottoActivo(models.Model):
     hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES, verbose_name="Hora del sorteo")
@@ -225,7 +248,13 @@ class LottoActivo(models.Model):
         super().save(*args, **kwargs)  # Llama al método save original
 
         # Llama a la función para enviar el mensaje
+        
         enviar_mensaje(self)
+        
+    @classmethod
+    def eliminar_registros_antiguos(cls):
+        fecha_limite = timezone.now().date() - timedelta(days=2)
+        cls.objects.filter(date_sort__lt=fecha_limite).delete()
 
 class LottoActivoInterRD(models.Model):
     hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES_GP, verbose_name="Hora del sorteo")
@@ -244,7 +273,13 @@ class LottoActivoInterRD(models.Model):
         super().save(*args, **kwargs)  # Llama al método save original
 
         # Llama a la función para enviar el mensaje
+        
         enviar_mensaje(self)
+        
+    @classmethod
+    def eliminar_registros_antiguos(cls):
+        fecha_limite = timezone.now().date() - timedelta(days=2)
+        cls.objects.filter(date_sort__lt=fecha_limite).delete()
 
 class LottoRey(models.Model):
     hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES_GP, verbose_name="Hora del sorteo")
@@ -263,7 +298,13 @@ class LottoRey(models.Model):
         super().save(*args, **kwargs)  # Llama al método save original
 
         # Llama a la función para enviar el mensaje
+        
         enviar_mensaje(self)
+        
+    @classmethod
+    def eliminar_registros_antiguos(cls):
+        fecha_limite = timezone.now().date() - timedelta(days=2)
+        cls.objects.filter(date_sort__lt=fecha_limite).delete()
 
 class SelvaPlus(models.Model):
     hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES_SP, verbose_name="Hora del sorteo")
@@ -282,7 +323,13 @@ class SelvaPlus(models.Model):
         super().save(*args, **kwargs)  # Llama al método save original
 
         # Llama a la función para enviar el mensaje
+        
         enviar_mensaje(self)
+        
+    @classmethod
+    def eliminar_registros_antiguos(cls):
+        fecha_limite = timezone.now().date() - timedelta(days=2)
+        cls.objects.filter(date_sort__lt=fecha_limite).delete()
 
 class GuacharoActivo(models.Model):
     hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES_SP, verbose_name="Hora del sorteo")
@@ -301,7 +348,13 @@ class GuacharoActivo(models.Model):
         super().save(*args, **kwargs)  # Llama al método save original
 
         # Llama a la función para enviar el mensaje
+        
         enviar_mensaje(self)
+        
+    @classmethod
+    def eliminar_registros_antiguos(cls):
+        fecha_limite = timezone.now().date() - timedelta(days=2)
+        cls.objects.filter(date_sort__lt=fecha_limite).delete()
 
 class GranjaMillonaria(models.Model):
     hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES_GM, verbose_name="Hora del sorteo")
@@ -320,7 +373,13 @@ class GranjaMillonaria(models.Model):
         super().save(*args, **kwargs)  # Llama al método save original
 
         # Llama a la función para enviar el mensaje
+        
         enviar_mensaje(self)
+        
+    @classmethod
+    def eliminar_registros_antiguos(cls):
+        fecha_limite = timezone.now().date() - timedelta(days=2)
+        cls.objects.filter(date_sort__lt=fecha_limite).delete()
 
 class Granjazo(models.Model):
     hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES_GJO, verbose_name="Hora del sorteo")
@@ -339,7 +398,13 @@ class Granjazo(models.Model):
         super().save(*args, **kwargs)  # Llama al método save original
 
         # Llama a la función para enviar el mensaje
+        
         enviar_mensaje(self)
+        
+    @classmethod
+    def eliminar_registros_antiguos(cls):
+        fecha_limite = timezone.now().date() - timedelta(days=2)
+        cls.objects.filter(date_sort__lt=fecha_limite).delete()
 
 class Terminalito(models.Model):
     hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES_TO, verbose_name="Hora del sorteo")
@@ -358,7 +423,13 @@ class Terminalito(models.Model):
         super().save(*args, **kwargs)  # Llama al método save original
 
         # Llama a la función para enviar el mensaje
+        
         enviar_mensaje(self)
+        
+    @classmethod
+    def eliminar_registros_antiguos(cls):
+        fecha_limite = timezone.now().date() - timedelta(days=2)
+        cls.objects.filter(date_sort__lt=fecha_limite).delete()
 
 class FruitaGana(models.Model):
     hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES, verbose_name="Hora del sorteo")
@@ -377,7 +448,13 @@ class FruitaGana(models.Model):
         super().save(*args, **kwargs)  # Llama al método save original
 
         # Llama a la función para enviar el mensaje
+        
         enviar_mensaje(self)
+        
+    @classmethod
+    def eliminar_registros_antiguos(cls):
+        fecha_limite = timezone.now().date() - timedelta(days=2)
+        cls.objects.filter(date_sort__lt=fecha_limite).delete()
 
 # Modelo de las Loterias
 
@@ -399,6 +476,11 @@ class TripleCaliente(models.Model):
 
         # Llama a la función para enviar el mensaje
         enviar_mensaje_loterias(self)
+        
+    @classmethod
+    def eliminar_registros_antiguos(cls):
+        fecha_limite = timezone.now().date() - timedelta(days=2)
+        cls.objects.filter(date_sort__lt=fecha_limite).delete()
 
 class TripleCaracas(models.Model):
     hour_sort = models.CharField(max_length=9, choices=LOTERY_CHOICES_TCCS_TCH, verbose_name="Hora del sorteo")
@@ -418,6 +500,11 @@ class TripleCaracas(models.Model):
 
         # Llama a la función para enviar el mensaje
         enviar_mensaje_loterias(self)
+        
+    @classmethod
+    def eliminar_registros_antiguos(cls):
+        fecha_limite = timezone.now().date() - timedelta(days=2)
+        cls.objects.filter(date_sort__lt=fecha_limite).delete()
 
 class TripleZulia(models.Model):
     hour_sort = models.CharField(max_length=9, choices=LOTERY_CHOICES_ZL, verbose_name="Hora del sorteo")
@@ -437,6 +524,11 @@ class TripleZulia(models.Model):
 
         # Llama a la función para enviar el mensaje
         enviar_mensaje_loterias(self)
+        
+    @classmethod
+    def eliminar_registros_antiguos(cls):
+        fecha_limite = timezone.now().date() - timedelta(days=2)
+        cls.objects.filter(date_sort__lt=fecha_limite).delete()
 
 class TripleZamorano(models.Model):
     hour_sort = models.CharField(max_length=9, choices=LOTERY_CHOICES_ZA, verbose_name="Hora del sorteo")
@@ -456,6 +548,11 @@ class TripleZamorano(models.Model):
 
         # Llama a la función para enviar el mensaje
         enviar_mensaje_loterias_tz(self)
+        
+    @classmethod
+    def eliminar_registros_antiguos(cls):
+        fecha_limite = timezone.now().date() - timedelta(days=2)
+        cls.objects.filter(date_sort__lt=fecha_limite).delete()
 
 class TripleChance(models.Model):
     hour_sort = models.CharField(max_length=9, choices=LOTERY_CHOICES_TCCS_TCH, verbose_name="Hora del sorteo")
@@ -475,6 +572,11 @@ class TripleChance(models.Model):
 
         # Llama a la función para enviar el mensaje
         enviar_mensaje_loterias(self)
+        
+    @classmethod
+    def eliminar_registros_antiguos(cls):
+        fecha_limite = timezone.now().date() - timedelta(days=2)
+        cls.objects.filter(date_sort__lt=fecha_limite).delete()
 
 class TripleTachira(models.Model):
     hour_sort = models.CharField(max_length=9, choices=LOTERY_CHOICES_TAC, verbose_name="Hora del sorteo")
@@ -494,6 +596,12 @@ class TripleTachira(models.Model):
 
         # Llama a la función para enviar el mensaje
         enviar_mensaje_loterias(self)
+    # Otros campos...
+
+    @classmethod
+    def eliminar_registros_antiguos(cls):
+        fecha_limite = timezone.now().date() - timedelta(days=2)
+        cls.objects.filter(date_sort__lt=fecha_limite).delete()
 
 class TrioActivo(models.Model):
     hour_sort = models.CharField(max_length=9, choices=LOTERY_CHOICES_TA, verbose_name="Hora del sorteo")
@@ -509,6 +617,11 @@ class TrioActivo(models.Model):
 
         # Llama a la función para enviar el mensaje
         enviar_mensaje_loterias_esp(self)
+        
+    @classmethod
+    def eliminar_registros_antiguos(cls):
+        fecha_limite = timezone.now().date() - timedelta(days=2)
+        cls.objects.filter(date_sort__lt=fecha_limite).delete()
 
 class Ricachona(models.Model):
     hour_sort = models.CharField(max_length=9, choices=LOTERY_CHOICES_RC, verbose_name="Hora del sorteo")
@@ -525,3 +638,8 @@ class Ricachona(models.Model):
 
         # Llama a la función para enviar el mensaje
         enviar_mensaje_loterias_esp(self)
+        
+    @classmethod
+    def eliminar_registros_antiguos(cls):
+        fecha_limite = timezone.now().date() - timedelta(days=2)
+        cls.objects.filter(date_sort__lt=fecha_limite).delete()
