@@ -37,9 +37,9 @@
           <tr>
             <td>
               {% if animalito.image_path != '----------' %}
-              <img src="{{ animalito.image_path }}" alt="{{ animalito.animalito_name }}" style="width:175px !important; height:175px !important;" />
+              <img src="{{ animalito.image_path }}" alt="{{ animalito.animalito_name }}"  style="width:125px !important; height:125px !important;"/>
               {% else %}
-              <img src="{% static 'img/logo.png' %}" style="opacity: 0.5;" alt="" style="width:175px !important; height:175px !important;"/>
+              <img src="{% static 'img/logo.png' %}" style="opacity: 0.5;" alt="" style="width:125px !important; height:125px !important;"/>
               {% endif %}
             </td> 
             <th style="display: block;">{{ animalito.hour_sort }}</th> 
