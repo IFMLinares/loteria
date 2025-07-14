@@ -3,17 +3,17 @@
     <div class="cuadro1">
         <div class="cuadroLadoaladoAnimalito">
             <div class="cuadroTexto">
-                <h5>EL GRANJAZO</h5>
+                <h5>EL GUACHARITO</h5>
             </div>
             <div class="cuadroImagen">
-                <img src="{% static 'img/granjazo/logogz.png' %}" alt="" id="foto1" />
+                <img src="{% static 'img/guacharito/logo.png' %}" />
             </div>
         </div>
     </div>
     <div class="cuadro2">
         {% if day == "today" %}
-            {% with records=Granjazo %}
-                <table id="Granjazo">
+            {% with records=Guacharito %}
+                <table id="Guacharito">
                     <thead>
                         <tr>
                             <th>Hora</th>
@@ -32,32 +32,16 @@
                                     {% if record.image_path != '----------' %}
                                         <img src="{{ record.image_path }}" alt="{{ record.animalito_name }}" width="75px" height="50px" />
                                     {% else %}
-                                        <img src="{% static 'img/logo.png' %}" style="opacity: 0.5;" alt="" width="75px" height="50px" />
+                                        <img src="{% static 'img/logo.png' %}" style="opacity: 0.5" alt="" width="75px" height="50px" />
                                     {% endif %}
                                 </td>
                             </tr>
                         {% endfor %}
-                        <tr>
-                            <td>N/A</td>
-                            <td>N/A</td>
-                            <td>N/A</td>
-                            <td>
-                                <img src="{% static 'img/logo.png' %}" style="opacity: 0.5;" alt="" width="75px" height="50px" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>N/A</td>
-                            <td>N/A</td>
-                            <td>N/A</td>
-                            <td>
-                                <img src="{% static 'img/logo.png' %}" style="opacity: 0.5;" alt="" width="75px" height="50px" />
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
             {% endwith %}
         {% else %}
-            {% with records=yesterday.Granjazo %}
+            {% with records=yesterday.Guacharito %}
                 <table>
                     <thead>
                         <tr>
@@ -77,35 +61,11 @@
                                     {% if record.image_path != '----------' %}
                                         <img src="{{ record.image_path }}" alt="{{ record.animalito_name }}" width="75px" height="50px" />
                                     {% else %}
-                                        <img src="{% static 'img/logo.png' %}" style="opacity: 0.5;" alt="" width="75px" height="50px" />
+                                        <img src="{% static 'img/logo.png' %}" style="opacity: 0.5" alt="" width="75px" height="50px" />
                                     {% endif %}
                                 </td>
                             </tr>
                         {% endfor %}
-                        <tr>
-                            <td>N/A</td>
-                            <td>N/A</td>
-                            <td>N/A</td>
-                            <td>
-                                <img src="{% static 'img/logo.png' %}" style="opacity: 0.5;" alt="" width="75px" height="50px" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>N/A</td>
-                            <td>N/A</td>
-                            <td>N/A</td>
-                            <td>
-                                <img src="{% static 'img/logo.png' %}" style="opacity: 0.5;" alt="" width="75px" height="50px" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>N/A</td>
-                            <td>N/A</td>
-                            <td>N/A</td>
-                            <td>
-                                <img src="{% static 'img/logo.png' %}" style="opacity: 0.5;" alt="" width="75px" height="50px" />
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
             {% endwith %}
