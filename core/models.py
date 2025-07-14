@@ -456,6 +456,31 @@ class FruitaGana(models.Model):
         fecha_limite = timezone.now().date() - timedelta(days=2)
         cls.objects.filter(date_sort__lt=fecha_limite).delete()
 
+class Guacharito(models.Model):
+    hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES_GP, verbose_name="Hora del sorteo")
+    animalito = models.CharField(max_length=3, choices=GUACHARITO_CHOICES, verbose_name="Nro ")
+    date_sort = models.DateField(auto_now=True)
+
+    class Meta:
+        unique_together = ('hour_sort', 'date_sort',)
+        verbose_name = 'Guacharito'
+        verbose_name_plural = 'Guacharito'
+
+    def get_image_path(self):
+        return join(settings.STATIC_URL, f'img/guacharito/{self.animalito}.png')
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)  # Llama al método save original
+
+        # Llama a la función para enviar el mensaje
+        
+        enviar_mensaje(self)
+        
+    @classmethod
+    def eliminar_registros_antiguos(cls):
+        fecha_limite = timezone.now().date() - timedelta(days=2)
+        cls.objects.filter(date_sort__lt=fecha_limite).delete()
+
 # Modelo de las Loterias
 
 class TripleCaliente(models.Model):

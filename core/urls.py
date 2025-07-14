@@ -21,6 +21,7 @@ from core.views import (
     AdminGranjazo,
     AdminTerminalito,
     AdminFruitaGana,
+    AdminGuacharito,
 
     # Listados Loterias
     AdminTripleCaliente,
@@ -61,6 +62,7 @@ from core.views import (
     GranjazoView,
     TerminalitoView,
     FruitaGanaView,
+    GuacharitoView,
 
     TripleCalienteView,
     TripleCaracasView,
@@ -108,6 +110,7 @@ urlpatterns = [
     path("administrador/granjazo", view=AdminGranjazo.as_view(), name="granjazo"),
     path("administrador/terminalito", view=AdminTerminalito.as_view(), name="terminalito"),
     path("administrador/fruitaGana", view=AdminFruitaGana.as_view(), name="fruitaGana"),
+    path("administrador/guacharito", view=AdminGuacharito.as_view(), name="guacharito"),
 
     # URLS LISTADOS DE LOTERIAS
     path("administrador/triple_caliente", view=AdminTripleCaliente.as_view(), name="triple_caliente"),
@@ -150,6 +153,7 @@ urlpatterns = [
     path("administrador/granjazo_add", view=GranjazoView.as_view(), name="granjazo_add"),
     path("administrador/terminalito_add", view=TerminalitoView.as_view(), name="terminalito_add"),
     path("administrador/fruitaGana_add", view=FruitaGanaView.as_view(), name="fruitaGana_add"),
+    path("administrador/guacharito_add", view=GuacharitoView.as_view(), name="guacharito_add"),
 
 
     path("administrador/triple_caliente_add", view=TripleCalienteView.as_view(), name="triple_caliente_add"),
