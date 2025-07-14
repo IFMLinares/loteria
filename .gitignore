@@ -4,3 +4,5 @@ pycache/
 *.pyc
 db.sqlite3
 *.mp4
+
+media/
