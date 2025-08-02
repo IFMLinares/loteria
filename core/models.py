@@ -556,7 +556,7 @@ class TripleZulia(models.Model):
         cls.objects.filter(date_sort__lt=fecha_limite).delete()
 
 class TripleZamorano(models.Model):
-    hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES_10_12_2_4, verbose_name="Hora del sorteo")
+    hour_sort = models.CharField(max_length=9, choices=LOTERY_CHOICES_ZA, verbose_name="Hora del sorteo")
     date_sort = models.DateField(auto_now=True)
     a = models.CharField(max_length=20, validators=[validate_numeric])
     # b = models.CharField(max_length=20, validators=[validate_numeric])
@@ -694,26 +694,26 @@ class Ricachona(models.Model):
 # utiliza HOUR_CHOICES_10_12_2_4 
 # tiene los campos hour_sort, date_sort, a, c, zod
 
-class TripleZamorano(models.Model):
-    hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES_10_12_2_4, verbose_name="Hora del sorteo")
-    date_sort = models.DateField(auto_now=True)
-    a = models.CharField(max_length=20, validators=[validate_numeric])
-    c = models.CharField(max_length=20, validators=[validate_numeric])
-    zod = models.CharField(max_length=9, choices=ZOD_CHOICES)
+# class TripleZamorano(models.Model):
+#     hour_sort = models.CharField(max_length=9, choices=HOUR_CHOICES_10_12_2_4, verbose_name="Hora del sorteo")
+#     date_sort = models.DateField(auto_now=True)
+#     a = models.CharField(max_length=20, validators=[validate_numeric])
+#     c = models.CharField(max_length=20, validators=[validate_numeric])
+#     zod = models.CharField(max_length=9, choices=ZOD_CHOICES)
 
-    class Meta:
-        unique_together = ('hour_sort', 'date_sort',)
-        verbose_name = 'Loteria Triple Zamorano 10-12-2-4'
-        verbose_name_plural = 'Loteria Triple Zamorano 10-12-2-4'
+#     class Meta:
+#         unique_together = ('hour_sort', 'date_sort',)
+#         verbose_name = 'Loteria Triple Zamorano 10-12-2-4'
+#         verbose_name_plural = 'Loteria Triple Zamorano 10-12-2-4'
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)  # Llama al método save original
+#     def save(self, *args, **kwargs):
+#         super().save(*args, **kwargs)  # Llama al método save original
 
-        # Llama a la función para enviar el mensaje
-        enviar_mensaje_loterias_tz(self)
+#         # Llama a la función para enviar el mensaje
+#         enviar_mensaje_loterias_tz(self)
         
-    @classmethod
-    def eliminar_registros_antiguos(cls):
-        fecha_limite = timezone.now().date() - timedelta(days=2)
-        cls.objects.filter(date_sort__lt=fecha_limite).delete()
+#     @classmethod
+#     def eliminar_registros_antiguos(cls):
+#         fecha_limite = timezone.now().date() - timedelta(days=2)
+#         cls.objects.filter(date_sort__lt=fecha_limite).delete()
 
