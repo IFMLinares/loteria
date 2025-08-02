@@ -3,6 +3,24 @@ from datetime import datetime, time
 # Tupla de 9:00AM - 7:00PM
 HOUR_CHOICES = [(time(hour=i, minute=0).strftime('%I:%M %p'), time(hour=i, minute=0).strftime('%I:%M %p')) for i in range(9, 20)]
 
+# Tupla para horario de  10:00 , 12:00 , 2:00PM, 4:00PM
+HOUR_CHOICES_10_12_2_4 = [
+    ("10:00 AM", "10:00 AM"),
+    ("12:00 PM", "12:00 PM"),
+    ("2:00 PM", "2:00 PM"),
+    ("4:00 PM", "4:00 PM"),
+]
+# Tupla para horario de 9:00AM, 10:00AM, 11:00AM, 12:00PM, 1:00PM, 2:00PM, 3:00PM
+HOUR_CHOICES_9_10_11_12_1_2_3 = [
+    ("9:00 AM", "9:00 AM"),
+    ("10:00 AM", "10:00 AM"),
+    ("11:00 AM", "11:00 AM"),
+    ("12:00 PM", "12:00 PM"),
+    ("1:00 PM", "1:00 PM"),
+    ("2:00 PM", "2:00 PM"),
+    ("3:00 PM", "3:00 PM"),
+]
+
 # Tupla de 8:30AM - 7:30PM
 HOUR_CHOICES_GP = [(time(hour=i, minute=j).strftime('%I:%M %p'), time(hour=i, minute=j).strftime('%I:%M %p')) for i in range(8, 20) for j in (30,) if not (i == 8 and j == 0)]
 

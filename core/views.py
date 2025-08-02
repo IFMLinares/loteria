@@ -176,12 +176,26 @@ class LotteryView(View):
         except VideoModel.DoesNotExist:
             video_3 = None
 
+        # Try to get the video with the name "video_1" from the database
+        try:
+            video_4 = VideoModel.objects.get(name='video_4')
+        except VideoModel.DoesNotExist:
+            video_4 = None
+        
+        # Try to get the video with the name "video_1" from the database
+        try:
+            video_5 = VideoModel.objects.get(name='video_5')
+        except VideoModel.DoesNotExist:
+            video_5 = None
+
         # Add the video to the context
         time_view = TimeView.objects.first()
         context['time'] = time_view.time_in_milliseconds
         context['video'] = video
         context['video_2'] = video_2
         context['video_3'] = video_3
+        context['video_4'] = video_4
+        context['video_5'] = video_5
 
         return render(request, 'lotoview/index.html', context)
 
@@ -228,6 +242,18 @@ class IndexView(View):
         except VideoModel.DoesNotExist:
             video_3 = None
 
+        # Try to get the video with the name "video_1" from the database
+        try:
+            video_4 = VideoModel.objects.get(name='video_4')
+        except VideoModel.DoesNotExist:
+            video_4 = None
+        # Try to get the video with the name "video_1" from the database
+        try:
+            video_5 = VideoModel.objects.get(name='video_5')
+        except VideoModel.DoesNotExist:
+            video_5 = None
+
+
         # Add the video to the context
         time_view = TimeView.objects.first()
         time_in_seconds = time_view.time_in_milliseconds // 1000
@@ -235,6 +261,8 @@ class IndexView(View):
         context['video'] = video
         context['video_2'] = video_2
         context['video_3'] = video_3
+        context['video_4'] = video_4
+        context['video_5'] = video_5
         # Añadir Guacharito al contexto
         guacharito_records = Guacharito.objects.filter(date_sort=timezone.localtime(timezone.now()).date())
         context['Guacharito'] = guacharito_records
